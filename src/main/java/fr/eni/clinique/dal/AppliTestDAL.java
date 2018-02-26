@@ -3,7 +3,6 @@ package fr.eni.clinique.dal;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import fr.eni.clinique.common.AppConstants;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.ihm.controller.CliniqueController;
 import fr.eni.clinique.ihm.model.CliniqueModel;
@@ -28,7 +27,7 @@ public class AppliTestDAL {
 	                    CliniqueController catalogController = new CliniqueController(cliniqueModel);
 	                    
 	                    // Create A Catalog View
-	                    ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, catalogController, cliniqueModel);
+	                    ConnexionScreen screen = new ConnexionScreen(catalogController, cliniqueModel);
 	         
 	                }
 	            });
