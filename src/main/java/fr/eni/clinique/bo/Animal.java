@@ -7,7 +7,7 @@ public class Animal {
 	private String couleur;
 	private String race;
 	private String espece;
-	private Client codeClient;
+	private int codeClient;
 	private String tatouage;
 	private String antecedents;
 	private Boolean archive;
@@ -23,8 +23,7 @@ public class Animal {
 	 * @param antecedents
 	 * @param archive
 	 */
-	public Animal(Integer codeAnimal, String nomAnimal, String sexe, String couleur, String race, String espece,
-			Client codeClient, String tatouage, String antecedents, Boolean archive) {
+	public Animal(Integer codeAnimal, String nomAnimal, String sexe, String couleur, String race, String espece, String tatouage, String antecedents, Boolean archive) {
 		super();
 		this.codeAnimal = codeAnimal;
 		this.nomAnimal = nomAnimal;
@@ -109,18 +108,7 @@ public class Animal {
 	public void setEspece(String espece) {
 		this.espece = espece;
 	}
-	/**
-	 * @return the codeClient
-	 */
-	public Client getCodeClient() {
-		return codeClient;
-	}
-	/**
-	 * @param codeClient the codeClient to set
-	 */
-	public void setCodeClient(Client codeClient) {
-		this.codeClient = codeClient;
-	}
+	
 	/**
 	 * @return the tatouage
 	 */
