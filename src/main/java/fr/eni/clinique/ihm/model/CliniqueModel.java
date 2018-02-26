@@ -1,5 +1,18 @@
 package fr.eni.clinique.ihm.model;
 
-public class CliniqueModel {
+import java.util.List;
 
+import fr.eni.clinique.bo.Personnel;
+
+public class CliniqueModel {
+	
+	 public CliniqueModel() {
+	        super();
+	    }
+
+	public void loadPersonnels(List<Personnel> personnels) {
+
+	}
+	 
+	 
 }
