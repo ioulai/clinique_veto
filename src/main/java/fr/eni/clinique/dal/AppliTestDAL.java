@@ -25,10 +25,10 @@ public class AppliTestDAL {
 	                    CliniqueModel cliniqueModel = new CliniqueModel();
 	                    
 	                    // Create A Catalog controller
-	                    CliniqueController cliniqueController = new CliniqueController(cliniqueModel);
+	                    CliniqueController catalogController = new CliniqueController(cliniqueModel);
 	                    
 	                    // Create A Catalog View
-	                    ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, cliniqueController, cliniqueModel);
+	                    ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, catalogController, cliniqueModel);
 	         
 	                }
 	            });
