@@ -74,19 +74,12 @@ public class Personnel {
 
 	@Override
 	public String toString() {
-        return new StringBuilder()
-        .append("Personnel [codePers=")
-        .append(codePers)
-        .append(", nom=")
-        .append(nom)
-        .append(", motPasse=")
-        .append(motPasse)
-        .append(", role=")
-        .append(role)
-        .append(", archive=")
-        .append(archive)
-		.toString();
+		StringBuilder builder = new StringBuilder();
+		builder.append("Personnel [nom=").append(nom).append(", role=").append(role).append("]");
+		return builder.toString();
 	}
+
+	
 	
 	
 }
