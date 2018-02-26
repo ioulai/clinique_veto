@@ -26,6 +26,8 @@ public class AppliTestBO {
 		Personnel veto = new Personnel(1, "nom", "motPasse", "role", true);		
 		//rdv
 		Rdv rdv =new Rdv("26/02/2018", veto, A1);
+		
+		
 	
 
 	}
