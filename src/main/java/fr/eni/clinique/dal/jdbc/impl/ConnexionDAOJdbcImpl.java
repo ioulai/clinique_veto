@@ -9,7 +9,7 @@ import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 
 public class ConnexionDAOJdbcImpl implements ConnexionDAO{
-	 private static final String SELECT_BY_ID = "SELECT * FROM personnels WHERE codePers = ?";
+	 private static final String SELECT_ALL = "SELECT * FROM personnels";
 	   
 	 private static ConnexionDAOJdbcImpl instance;
 
@@ -32,7 +32,7 @@ public void connexion() throws DaoException {
     
 	 try {
          connexion = MSSQLConnectionFactory.get();
-         statement = connexion.prepareStatement(SELECT_BY_ID);
+         statement = connexion.prepareStatement(SELECT_ALL);
          statement.execute();
 	 }
 	 catch(SQLException e) {

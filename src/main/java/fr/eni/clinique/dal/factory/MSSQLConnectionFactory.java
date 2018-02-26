@@ -20,7 +20,7 @@ public class MSSQLConnectionFactory {
         Connection connection = null;
         
         try {
-            
+        	
             String url = AppConfig.get("database.mssql.url");
             String username = AppConfig.get("database.mssql.username");
             String password = AppConfig.get("database.mssql.password");
