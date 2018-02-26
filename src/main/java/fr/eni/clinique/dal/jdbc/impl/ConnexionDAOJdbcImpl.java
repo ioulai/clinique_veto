@@ -26,7 +26,7 @@ public static ConnexionDAOJdbcImpl getInstance() {
 }
 
 @Override
-public void connexion(Object element, Object id) throws DaoException {
+public void connexion() throws DaoException {
 	Connection connexion = null;
     PreparedStatement statement = null;
     
@@ -41,7 +41,6 @@ public void connexion(Object element, Object id) throws DaoException {
 	 finally {
          ResourceUtil.safeClose(connexion, statement);
      }
-	 
 }
 
 }

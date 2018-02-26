@@ -2,8 +2,8 @@ package fr.eni.clinique.dal.jdbc.impl;
 
 import fr.eni.clinique.dal.exception.DaoException;
 
-public interface ConnexionDAO<P, ID> {
+public interface ConnexionDAO {
 
-	void connexion(P element,ID id) throws DaoException;
+	void connexion() throws DaoException;
 
 }
