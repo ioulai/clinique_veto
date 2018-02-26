@@ -4,39 +4,58 @@ import java.util.Date;
 
 public class Rdv {
 	
-	protected Integer codeVeto;
-	protected Date dateRDV;
-	protected Integer codeAnimal;
 	
-	
-	
-	
-	Rdv(Integer codeVeto, Date dateRDV, Integer codeAnimal) {
+	private String dateRDV;	
+	private Personnel veterinaire;
+	private Animal animal;
+	/**
+	 * @param dateRDV
+	 * @param veterinaire
+	 * @param animal
+	 */
+	public Rdv(String dateRDV, Personnel veterinaire, Animal animal) {
 		super();
-		setCodeVeto(codeVeto);
-		setDateRDV(dateRDV);
-		setCodeAnimal(codeAnimal);
+		this.dateRDV = dateRDV;
+		this.veterinaire = veterinaire;
+		this.animal = animal;
 	}
-	
-	
-	public Integer getCodeVeto() {
-		return codeVeto;
-	}
-	public void setCodeVeto(Integer codeVeto) {
-		this.codeVeto = codeVeto;
-	}
-	public Date getDateRDV() {
+	/**
+	 * @return the dateRDV
+	 */
+	public String getDateRDV() {
 		return dateRDV;
 	}
-	public void setDateRDV(Date dateRDV) {
+	/**
+	 * @param dateRDV the dateRDV to set
+	 */
+	public void setDateRDV(String dateRDV) {
 		this.dateRDV = dateRDV;
 	}
-	public Integer getCodeAnimal() {
-		return codeAnimal;
+	/**
+	 * @return the veterinaire
+	 */
+	public Personnel getVeterinaire() {
+		return veterinaire;
 	}
-	public void setCodeAnimal(Integer codeAnimal) {
-		this.codeAnimal = codeAnimal;
+	/**
+	 * @param veterinaire the veterinaire to set
+	 */
+	public void setVeterinaire(Personnel veterinaire) {
+		this.veterinaire = veterinaire;
 	}
+	/**
+	 * @return the animal
+	 */
+	public Animal getAnimal() {
+		return animal;
+	}
+	/**
+	 * @param animal the animal to set
+	 */
+	public void setAnimal(Animal animal) {
+		this.animal = animal;
+	}
+	
 	
 	
 }
