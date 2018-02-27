@@ -25,7 +25,7 @@ public class ConnexionScreen extends JFrame{
 	 */
 	private static final long serialVersionUID = 8873958310825089378L;
 
-	 private JPanel mainPanel;
+	 	private JPanel mainPanel;
 	    private JLabel nomLbl;
 	    private JTextField nomTxt; 
 	    private JLabel mdpLbl; 

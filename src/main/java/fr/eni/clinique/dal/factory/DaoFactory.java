@@ -1,6 +1,5 @@
 package fr.eni.clinique.dal.factory;
 
-import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAOJdbcImpl;
 import fr.eni.clinique.dal.jdbc.impl.ConnexionDAO;

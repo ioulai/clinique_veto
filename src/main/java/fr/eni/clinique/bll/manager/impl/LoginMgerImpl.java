@@ -12,6 +12,7 @@ import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
 
 public class LoginMgerImpl implements LoginMger{
+	
 	private static LoginMgerImpl SINGLETON;
 	private PersonnelDAO personnelDAO = DaoFactory.personnelDao();
     private LoginMgerImpl() {
@@ -61,13 +62,21 @@ public class LoginMgerImpl implements LoginMger{
 
 	@Override
 	public void removePersonnel(Personnel personnel) throws BLLException {
-		
+		try {
+			personnelDAO.delete(personnel);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public List<Personnel> toutLePersonnel() throws DaoException {
+	public List<Personnel> toutLePersonnel() throws BLLException {
 		List<Personnel> personnels = null;
-		personnels = personnelDAO.selectALL();
+		try {
+			personnels = personnelDAO.selectALL();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
 		return personnels;
 	}
 
