@@ -13,7 +13,7 @@ public class DaoFactory {
 
 	public static PersonnelDAO personnelDao() {
 		
-		return null;
+		return personnelDao();
 	}
 
 }

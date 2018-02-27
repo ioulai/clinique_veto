@@ -44,25 +44,17 @@ public class Personnel {
 		return motPasse;
 	}
 
-
-
 	public void setMotPasse(String motPasse) {
 		this.motPasse = motPasse;
 	}
-
-
 
 	public String getRole() {
 		return role;
 	}
 
-
-
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-
 
 	public boolean isArchive() {
 		return archive;
