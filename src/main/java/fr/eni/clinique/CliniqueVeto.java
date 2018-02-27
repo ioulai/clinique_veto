@@ -2,7 +2,6 @@ package fr.eni.clinique;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-
 import fr.eni.clinique.common.AppConstants;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.ihm.controller.CliniqueController;
@@ -19,7 +18,7 @@ public class CliniqueVeto {
 	            SwingUtilities.invokeLater(new Runnable() {
 	                @Override
 	                public void run() {
-	                    
+	                	
 	                    CliniqueModel cliniqueModel = new CliniqueModel();
 	                    
 	                    CliniqueController cliniqueController = new CliniqueController(cliniqueModel);

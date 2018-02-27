@@ -24,7 +24,7 @@ import fr.eni.clinique.ihm.controller.CliniqueController;
 import fr.eni.clinique.ihm.model.CliniqueModel;
 import fr.eni.clinique.ihm.screen.ConnexionScreen;
 
-public class gestionPersonnel extends JFrame{
+public class GestionPersonnel extends JFrame{
 
 	/**
 	 * 
@@ -45,7 +45,7 @@ private LoginMgerImpl personnelManager = LoginMgerImpl.getInstance();
 private CliniqueController controller;
 private CliniqueModel model;
 
-public gestionPersonnel(CliniqueController controller, CliniqueModel model) {
+public GestionPersonnel(CliniqueController controller, CliniqueModel model) {
 
     this.model = model;
     this.controller = controller;
@@ -63,7 +63,7 @@ public gestionPersonnel(CliniqueController controller, CliniqueModel model) {
 }
 }
 private void showFailureMessage(String message) {
-    JOptionPane.showMessageDialog(gestionPersonnel.this, message, "Erreur d'affichage", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(GestionPersonnel.this, message, "Erreur d'affichage", JOptionPane.ERROR_MESSAGE);
 }
 private void setUp() {
 

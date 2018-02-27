@@ -22,6 +22,12 @@ public class Personnel {
 		this.archive = archive;
 	}
 	
+	public Personnel(String nom, String motPasse) {
+		super();
+		this.nom = nom;
+		this.motPasse = motPasse;
+	}
+
 	public Integer getCodePers() {
 		return codePers;
 	}
