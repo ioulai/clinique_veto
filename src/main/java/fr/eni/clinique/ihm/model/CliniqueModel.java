@@ -14,8 +14,8 @@ public class CliniqueModel {
 
 	}
 
-	public Object pageAccueil() {
-		return null;
+	public void pageAccueil() {
+		
 	}
 	 
 	 

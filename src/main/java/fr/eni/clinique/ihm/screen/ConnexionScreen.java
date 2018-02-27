@@ -139,17 +139,8 @@ public class ConnexionScreen extends JFrame{
 	                seConnecter();
 	            }
 	        });
-	        
-	        annulerConnexion = new JButton("ANNULER");
-	        annulerConnexion.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                annulerConnexion();
-	            }
-	        });
-
+	       
 	        addComponentOnGrid(panel, validerConnexion, gridBagConstraints, 2, 1, 1);
-	        addComponentOnGrid(panel, annulerConnexion, gridBagConstraints, 1, 1, 1);
 	       
 	        return panel;
 	    }
@@ -170,12 +161,6 @@ public class ConnexionScreen extends JFrame{
 	            showFailureMessage(e.getMessage());
 	        }
 	    }
-	    
-	    private void annulerConnexion() {
-	                showFailureMessage("Aurevoir !");
-	                mainPanel.hide();
-	    }
-	    
 	    
 	    
 }
