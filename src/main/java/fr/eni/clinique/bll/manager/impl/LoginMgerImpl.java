@@ -26,18 +26,17 @@ public class LoginMgerImpl implements LoginMger{
     }
    
 	@Override
-	public Personnel ajoutPersonnel(Personnel newPersonnel) throws BLLException {
+	public void ajoutPersonnel(Personnel newPersonnel) throws BLLException {
 
-		Personnel personnel = null;	
 		ObjectUtil.checkNotNull(newPersonnel);
 			try{
 				validerPersonnel(newPersonnel);
-				personnel = personnelDAO.insert(newPersonnel);
+				personnelDAO.insert(newPersonnel);
 			}
 			catch(DaoException e){
 				throw new BLLException("Error inserting", e);
 			}
-		return personnel;
+		
 	}
 
 	private void validerPersonnel(Personnel newPersonnel) throws BLLException {
@@ -66,7 +65,7 @@ public class LoginMgerImpl implements LoginMger{
 	}
 
 	@Override
-	public List<Personnel> toutLePersonnel() {
+	public List<Personnel> toutLePersonnel() throws DaoException {
 		List<Personnel> personnels = null;
 		personnels = personnelDAO.selectALL();
 		return personnels;

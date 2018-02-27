@@ -4,11 +4,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -34,11 +32,8 @@ public class ConnexionScreen extends JFrame{
 	    private JTextField mdpTxt; 
 	
 	    private JButton validerConnexion;
-	    private JButton annulerConnexion;
 	    
 	    private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14); 
-        // Label
-	    private Font defaultFont = new Font("Arial", Font.PLAIN, 14); 
 
 	    private CliniqueController controller;
 	    private CliniqueModel model;

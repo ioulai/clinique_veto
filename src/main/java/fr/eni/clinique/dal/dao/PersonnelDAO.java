@@ -4,7 +4,6 @@ import java.util.List;
 
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.exception.DaoException;
-import fr.eni.clinique.dal.jdbc.impl.ConnexionDAOJdbcImpl;
 
 public interface PersonnelDAO {
 	

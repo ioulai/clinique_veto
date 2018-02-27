@@ -8,6 +8,7 @@ import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.model.CliniqueModel;
 
 public class CliniqueController {
@@ -20,7 +21,7 @@ public class CliniqueController {
         this.model = model;
     }
     
-    public void init() throws BLLException {
+    public void init() throws BLLException, DaoException {
 
         List<Personnel> personnels = loginManager.toutLePersonnel();
 

@@ -16,7 +16,7 @@ public class MSSQLConnectionFactory {
      * 
      * @return A connection to the MSSQL DATABASE.
      */
-    public static Connection get() {
+    public static Connection get() throws SQLException{
         Connection connection = null;
         
         try {
