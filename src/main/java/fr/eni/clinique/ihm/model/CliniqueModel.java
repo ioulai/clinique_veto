@@ -13,6 +13,10 @@ public class CliniqueModel {
 	public void loadPersonnels(List<Personnel> personnels) {
 
 	}
+
+	public Object pageAccueil() {
+		return null;
+	}
 	 
 	 
 }
