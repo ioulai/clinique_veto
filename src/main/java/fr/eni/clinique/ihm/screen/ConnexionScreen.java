@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,7 +43,7 @@ public class ConnexionScreen extends JFrame{
 	    private CliniqueController controller;
 	    private CliniqueModel model;
 	    
-	    public ConnexionScreen(CliniqueController controller, CliniqueModel model) {
+	    public ConnexionScreen(String titre,CliniqueController controller, CliniqueModel model) {
 
 	        this.model = model;
 	        this.controller = controller;
@@ -49,8 +51,7 @@ public class ConnexionScreen extends JFrame{
 	        setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
 	        setSize(300, 200); // Taille de la fenetre
 	        setResizable(false); // Fenetre pas redimensionnable
-	        setTitle("PAGE D'AUTHENTIFICATION"); // Titre de la fenetre
-	        
+	        setTitle(titre);
 	        try {
 	            setUp(); 
 	            controller.init();
@@ -130,16 +131,35 @@ public class ConnexionScreen extends JFrame{
 
 	        GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-	        validerConnexion = new JButton();
-	        validerConnexion.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/valider.jpg")));
-	        
-	        annulerConnexion = new JButton();
-	        annulerConnexion.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/annuler.jpg")));
-	    
-	        addComponentOnGrid(panel, validerConnexion, gridBagConstraints, 1, 1, 1);
-	        addComponentOnGrid(panel, annulerConnexion, gridBagConstraints, 2, 1, 1);
+	        validerConnexion = new JButton("OK");
+	        validerConnexion.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                seConnecter();
+	            }
+	        });
+	       
+	        addComponentOnGrid(panel, validerConnexion, gridBagConstraints, 2, 1, 1);
 	       
 	        return panel;
 	    }
+	    private void seConnecter() {
+	        try {
+	            if (nomTxt == null) {
+	                showFailureMessage("Veuillez saisir un nom !");
+	            } 
+	            else if(mdpTxt == null) {
+	            	 showFailureMessage("Veuillez saisir un mot de passe !");
+	            }
+	            else {
+	                controller.seConnecter();
+	                model.pageAccueil();
+	            }
+	        } catch (Exception e) {
+	            showFailureMessage(e.getMessage());
+	        }
+	    }
+	    
+	    
 }
 	    

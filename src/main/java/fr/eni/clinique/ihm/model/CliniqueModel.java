@@ -11,7 +11,11 @@ public class CliniqueModel {
 	    }
 
 	public void loadPersonnels(List<Personnel> personnels) {
+		
+	}
 
+	public void pageAccueil() {
+		
 	}
 	 
 	 
