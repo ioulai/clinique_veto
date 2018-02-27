@@ -9,11 +9,13 @@ public interface LoginMger {
 
 	//Personnel
 	Personnel ajoutPersonnel(Personnel newPersonnel) throws BLLException;
+	
 	void updatePersonnel(Personnel personnel) throws BLLException;
-	void removeArticle(Personnel personnel) throws BLLException;
-	List<Personnel> getPersonnel();
-	 
-	 
-	 
+	
+	void removePersonnel(Personnel personnel) throws BLLException;
+	
+	List<Personnel> toutLePersonnel();
+	
+	void reinitialiserMDP(Personnel personnel)throws BLLException; 
 	 
 }

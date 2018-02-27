@@ -77,9 +77,6 @@ public class Personnel {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Personnel [nom=").append(nom).append(", role=").append(role).append("]");
 		return builder.toString();
-	}
-
-	
-	
+	}	
 	
 }

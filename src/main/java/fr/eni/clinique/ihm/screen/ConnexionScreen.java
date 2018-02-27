@@ -43,7 +43,7 @@ public class ConnexionScreen extends JFrame{
 	    private CliniqueController controller;
 	    private CliniqueModel model;
 	    
-	    public ConnexionScreen(CliniqueController controller, CliniqueModel model) {
+	    public ConnexionScreen(String titre,CliniqueController controller, CliniqueModel model) {
 
 	        this.model = model;
 	        this.controller = controller;
@@ -51,8 +51,7 @@ public class ConnexionScreen extends JFrame{
 	        setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
 	        setSize(300, 200); // Taille de la fenetre
 	        setResizable(false); // Fenetre pas redimensionnable
-	        setTitle("PAGE D'AUTHENTIFICATION"); // Titre de la fenetre
-	        
+	        setTitle(titre);
 	        try {
 	            setUp(); 
 	            controller.init();
@@ -148,7 +147,6 @@ public class ConnexionScreen extends JFrame{
 	        try {
 	            if (nomTxt == null) {
 	                showFailureMessage("Veuillez saisir un nom !");
-
 	            } 
 	            else if(mdpTxt == null) {
 	            	 showFailureMessage("Veuillez saisir un mot de passe !");

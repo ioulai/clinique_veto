@@ -13,7 +13,6 @@ import fr.eni.clinique.ihm.model.CliniqueModel;
 public class CliniqueController {
 	
 	private CliniqueModel model;
-	
     private LoginMger loginManager = ManagerFactory.loginMger();
     
     public CliniqueController(CliniqueModel model) {
@@ -23,11 +22,11 @@ public class CliniqueController {
     
     public void init() throws BLLException {
 
-        List<Personnel> personnels = loginManager.getPersonnel();
+        List<Personnel> personnels = loginManager.toutLePersonnel();
 
-       model.loadPersonnels(personnels);
+        model.loadPersonnels(personnels);
     }
-
+    
 	public void seConnecter() {
 		
 	}

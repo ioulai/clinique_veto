@@ -42,5 +42,4 @@ public void connexion() throws DaoException {
          ResourceUtil.safeClose(connexion, statement);
      }
 }
-
 }
