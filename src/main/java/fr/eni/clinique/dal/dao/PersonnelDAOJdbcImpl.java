@@ -72,7 +72,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 		try {
 			statement = connexion.prepareStatement(INSERT_QUERY);
 			remplissagePersonnel(statement, newPersonnel);
-			statement.executeUpdate();
+			statement.execute();
 		} catch (SQLException e) {
 			throw new DaoException("erreur d'insertion personnel",e);
 		}finally {
