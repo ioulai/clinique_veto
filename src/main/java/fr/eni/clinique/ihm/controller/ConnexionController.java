@@ -9,14 +9,14 @@ import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.exception.DaoException;
-import fr.eni.clinique.ihm.model.CliniqueModel;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
-public class CliniqueController {
+public class ConnexionController {
 	
-	private CliniqueModel model;
+	private ConnexionModel model;
     private LoginMger loginManager = ManagerFactory.loginMger();
     
-    public CliniqueController(CliniqueModel model) {
+    public ConnexionController(ConnexionModel model) {
         super();
         this.model = model;
     }

@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import fr.eni.clinique.ihm.controller.CliniqueController;
-import fr.eni.clinique.ihm.model.CliniqueModel;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class ConnexionScreen extends JFrame{
 
@@ -35,10 +35,10 @@ public class ConnexionScreen extends JFrame{
 	    
 	    private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14); 
 
-	    private CliniqueController controller;
-	    private CliniqueModel model;
+	    private ConnexionController controller;
+	    private ConnexionModel model;
 	    
-	    public ConnexionScreen(String titre,CliniqueController controller, CliniqueModel model) {
+	    public ConnexionScreen(String titre,ConnexionController controller, ConnexionModel model) {
 
 	        this.model = model;
 	        this.controller = controller;
@@ -57,11 +57,11 @@ public class ConnexionScreen extends JFrame{
 	    }
 	    
 	    private void showFailureMessage(String message) {
-	        JOptionPane.showMessageDialog(ConnexionScreen.this, message, "Erreur d'authentification", JOptionPane.ERROR_MESSAGE);
+	        JOptionPane.showMessageDialog(ConnexionScreen.this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
 	    }
 	    
-	    private void showSuccessMessage() {
-	        JOptionPane.showMessageDialog(ConnexionScreen.this,"Authentification reussie");
+	    private void showSuccessMessage(String message) {
+	        JOptionPane.showMessageDialog(ConnexionScreen.this,message);
 	    }
 	    
 	    private void setUp() {

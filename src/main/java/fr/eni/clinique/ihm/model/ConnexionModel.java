@@ -4,9 +4,9 @@ import java.util.List;
 
 import fr.eni.clinique.bo.Personnel;
 
-public class CliniqueModel {
+public class ConnexionModel {
 	
-	 public CliniqueModel() {
+	 public ConnexionModel() {
 	        super();
 	    }
 
