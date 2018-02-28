@@ -116,6 +116,9 @@ public class Client {
 	public List<Animal> getLesAnimaux() {
 		return lesAnimaux;
 	}
+	public Client() {
+		super();
+	}
 	public void setLesAnimaux(List<Animal> lesAnimaux) {
 		this.lesAnimaux = lesAnimaux;
 	}
