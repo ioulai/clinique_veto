@@ -5,19 +5,32 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.common.AppConstants;
+import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
+import fr.eni.clinique.ihm.controller.AdminController;
+import fr.eni.clinique.ihm.model.AdminModel;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GestionPersonnel extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private AdminController controller;
+	private AdminModel model;
 
 	/**
 	 * Launch the application.
@@ -34,11 +47,11 @@ public class GestionPersonnel extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
 	public GestionPersonnel() {
+		
 		setTitle("Gestion du personnel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 510, 496);
@@ -74,11 +87,11 @@ public class GestionPersonnel extends JFrame {
 		panel_bouton.add(lblAjouter);
 		
 		JLabel lblSupprimer = new JLabel("Supprimer");
-		lblSupprimer.setBounds(99, 39, 58, 14);
+		lblSupprimer.setBounds(99, 39, 66, 14);
 		panel_bouton.add(lblSupprimer);
 		
 		JLabel lblRinitialiser = new JLabel("R\u00E9initialiser");
-		lblRinitialiser.setBounds(190, 39, 58, 14);
+		lblRinitialiser.setBounds(190, 39, 74, 14);
 		panel_bouton.add(lblRinitialiser);
 		
 		JLabel lblPourTouteQuestion = new JLabel("Pour toute question technique, Contactez Isaac et Mariam. Merci");
@@ -90,5 +103,8 @@ public class GestionPersonnel extends JFrame {
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		table.setBounds(10, 86, 474, 334);
 		contentPane.add(table);
-	}
+		
+		
+	} 
+	
 }

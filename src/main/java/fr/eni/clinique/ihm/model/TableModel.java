@@ -1,5 +1,8 @@
 package fr.eni.clinique.ihm.model;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +17,24 @@ public class TableModel extends AbstractTableModel {
 	
 	private List<Personnel> personnels = new ArrayList<>();
     private final String[] entetes = { "Nom", "Rôle", "MotPasse"};
-	 
+
+	private ResultSet resultSet;
+
+	private ResultSetMetaData resultSetMetaData;
+   
+    public TableModel( ResultSet resultSet )
+    {
+      this.resultSet = resultSet;
+      
+      try 
+      {
+        this.resultSetMetaData = resultSet.getMetaData();
+      } 
+      catch (SQLException e) 
+      {
+        e.printStackTrace();
+      }
+    }
     public void changeArticle(int index, Personnel personnel) {
         this.personnels.set(index, personnel);
     }
