@@ -14,7 +14,6 @@ public class DaoFactory {
 
 	public static PersonnelDAO personnelDao() {
 		PersonnelDAOJdbcImpl personnel = new PersonnelDAOJdbcImpl();
-		
 		return personnel;
 	}
 

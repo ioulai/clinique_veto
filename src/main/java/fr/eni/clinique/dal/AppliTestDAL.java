@@ -19,6 +19,7 @@ public class AppliTestDAL {
 		System.out.println("b");
 		List <Personnel> ps= new ArrayList<>();
 		PersonnelDAO pers =DaoFactory.personnelDao();
+		//select all
 		try {
 			ps = pers.selectALL();
 			for(Personnel p : ps)
@@ -26,29 +27,25 @@ public class AppliTestDAL {
 				System.out.println("a"+p);
 			}
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		Personnel personnel = new Personnel("TestDal", "mdpDAL");
+		//insert
+		Personnel personnel = new Personnel("TeTTPaMP", "mdpDAL","Sec",true);
 
 		try {
 			pers.insert(personnel);
 		} catch (DaoException e) {
 			e.printStackTrace();
 		} 
-
-		try {
-			ps = pers.selectALL();
-			for(Personnel p : ps)
-			{
-				System.out.println(p);
-			}
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
 		
+		//update
+		try {
+			pers.update(personnel,"OKOK");
+				
+		} catch (DaoException e) {
+			e.printStackTrace();
+		} 
 //		 try {
 //
 //	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

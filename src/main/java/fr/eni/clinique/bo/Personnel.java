@@ -21,7 +21,14 @@ public class Personnel {
 		this.role = role;
 		this.archive = archive;
 	}
-	
+	public Personnel(String nom, String motPasse, String role, boolean archive) {
+		super();
+		
+		this.nom = nom;
+		this.motPasse = motPasse;
+		this.role = role;
+		this.archive = archive;
+	}
 	public Personnel(String nom, String motPasse) {
 		super();
 		this.nom = nom;

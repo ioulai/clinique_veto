@@ -9,7 +9,7 @@ public interface PersonnelDAO {
 	
 	List<Personnel> selectALL() throws DaoException;
 	
-	void insert(Personnel newPersonnel) throws DaoException;
+	Personnel insert(Personnel newPersonnel) throws DaoException;
 	void update(Personnel newPersonnel, String pass) throws DaoException;
 	void delete(Personnel newPersonnel) throws DaoException;
 	

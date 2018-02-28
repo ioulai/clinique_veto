@@ -15,30 +15,30 @@ import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 
 
 public class PersonnelDAOJdbcImpl implements PersonnelDAO{
-	private Connection connexion = null;
+	
+	private Connection connection = null;
+	
 	private static final String SELECT_ALL_QUERY = "select * from Personnels";
 	private static final String INSERT_QUERY = "insert into Personnels(Nom, MotPasse, Role, Archive) values(?,?,?,?)";
+	private static final String DELETE_QUERY ="DELETE FROM Personnels WHERE CodePers=?";
+	private static final String SELECT_BY_ROLE="SELECT * FROM Personnels WHERE Role=?";
+	private static final String UPDATE_QUERY="UPDATE Personnels SET Nom=?, MotPasse=?, Role=?, Archive=? WHERE CodePers=?";
+	
 	private Personnel getPersonnel(ResultSet res) throws SQLException{
 		Personnel personnel = new Personnel();
 		personnel.setCodePers(res.getInt("CodePers"));
 		personnel.setNom(res.getString("Nom"));
 		personnel.setMotPasse(res.getString("MotPasse"));
 		personnel.setRole(res.getString("Role"));
+		personnel.setArchive(res.getBoolean("Archive"));
 		
 		return personnel;
 	}
 	
-	private void remplissagePersonnel(PreparedStatement statement, Personnel personnel) throws SQLException{
-		
-		statement.setString(1,  personnel.getNom());
-		statement.setString(2,  personnel.getMotPasse());
-		statement.setString(3,  personnel.getRole());
-	}
-	
 	private void ouvertureConnection() throws DaoException{
 		try {
-			if (connexion == null){
-				connexion = MSSQLConnectionFactory.get();
+			if (connection == null){
+				connection = MSSQLConnectionFactory.get();
 			}
 		} catch (SQLException e) {
 		throw new DaoException("Erreur connexion",e);
@@ -52,7 +52,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 		List<Personnel> personnels = new ArrayList<>();
 		
 		try {
-			Statement statement = (Statement) connexion.createStatement();
+			Statement statement = (Statement) connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(SELECT_ALL_QUERY);
 			while(resultSet.next()){
 				personnels.add(getPersonnel(resultSet));
@@ -65,39 +65,100 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	}
 
 	@Override
-	public void insert(Personnel newPersonnel) throws DaoException {
-		ouvertureConnection();
-		PreparedStatement statement = null;
-	
+	public Personnel insert(Personnel newPersonnel) throws DaoException {
+		    Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultSet = null;
+	        
 		try {
-			statement = connexion.prepareStatement(INSERT_QUERY);
-			remplissagePersonnel(statement, newPersonnel);
-			statement.execute();
-		} catch (SQLException e) {
-			throw new DaoException("erreur d'insertion personnel",e);
+			   connection = MSSQLConnectionFactory.get();
+	           statement = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
+	           
+	            statement.setString(1, newPersonnel.getNom());
+	            statement.setString(2, newPersonnel.getMotPasse());
+	            statement.setString(3, newPersonnel.getRole());
+	            statement.setBoolean(4, newPersonnel.isArchive());
+	            
+	            if (statement.executeUpdate() == 1) {
+	                resultSet = statement.getGeneratedKeys();
+	                if (resultSet.next()) {
+	                	newPersonnel.setCodePers(resultSet.getInt(1));
+	                }
+			} }
+		catch (SQLException e) {
+			throw new DaoException("Erreur d'insertion personnel",e);
 		}finally {
-            ResourceUtil.safeClose(statement);
+            ResourceUtil.safeClose(connection,statement,resultSet);
         }
-		
-		
+		return newPersonnel;
 	}
 
 	@Override
 	public void update(Personnel newPersonnel, String pass) throws DaoException {
-		
-		
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            connection = MSSQLConnectionFactory.get();
+            statement = connection.prepareStatement(UPDATE_QUERY);
+            
+          
+            statement.setString(1, newPersonnel.getNom());
+            statement.setString(2, pass);
+            statement.setString(3, newPersonnel.getRole());
+            statement.setBoolean(4, newPersonnel.isArchive());
+            statement.setInt(5, newPersonnel.getCodePers());
+            statement.executeUpdate();
+            
+        } catch(SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        } finally {
+            ResourceUtil.safeClose(connection, statement);
+        }
 	}
 
 	@Override
 	public void delete(Personnel newPersonnel) throws DaoException {
-	
-		
+		  Connection connection = null;
+	        PreparedStatement statement = null;
+	        
+	        try {
+	            connection = MSSQLConnectionFactory.get();
+	            statement = connection.prepareStatement(DELETE_QUERY);
+	            statement.setInt(1, newPersonnel.getCodePers());
+	            statement.executeUpdate();
+	            
+	        } catch(SQLException e) {
+	            throw new DaoException(e.getMessage(), e);
+	        } finally {
+	            ResourceUtil.safeClose(connection, statement);
+	        }
 	}
 
 	@Override
 	public List<Personnel> selectByRole(String role) throws DaoException {
+	        PreparedStatement statement = null;
+	        ResultSet resultSet = null;
+	        
+	        List<Personnel> lesPersonnels = new ArrayList<Personnel>();
+	        try {
+	            connection = MSSQLConnectionFactory.get();
+	            statement = connection.prepareStatement(SELECT_BY_ROLE);
+	            statement.setString(1, role);
+	            resultSet = statement.executeQuery();
 
-		return null;
+	            while (resultSet.next()) {
+	            	lesPersonnels.add((Personnel) resultSet);
+	            }
+	            
+	        } catch(SQLException e) {
+	            throw new DaoException(e.getMessage(), e);
+	        } finally {
+	            ResourceUtil.safeClose(connection, statement);
+	        }
+	        
+	        return lesPersonnels;
 	}
 
 }
