@@ -18,11 +18,8 @@ public class CliniqueVeto {
 	            SwingUtilities.invokeLater(new Runnable() {
 	                @Override
 	                public void run() {
-	                	
 	                    CliniqueModel cliniqueModel = new CliniqueModel();
-	                    
 	                    CliniqueController cliniqueController = new CliniqueController(cliniqueModel);
-	        
 	                    ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME,cliniqueController, cliniqueModel);
 	                }
 	            });

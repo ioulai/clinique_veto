@@ -1,4 +1,4 @@
-package fr.eni.clinique.bll.manager.ihm;
+package fr.eni.clinique.ihm.manager.screen;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,17 +16,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
 import fr.eni.clinique.ihm.manager.controller.AdminController;
 import fr.eni.clinique.ihm.manager.model.AdminModel;
-public class GestionPersonnel extends JFrame{
+public class ScreenGestionManager extends JFrame {
 
-	/**
+ 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5384422349271584894L;
 	
- 	private JPanel mainPanel;
+	private JPanel mainPanel;
 	private JComboBox comboBox;
 	
     private JButton previousButton;
@@ -35,12 +34,10 @@ public class GestionPersonnel extends JFrame{
     private JButton deleteButton;
     private JButton newButton;
     
-private LoginMgerImpl personnelManager = LoginMgerImpl.getInstance();
-
 private AdminController controller;
 private AdminModel model;
 
-public GestionPersonnel(AdminController controller, AdminModel model) {
+public ScreenGestionManager (AdminController controller, AdminModel model) {
 
     this.model = model;
     this.controller = controller;
@@ -58,7 +55,7 @@ public GestionPersonnel(AdminController controller, AdminModel model) {
 }
 }
 private void showFailureMessage(String message) {
-    JOptionPane.showMessageDialog(GestionPersonnel.this, message, "Erreur d'affichage", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(ScreenGestionManager.this, message, "Erreur d'affichage", JOptionPane.ERROR_MESSAGE);
 }
 private void setUp() {
 
@@ -166,5 +163,6 @@ private JPanel createButtonBar() {
 
     return panel;
 }
+
 
 }
