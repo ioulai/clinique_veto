@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm.manager.controller;
+package fr.eni.clinique.ihm.controller;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.exception.DaoException;
-import fr.eni.clinique.ihm.manager.model.AdminModel;
+import fr.eni.clinique.ihm.model.AdminModel;
 
 public class AdminController {
 	private AdminModel model;

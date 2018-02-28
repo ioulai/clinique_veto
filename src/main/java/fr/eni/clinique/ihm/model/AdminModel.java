@@ -1,4 +1,4 @@
-package fr.eni.clinique.ihm.manager.model;
+package fr.eni.clinique.ihm.model;
 
 import java.util.List;
 

@@ -5,9 +5,9 @@ import javax.swing.UIManager;
 
 import fr.eni.clinique.bll.manager.ihm.GestionPersonnel;
 import fr.eni.clinique.common.exception.TechnicalException;
+import fr.eni.clinique.ihm.controller.AdminController;
 import fr.eni.clinique.ihm.controller.CliniqueController;
-import fr.eni.clinique.ihm.manager.controller.AdminController;
-import fr.eni.clinique.ihm.manager.model.AdminModel;
+import fr.eni.clinique.ihm.model.AdminModel;
 import fr.eni.clinique.ihm.model.CliniqueModel;
 
 public class AppliTestBLL {
