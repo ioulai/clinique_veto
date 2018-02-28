@@ -1,21 +1,24 @@
 package fr.eni.clinique.ihm.screen;
 
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JTable;
 
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.controller.AdminController;
 import fr.eni.clinique.ihm.model.AdminModel;
 public class ScreenGestionManager extends JFrame {
@@ -24,28 +27,31 @@ public class ScreenGestionManager extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -5384422349271584894L;
-	
+	private List<Personnel> lesPersonnels = new ArrayList<>();
+	private final String[] entetes = { "Nom", "Rôle", "MotPasse"};
+    private final Object[][] donnees = {};
+	    
 	private JPanel mainPanel;
-	private JComboBox comboBox;
+	private JLabel ajoutLbl; 
+	private JLabel supprLbl; 
+	private JLabel reinitLbl; 
 	
-    private JButton previousButton;
-    private JButton nextButton;
     private JButton validateButton;
     private JButton deleteButton;
     private JButton newButton;
     
-private AdminController controller;
-private AdminModel model;
-
+    private AdminController controller;
+    private AdminModel model;
+    
 public ScreenGestionManager (AdminController controller, AdminModel model) {
 
     this.model = model;
     this.controller = controller;
     
     setDefaultCloseOperation(EXIT_ON_CLOSE); 
-    setSize(600, 300 ); 
+    setSize(800, 500 ); 
     setResizable(false); 
-    setTitle("Gestion du Personnel");
+    setTitle("Gestion du personnel");
     try {
         setUp(); 
         controller.init();
@@ -54,9 +60,11 @@ public ScreenGestionManager (AdminController controller, AdminModel model) {
         showFailureMessage(e.getMessage());
 }
 }
+
 private void showFailureMessage(String message) {
     JOptionPane.showMessageDialog(ScreenGestionManager.this, message, "Erreur d'affichage", JOptionPane.ERROR_MESSAGE);
 }
+
 private void setUp() {
 
     mainPanel = new JPanel();
@@ -67,21 +75,18 @@ private void setUp() {
     setContentPane(mainPanel);
     
     mainPanel.setLayout(new GridBagLayout());
-    
-    JLabel nomLbl = createLabel("Nom");
-    JTextField nomTxt = new JTextField();
-    
-    JLabel mdpLbl = createLabel("Mot de Passe");
-    JTextField mdpTxt = new JTextField();
-    
-    GridBagConstraints gridBagConstraints = createGridBagConstraints();
-    addComponentOnGrid(mainPanel, nomLbl, gridBagConstraints, 1, 1, 0.15);
-    addComponentOnGrid(mainPanel, nomTxt, gridBagConstraints, 2, 1, 0.85);
-    addComponentOnGrid(mainPanel, mdpLbl, gridBagConstraints, 1, 2, 0.15);
-    addComponentOnGrid(mainPanel, mdpTxt, gridBagConstraints, 2, 2, 0.85);
-    addComponentOnGrid(mainPanel, createButtonBar(), gridBagConstraints, 2, 3, 1);
-}
+    mainPanel.setLocation(100, 100);
+    ajoutLbl = new JLabel("Ajouter");
+    supprLbl = new JLabel("Supprimer");
+    reinitLbl = new JLabel("Réinitialiser");
 
+    JTable monTableau = new JTable(donnees, entetes);
+    
+    monTableau.setVisible(true);
+    GridBagConstraints gridBagConstraints = createGridBagConstraints();
+    addComponentOnGrid(mainPanel, createButtonBar(), gridBagConstraints, 1, 1, 1);
+    addComponentOnGrid(mainPanel, monTableau, gridBagConstraints, 2, 1, 1);    
+}
 
 private void addComponentOnGrid(JPanel panel,JComponent component,GridBagConstraints gridBagConstraints,int gridX, int gridY, double weightX) {
     gridBagConstraints.gridx = gridX; 
@@ -96,41 +101,17 @@ private GridBagConstraints createGridBagConstraints() {
     GridBagConstraints gridBagConstraints = new GridBagConstraints();
     gridBagConstraints.fill = GridBagConstraints.HORIZONTAL; 
     gridBagConstraints.insets = new Insets(5,5,5,5);
-
     return gridBagConstraints; 
 }
 
-private JLabel createLabel(String text) {
-    JLabel label = new JLabel(text);
-    return label;
-}
-
 private JPanel createButtonBar() {
-
     JPanel panel = new JPanel();
     panel.setOpaque(true);
     panel.setLayout(new GridBagLayout());
-
+   
     GridBagConstraints gridBagConstraints = new GridBagConstraints();
-
-   previousButton = new JButton();
-    previousButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/Back24.gif")));
-    previousButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        }
-    });
-
-    nextButton = new JButton();
-    nextButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/Forward24.gif")));
-    nextButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        }
-    });
-
     validateButton = new JButton();
-    validateButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/Save24.gif")));
+    validateButton.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/init.PNG")));
     validateButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -155,14 +136,28 @@ private JPanel createButtonBar() {
         }
     });
 
-    addComponentOnGrid(panel, previousButton, gridBagConstraints, 1, 1, 1);
-    addComponentOnGrid(panel, nextButton, gridBagConstraints, 2, 1, 1);
-    addComponentOnGrid(panel, validateButton, gridBagConstraints, 3, 1, 1);
-    addComponentOnGrid(panel, deleteButton, gridBagConstraints, 4, 1, 1);
-    addComponentOnGrid(panel, newButton, gridBagConstraints, 5, 1, 1);
+    addComponentOnGrid(panel, newButton, gridBagConstraints, 0, 0, 1);
+    addComponentOnGrid(panel, ajoutLbl, gridBagConstraints, 0, 1, 1);
 
+    addComponentOnGrid(panel, deleteButton, gridBagConstraints,1, 0, 1);
+    addComponentOnGrid(panel, supprLbl, gridBagConstraints, 1, 1, 1);
+    
+    addComponentOnGrid(panel, validateButton, gridBagConstraints, 2, 0, 1);
+    addComponentOnGrid(panel, reinitLbl, gridBagConstraints, 2, 1, 1);
+    
     return panel;
 }
 
+public void addAllPersonnel(List<Personnel> lePersonnel) {
+    this.lesPersonnels.addAll(lePersonnel);
+}
+
+public void addPersonnel(Personnel lePersonnel) {
+    this.lesPersonnels.add(lePersonnel);
+}
+public ScreenGestionManager(List<Personnel> personnels) {
+    super();
+    this.lesPersonnels = personnels;
+}
 
 }
