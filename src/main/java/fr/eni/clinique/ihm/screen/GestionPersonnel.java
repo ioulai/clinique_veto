@@ -1,6 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,12 +11,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-import fr.eni.clinique.bo.Personnel;
-import fr.eni.clinique.common.AppConstants;
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 import fr.eni.clinique.ihm.controller.AdminController;
 import fr.eni.clinique.ihm.model.AdminModel;
+import fr.eni.clinique.ihm.model.TableModel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -25,8 +25,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GestionPersonnel extends JFrame {
 
@@ -50,6 +48,19 @@ public class GestionPersonnel extends JFrame {
 			}
 		});
 	}
+
+	public class Panel extends JPanel
+	{
+		private static final long serialVersionUID = 1L;
+		
+		public Panel( TableModel model )
+		  {
+		    table = new JTable( model );
+		    setLayout( new BorderLayout() );
+		    add( new JScrollPane( table ), BorderLayout.CENTER );
+		  }
+		  private JTable table;
+		}
 	/**
 	 * Create the frame.
 	 */
@@ -105,15 +116,22 @@ public class GestionPersonnel extends JFrame {
 		lblPourTouteQuestion.setBounds(20, 431, 452, 24);
 		contentPane.add(lblPourTouteQuestion);
 		
-		table = new JTable();
-		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		table.setBounds(10, 86, 474, 334);
-		contentPane.add(table);
-	   // controller.init();
-	    List<Personnel> personnels = new ArrayList<>();
-		model.loadPersonnels(personnels);
-		
-		
+		 Connection connection;
+			try {
+				connection = MSSQLConnectionFactory.get(); 
+				Statement st = connection.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE,
+			                								   ResultSet.CONCUR_READ_ONLY );
+		   ResultSet rs = st.executeQuery( "SELECT * FROM Personnels" );	
+		   TableModel rtm = new TableModel( rs );
+	       
+		    JPanel tablePanel = new JPanel( rtm );
+		    tablePanel.setBounds(20, 86, 433, 324);
+			contentPane.add(tablePanel);
+			}
+			catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 	}
+	
 	
 }

@@ -1,5 +1,9 @@
 package fr.eni.clinique.ihm.model;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -11,16 +15,18 @@ import javax.swing.table.AbstractTableModel;
 import fr.eni.clinique.bo.Personnel;
 
 
-public class TableModel extends AbstractTableModel {
+public class TableModel extends AbstractTableModel implements LayoutManager {
 
 	private static final long serialVersionUID = 5339658835698597380L;
 	
 	private List<Personnel> personnels = new ArrayList<>();
     private final String[] entetes = { "Nom", "Rôle", "MotPasse"};
 
+	private ResultSetMetaData resultSetMetaData;
+
 	private ResultSet resultSet;
 
-	private ResultSetMetaData resultSetMetaData;
+
    
     public TableModel( ResultSet resultSet )
     {
@@ -97,5 +103,30 @@ public class TableModel extends AbstractTableModel {
     public void loadArticle(){
     
     }
+	@Override
+	public void addLayoutComponent(String arg0, Component arg1) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void layoutContainer(Container arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public Dimension minimumLayoutSize(Container arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Dimension preferredLayoutSize(Container arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void removeLayoutComponent(Component arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

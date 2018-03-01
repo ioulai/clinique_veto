@@ -27,7 +27,6 @@ public class GestionPersonnel extends JFrame{
 	private static final long serialVersionUID = 1L;
 	
  	private JPanel mainPanel;
-	private JComboBox comboBox;
 	
     private JButton previousButton;
     private JButton nextButton;
