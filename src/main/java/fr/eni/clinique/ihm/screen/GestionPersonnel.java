@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.AppConstants;
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 import fr.eni.clinique.ihm.controller.AdminController;
@@ -24,6 +25,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionPersonnel extends JFrame {
 
@@ -54,7 +57,7 @@ public class GestionPersonnel extends JFrame {
 		
 		setTitle("Gestion du personnel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 510, 496);
+		setBounds(100, 100, 510, 505);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,7 +102,7 @@ public class GestionPersonnel extends JFrame {
 		
 		JLabel lblPourTouteQuestion = new JLabel("Pour toute question technique, Contactez Isaac et Mariam. Merci");
 		lblPourTouteQuestion.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblPourTouteQuestion.setBounds(20, 431, 452, 14);
+		lblPourTouteQuestion.setBounds(20, 431, 452, 24);
 		contentPane.add(lblPourTouteQuestion);
 		
 		table = new JTable();
@@ -107,8 +110,9 @@ public class GestionPersonnel extends JFrame {
 		table.setBounds(10, 86, 474, 334);
 		contentPane.add(table);
 	   // controller.init();
-	    
-		//model.loadPersonnels(personnels);
+	    List<Personnel> personnels = new ArrayList<>();
+		model.loadPersonnels(personnels);
+		
 		
 	}
 	

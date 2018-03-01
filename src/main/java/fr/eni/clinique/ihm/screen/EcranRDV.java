@@ -118,16 +118,16 @@ public class EcranRDV extends JFrame {
 		panel_2.add(lblNewLabel);
 		
 		JComboBox cbx_heure = new JComboBox();
-		cbx_heure.setBounds(10, 71, 28, 20);
+		cbx_heure.setBounds(10, 71, 33, 20);
 		panel_2.add(cbx_heure);
 		
 		JComboBox cbx_min = new JComboBox();
-		cbx_min.setBounds(48, 71, 28, 20);
+		cbx_min.setBounds(59, 71, 33, 20);
 		panel_2.add(cbx_min);
 		
 		JLabel lblH = new JLabel("h");
 		lblH.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblH.setBounds(41, 74, 46, 14);
+		lblH.setBounds(48, 74, 46, 14);
 		panel_2.add(lblH);
 		
 		JLabel lblPour = new JLabel("Pour");

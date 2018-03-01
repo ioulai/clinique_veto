@@ -30,9 +30,10 @@ public class ConnexionController {
     
 	public boolean seConnecter(String nom, String motPasse) {
 		
-		if(nom.equals(arg0))
+		if(nom.equals("arg0"))
 		
 		return true;
+		return false;
 	}
 
 

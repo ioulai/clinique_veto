@@ -17,7 +17,9 @@ public class AppliTestDAL {
 
 	public static void main(String[] args) {
 		System.out.println("b");
+		
 		List <Personnel> ps= new ArrayList<>();
+		
 		PersonnelDAO pers =DaoFactory.personnelDao();
 		//select all
 		try {
@@ -30,7 +32,7 @@ public class AppliTestDAL {
 			
 			e.printStackTrace();
 		}
-		//insert
+		/*insert
 		Personnel personnel = new Personnel("TeTTPaMP", "mdpDAL","Sec",true);
 
 		try {
@@ -45,7 +47,7 @@ public class AppliTestDAL {
 				
 		} catch (DaoException e) {
 			e.printStackTrace();
-		} 
+		} */
 //		 try {
 //
 //	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

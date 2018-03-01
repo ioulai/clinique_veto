@@ -147,7 +147,7 @@ public class ConnexionScreen extends JFrame{
 	            	 showFailureMessage("Veuillez saisir un mot de passe !");
 	            }
 	            else {
-	                controller.seConnecter();
+	               // controller.seConnecter();
 	                model.pageAccueil();
 	            }
 	        } catch (Exception e) {
