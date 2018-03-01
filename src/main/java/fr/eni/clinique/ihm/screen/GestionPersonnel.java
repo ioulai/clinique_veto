@@ -103,9 +103,9 @@ public class GestionPersonnel extends JFrame {
 		table.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		table.setBounds(10, 86, 474, 334);
 		contentPane.add(table);
-	    controller.init();
+	   // controller.init();
 	    
-		model.loadPersonnels(personnels);
+		//model.loadPersonnels(personnels);
 		
 	}
 	

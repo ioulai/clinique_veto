@@ -38,6 +38,21 @@ public class Animal {
 		this.archive = archive;
 	}
 	
+	public Animal(Integer codeAnimal, String nomAnimal, String sexe, String couleur, String race, String espece,
+			int codeClient, String tatouage, String antecedents, Boolean archive) {
+		super();
+		this.codeAnimal = codeAnimal;
+		this.nomAnimal = nomAnimal;
+		this.sexe = sexe;
+		this.couleur = couleur;
+		this.race = race;
+		this.espece = espece;
+		this.codeClient = codeClient;
+		this.tatouage = tatouage;
+		this.antecedents = antecedents;
+		this.archive = archive;
+	}
+
 	public int getCodeClient() {
 		return codeClient;
 	}
