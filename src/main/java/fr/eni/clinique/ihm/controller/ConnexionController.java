@@ -28,8 +28,11 @@ public class ConnexionController {
         model.loadPersonnels(personnels);
     }
     
-	public void seConnecter() {
+	public boolean seConnecter(String nom, String motPasse) {
 		
+		if(nom.equals(arg0))
+		
+		return true;
 	}
 
 

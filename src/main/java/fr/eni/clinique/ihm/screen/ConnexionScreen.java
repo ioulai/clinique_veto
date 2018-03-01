@@ -126,11 +126,11 @@ public class ConnexionScreen extends JFrame{
 
 	        GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-	        validerConnexion = new JButton("OK");
+	        validerConnexion = new JButton("VALIDER");
 	        validerConnexion.addActionListener(new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
-	                seConnecter();
+	                
 	            }
 	        });
 	       
@@ -138,7 +138,7 @@ public class ConnexionScreen extends JFrame{
 	       
 	        return panel;
 	    }
-	    private void seConnecter() {
+	    private void seConnecter(String nom, String motPasse) {
 	        try {
 	            if (nomTxt == null) {
 	                showFailureMessage("Veuillez saisir un nom !");
