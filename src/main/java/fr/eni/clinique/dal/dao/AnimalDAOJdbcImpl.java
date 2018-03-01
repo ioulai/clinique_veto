@@ -17,16 +17,18 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 	private Connection connection = null;
 	
 	private static final String SELECT_ALL_QUERY = "select * from Animaux";
-	private static final String INSERT_QUERY = "insert into Animaux (NomAnimal, Sexe, Espece, CodeClient,Tatouage,Antecedents,Archive) values(?,?,?,?,?,?,?)";
+	private static final String INSERT_QUERY = "insert into Animaux (NomAnimal, Sexe, Couleur, Race, Espece, CodeClient,Tatouage,Antecedents,Archive) values(?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_QUERY ="DELETE FROM Animaux WHERE CodeAnimal=?";
-	private static final String SELECT_BY_ROLE="SELECT * FROM Personnels WHERE Role=?";
-	private static final String UPDATE_QUERY="UPDATE Personnels SET Nom=?, MotPasse=?, Role=?, Archive=? WHERE CodePers=?";
+	private static final String SELECT_BY_RACE="SELECT * FROM Animaux WHERE Race=?";
+	private static final String UPDATE_QUERY="UPDATE Animaux SET CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
 	
 	private Animal getAnimal(ResultSet res) throws SQLException{
 		Animal animal = new Animal();
 		animal.setCodeAnimal(res.getInt("CodeAnimal"));
 		animal.setNomAnimal(res.getString("NomAnimal"));
 		animal.setSexe(res.getString("Sexe"));
+		animal.setCouleur(res.getString("Couleur"));
+		animal.setRace(res.getString("Race"));
 		animal.setEspece(res.getString("Espece"));
 		animal.setCodeClient(res.getInt("CodeClient"));
 		animal.setTatouage(res.getString("Tatouage"));
@@ -76,11 +78,13 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 
 	            statement.setString(1, newAnimal.getNomAnimal());
 	            statement.setString(2, newAnimal.getSexe());
-	            statement.setString(3, newAnimal.getEspece());
-	            statement.setInt(4, newAnimal.getCodeClient());
-	            statement.setString(5, newAnimal.getTatouage());
-	            statement.setString(6, newAnimal.getAntecedents());
-	            statement.setBoolean(7, newAnimal.getArchive());
+	            statement.setString(3, newAnimal.getCouleur());
+	            statement.setString(4, newAnimal.getRace());
+	            statement.setString(5, newAnimal.getEspece());
+	            statement.setInt(6, newAnimal.getCodeClient());
+	            statement.setString(7, newAnimal.getTatouage());
+	            statement.setString(8, newAnimal.getAntecedents());
+	            statement.setBoolean(9, newAnimal.getArchive());
 	            
 	            if (statement.executeUpdate() == 1) {
 	                resultSet = statement.getGeneratedKeys();
@@ -99,8 +103,30 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 	@Override
 	public void update(Animal newAnimal, int codeClient, String tatouage, String antecedents, Boolean archive)
 			throws DaoException {
-		
-		
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            connection = MSSQLConnectionFactory.get();
+            statement = connection.prepareStatement(UPDATE_QUERY);
+            
+            statement.setString(1, newAnimal.getNomAnimal());
+            statement.setString(2, newAnimal.getSexe());
+            statement.setString(3, newAnimal.getCouleur());
+            statement.setString(4, newAnimal.getRace());
+            statement.setString(1, newAnimal.getEspece());
+            statement.setInt(5, codeClient);
+            statement.setString(6, tatouage);
+            statement.setString(7, antecedents);
+            statement.setBoolean(8, archive);
+            statement.executeUpdate();
+            
+        } catch(SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        } finally {
+            ResourceUtil.safeClose(connection, statement);
+        }
 	}
 
 	@Override
@@ -124,8 +150,27 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 
 	@Override
 	public List<Animal> selectByRace(String race) throws DaoException {
-		
-		return null;
+		   PreparedStatement statement = null;
+	        ResultSet resultSet = null;
+	        
+	        List<Animal> lesAnimaux = new ArrayList<Animal>();
+	        try {
+	            connection = MSSQLConnectionFactory.get();
+	            statement = connection.prepareStatement(SELECT_BY_RACE);
+	            statement.setString(1, race);
+	            resultSet = statement.executeQuery();
+
+	            while (resultSet.next()) {
+	            	lesAnimaux.add((Animal) resultSet);
+	            }
+	            
+	        } catch(SQLException e) {
+	            throw new DaoException(e.getMessage(), e);
+	        } finally {
+	            ResourceUtil.safeClose(connection, statement);
+	        }
+	        
+	        return lesAnimaux;
 	}
 
 }
