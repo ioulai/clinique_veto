@@ -67,31 +67,34 @@ public class GestionPersonnel extends JFrame {
 		contentPane.add(panel_bouton);
 		panel_bouton.setLayout(null);
 		
-		JButton ajout = new JButton("+");
+		JButton ajout = new JButton("");
+		ajout.setIcon(new ImageIcon(GestionPersonnel.class.getResource("/images/New24.gif")));
 		ajout.setFont(new Font("Tahoma", Font.BOLD, 11));
-		ajout.setBounds(15, 11, 41, 23);
+		ajout.setBounds(15, 11, 35, 33);
 		panel_bouton.add(ajout);
 		
-		JButton reini = new JButton("§");
+		JButton reini = new JButton("");
+		reini.setIcon(new ImageIcon(GestionPersonnel.class.getResource("/images/init.PNG")));
 		reini.setFont(new Font("Tahoma", Font.BOLD, 11));
-		reini.setBounds(190, 11, 41, 23);
+		reini.setBounds(182, 11, 35, 33);
 		panel_bouton.add(reini);
 		
-		JButton supprimer = new JButton("-");
+		JButton supprimer = new JButton("");
+		supprimer.setIcon(new ImageIcon(GestionPersonnel.class.getResource("/images/Delete24.gif")));
 		supprimer.setFont(new Font("Tahoma", Font.BOLD, 11));
-		supprimer.setBounds(99, 11, 41, 23);
+		supprimer.setBounds(99, 11, 35, 33);
 		panel_bouton.add(supprimer);
 		
 		JLabel lblAjouter = new JLabel("Ajouter");
-		lblAjouter.setBounds(15, 39, 41, 14);
+		lblAjouter.setBounds(15, 45, 41, 14);
 		panel_bouton.add(lblAjouter);
 		
 		JLabel lblSupprimer = new JLabel("Supprimer");
-		lblSupprimer.setBounds(99, 39, 66, 14);
+		lblSupprimer.setBounds(96, 45, 66, 14);
 		panel_bouton.add(lblSupprimer);
 		
 		JLabel lblRinitialiser = new JLabel("R\u00E9initialiser");
-		lblRinitialiser.setBounds(190, 39, 74, 14);
+		lblRinitialiser.setBounds(172, 45, 74, 14);
 		panel_bouton.add(lblRinitialiser);
 		
 		JLabel lblPourTouteQuestion = new JLabel("Pour toute question technique, Contactez Isaac et Mariam. Merci");
