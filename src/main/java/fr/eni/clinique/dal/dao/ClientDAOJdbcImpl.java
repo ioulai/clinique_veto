@@ -98,9 +98,33 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	public void update(Client newClient, String nomClient, String prenomClient, String adresse1, String adresse2,
 			String ville, String assurance, String email, String remarque, Boolean archive, List<Animal> lesAnimaux)
 			throws DaoException {
-		// TODO Auto-generated method stub
-		
+		Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            connection = MSSQLConnectionFactory.get();
+            statement = connection.prepareStatement(UPDATE_QUERY);
+            
+            statement.setString(1, newClient.getNomClient());
+            statement.setString(2, newClient.getPrenomClient());
+            statement.setString(3, newClient.getAdresse1());
+            statement.setString(4, newClient.getAdresse2());
+            statement.setString(5, newClient.getVille());
+            statement.setString(6, newClient.getAssurance());
+            statement.setString(7, newClient.getEmail());
+            statement.setString(8, newClient.getRemarque());
+            statement.setBoolean(9, newClient.getArchive());
+         //   statement.setFloat(5, newClient.getLesAnimaux());
+            statement.executeUpdate();
+            
+        } catch(SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        } finally {
+            ResourceUtil.safeClose(connection, statement);
+        }
 	}
+		
+	
 
 	@Override
 	public Client insert(Client client) throws DaoException {
