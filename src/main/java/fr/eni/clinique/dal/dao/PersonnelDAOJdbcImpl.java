@@ -18,7 +18,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	
 	private Connection connection = null;
 	
-	private static final String SELECT_ALL_QUERY = "select * from Personnels";
+	private static final String SELECT_ALL_QUERY = "select * from Personnels";	
 	private static final String INSERT_QUERY = "insert into Personnels(Nom, MotPasse, Role, Archive) values(?,?,?,?)";
 	private static final String DELETE_QUERY ="DELETE FROM Personnels WHERE CodePers=?";
 	private static final String SELECT_BY_ROLE="SELECT * FROM Personnels WHERE Role=?";
