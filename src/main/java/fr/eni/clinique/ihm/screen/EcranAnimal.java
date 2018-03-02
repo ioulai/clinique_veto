@@ -13,6 +13,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+<<<<<<< HEAD
+=======
+//import com.jgoodies.forms.factories.DefaultComponentFactory;
+>>>>>>> da74766e1ee04242d56327aa438c5df14e8700ad
 import javax.swing.JComboBox;
 
 public class EcranAnimal extends JFrame {
