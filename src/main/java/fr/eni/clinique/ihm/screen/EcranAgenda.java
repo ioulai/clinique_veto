@@ -1,6 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,6 +14,10 @@ import javax.swing.JButton;
 
 public class EcranAgenda extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8314030710747042747L;
 	private JPanel contentPane;
 
 	/**
@@ -58,7 +62,7 @@ public class EcranAgenda extends JFrame {
 		lblVtrinaire.setBounds(10, 27, 70, 14);
 		panel.add(lblVtrinaire);
 		
-		JComboBox cbx_veterinaire = new JComboBox();
+		JComboBox<?> cbx_veterinaire = new JComboBox<Object>();
 		cbx_veterinaire.setBounds(74, 24, 136, 20);
 		panel.add(cbx_veterinaire);
 		

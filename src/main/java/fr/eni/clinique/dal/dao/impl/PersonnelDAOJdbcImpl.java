@@ -1,4 +1,4 @@
-package fr.eni.clinique.dal.dao;
+package fr.eni.clinique.dal.dao.impl;
 
 import java.sql.Statement;
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.util.ResourceUtil;
+import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 

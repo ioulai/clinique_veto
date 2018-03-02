@@ -40,14 +40,8 @@ public class ScreenGestionManager extends JFrame {
     private JButton deleteButton;
     private JButton newButton;
     
-    private AdminController controller;
-    private AdminModel model;
-    
-public ScreenGestionManager (AdminController controller, AdminModel model) {
+    public ScreenGestionManager (AdminController controller, AdminModel model) {
 
-    this.model = model;
-    this.controller = controller;
-    
     setDefaultCloseOperation(EXIT_ON_CLOSE); 
     setSize(800, 500 ); 
     setResizable(false); 

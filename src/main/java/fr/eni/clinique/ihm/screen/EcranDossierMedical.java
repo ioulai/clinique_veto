@@ -1,6 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,6 +16,10 @@ import javax.swing.JTextField;
 
 public class EcranDossierMedical extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9124793968888313778L;
 	private JPanel contentPane;
 	private JTextField txt_CodeAnimal;
 	private JTextField txtNom;

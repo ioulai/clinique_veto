@@ -1,9 +1,10 @@
-package fr.eni.clinique.dal.jdbc.impl;
+package fr.eni.clinique.dal.dao.impl;
 
 
 import java.util.List;
 
 import fr.eni.clinique.dal.exception.DaoException;
+import fr.eni.clinique.dal.jdbc.ConnexionDAO;
 
 public interface ConnexionDAOJdbcImpl<T, ID>{
   

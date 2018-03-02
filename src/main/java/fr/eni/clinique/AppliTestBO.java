@@ -20,12 +20,10 @@ public class AppliTestBO {
 		lesAnimaux.add(A3);
 		lesAnimaux.add(A2);
 		lesAnimaux.add(A1);
-		//client
-		Client C1 = new Client(1, "nomClient", "prenomClient", "adresse1", "adresse2", "ville", "numTel", "assurance", "email", "remarque", true, lesAnimaux);
+		new Client(1, "nomClient", "prenomClient", "adresse1", "adresse2", "ville", "numTel", "assurance", "email", "remarque", true, lesAnimaux);
 		//veterinaire
 		Personnel veto = new Personnel(1, "nom", "motPasse", "role", true);		
-		//rdv
-		Rdv rdv =new Rdv("26/02/2018", veto, A1);
+		new Rdv("26/02/2018", veto, A1);
 		
 		
 	}

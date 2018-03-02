@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
-import fr.eni.clinique.ihm.controller.AdminController;
-import fr.eni.clinique.ihm.model.AdminModel;
 import fr.eni.clinique.ihm.model.TableModel;
 
 import java.awt.BorderLayout;
@@ -21,6 +19,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,10 +28,11 @@ import java.sql.Statement;
 
 public class GestionPersonnel extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7897602906008254998L;
 	private JPanel contentPane;
-	private JTable table;
-	private AdminController controller;
-	private AdminModel model;
 
 	/**
 	 * Launch the application.
@@ -82,6 +83,15 @@ public class GestionPersonnel extends JFrame {
 		panel_bouton.setLayout(null);
 		
 		JButton ajout = new JButton("");
+		ajout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EcranAgenda frame = new EcranAgenda();
+				frame.setVisible(true);
+				
+			}
+		});
 		ajout.setIcon(new ImageIcon(GestionPersonnel.class.getResource("/images/New24.gif")));
 		ajout.setFont(new Font("Tahoma", Font.BOLD, 11));
 		ajout.setBounds(15, 11, 35, 33);

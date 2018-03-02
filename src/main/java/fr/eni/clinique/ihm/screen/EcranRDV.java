@@ -1,6 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,16 +12,13 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import java.awt.ScrollPane;
-import javax.swing.JTable;
-import javax.swing.JScrollBar;
-import java.awt.Point;
-import javax.swing.JSpinner;
-import java.awt.Panel;
-import javax.swing.JList;
 
 public class EcranRDV extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3455097310174582783L;
 	private JPanel contentPane;
 
 	/**
@@ -68,11 +65,11 @@ public class EcranRDV extends JFrame {
 		lblAnimal.setBounds(10, 52, 46, 14);
 		panel.add(lblAnimal);
 		
-		JComboBox cbx_nomClient = new JComboBox();
+		JComboBox<?> cbx_nomClient = new JComboBox<Object>();
 		cbx_nomClient.setBounds(10, 31, 89, 20);
 		panel.add(cbx_nomClient);
 		
-		JComboBox cbx_Animal = new JComboBox();
+		JComboBox<?> cbx_Animal = new JComboBox<Object>();
 		cbx_Animal.setBounds(10, 71, 89, 20);
 		panel.add(cbx_Animal);
 		
@@ -92,7 +89,7 @@ public class EcranRDV extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox cbx_veterinaire = new JComboBox();
+		JComboBox<?> cbx_veterinaire = new JComboBox<Object>();
 		cbx_veterinaire.setBounds(32, 31, 100, 20);
 		panel_1.add(cbx_veterinaire);
 		
@@ -117,11 +114,11 @@ public class EcranRDV extends JFrame {
 		lblNewLabel.setBounds(10, 52, 46, 14);
 		panel_2.add(lblNewLabel);
 		
-		JComboBox cbx_heure = new JComboBox();
+		JComboBox<?> cbx_heure = new JComboBox<Object>();
 		cbx_heure.setBounds(10, 71, 33, 20);
 		panel_2.add(cbx_heure);
 		
-		JComboBox cbx_min = new JComboBox();
+		JComboBox<?> cbx_min = new JComboBox<Object>();
 		cbx_min.setBounds(59, 71, 33, 20);
 		panel_2.add(cbx_min);
 		

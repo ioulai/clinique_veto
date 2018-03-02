@@ -39,6 +39,19 @@ public class LoginMgerImpl implements LoginMger{
 			}
 		
 	}
+	public Personnel tryConnect(String nom, String motDePasse)
+	{
+		Personnel personnel = null;
+		
+		return personnel;
+	}
+	
+	public Personnel selectById(Integer id) throws DaoException {
+	
+	    Personnel personnel = null;
+	
+	    return personnel;
+	}
 
 	private void validerPersonnel(Personnel newPersonnel) throws BLLException {
 		try{

@@ -1,4 +1,4 @@
-package fr.eni.clinique.dal.dao;
+package fr.eni.clinique.dal.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +11,7 @@ import java.util.List;
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.common.util.ResourceUtil;
+import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 
@@ -126,6 +127,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 		
 	
 
+	@SuppressWarnings({ "null", "resource" })
 	@Override
 	public Client insert(Client client) throws DaoException {
 		   Connection connection = null;

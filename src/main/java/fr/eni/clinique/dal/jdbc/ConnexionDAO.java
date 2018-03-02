@@ -1,4 +1,4 @@
-package fr.eni.clinique.dal.jdbc.impl;
+package fr.eni.clinique.dal.jdbc;
 
 import fr.eni.clinique.dal.exception.DaoException;
 

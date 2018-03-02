@@ -1,5 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,10 +14,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import fr.eni.clinique.ihm.controller.ConnexionController;
-import fr.eni.clinique.ihm.model.ConnexionModel;
+import fr.eni.clinique.common.AppConstants;
+import fr.eni.clinique.ihm.controller.AdminController;
+import fr.eni.clinique.ihm.model.AdminModel;
 
 public class ConnexionScreen extends JFrame{
 
@@ -27,29 +30,23 @@ public class ConnexionScreen extends JFrame{
 
 	 	private JPanel mainPanel;
 	    private JLabel nomLbl;
-	    private JTextField nomTxt; 
+	    public JTextField nomTxt; 
 	    private JLabel mdpLbl; 
-	    private JTextField mdpTxt; 
+	    public JPasswordField mdpTxt; 
 	
 	    private JButton validerConnexion;
 	    
 	    private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14); 
+	   
+	    public ConnexionScreen(String titre,AdminController adminController, AdminModel adminModel) {
 
-	    private ConnexionController controller;
-	    private ConnexionModel model;
-	    
-	    public ConnexionScreen(String titre,ConnexionController controller, ConnexionModel model) {
-
-	        this.model = model;
-	        this.controller = controller;
-	        
 	        setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
 	        setSize(300, 200); // Taille de la fenetre
 	        setResizable(false); // Fenetre pas redimensionnable
 	        setTitle(titre);
 	        try {
 	            setUp(); 
-	            controller.init();
+	            adminController.init();
 
 	        } catch (Exception e) {
 	            showFailureMessage(e.getMessage());
@@ -60,7 +57,7 @@ public class ConnexionScreen extends JFrame{
 	        JOptionPane.showMessageDialog(ConnexionScreen.this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
 	    }
 	    
-	    private void showSuccessMessage(String message) {
+		private void showSuccessMessage(String message) {
 	        JOptionPane.showMessageDialog(ConnexionScreen.this,message);
 	    }
 	    
@@ -79,14 +76,34 @@ public class ConnexionScreen extends JFrame{
 	        nomTxt = new JTextField();
 	        
 	        mdpLbl = createLabel("Mot de Passe");
-	        mdpTxt = new JTextField();
+	        mdpTxt = new JPasswordField();
 	        
+	        JPanel panel = new JPanel();
+	        panel.setOpaque(true);
+	        panel.setLayout(new GridBagLayout());
+
+	        validerConnexion = new JButton("VALIDER");
+	        validerConnexion.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					if(nomTxt.getText() =="" || mdpTxt.getPassword().toString()=="" ){
+	            		showFailureMessage("Veuillez saisir tous les champs");	
+	            	}
+	            	else if(nomTxt.getText()=="test" && mdpTxt.getPassword().toString()=="1234"){
+	            		showSuccessMessage("Authentification réussie");
+	            		GestionPersonnel frame = new GestionPersonnel();
+						frame.setVisible(true);
+	            	}
+					
+				}
+			});
 	        GridBagConstraints gridBagConstraints = createGridBagConstraints();
 	        addComponentOnGrid(mainPanel, nomLbl, gridBagConstraints, 1, 1, 0.15);
 	        addComponentOnGrid(mainPanel, nomTxt, gridBagConstraints, 2, 1, 0.85);
 	        addComponentOnGrid(mainPanel, mdpLbl, gridBagConstraints, 1, 2, 0.15);
 	        addComponentOnGrid(mainPanel, mdpTxt, gridBagConstraints, 2, 2, 0.85);
-	        addComponentOnGrid(mainPanel, createButtonBar(), gridBagConstraints, 2, 3, 1);
+	        addComponentOnGrid(mainPanel, validerConnexion, gridBagConstraints, 2, 3, 1);
 	    }
 	    
 	    
@@ -117,44 +134,6 @@ public class ConnexionScreen extends JFrame{
 
 	        return label;
 	    }
-	    
-	    private JPanel createButtonBar() {
-	    	
-	        JPanel panel = new JPanel();
-	        panel.setOpaque(true);
-	        panel.setLayout(new GridBagLayout());
-
-	        GridBagConstraints gridBagConstraints = new GridBagConstraints();
-
-	        validerConnexion = new JButton("VALIDER");
-	        validerConnexion.addActionListener(new ActionListener() {
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	                
-	            }
-	        });
-	       
-	        addComponentOnGrid(panel, validerConnexion, gridBagConstraints, 2, 1, 1);
-	       
-	        return panel;
-	    }
-	    private void seConnecter(String nom, String motPasse) {
-	        try {
-	            if (nomTxt == null) {
-	                showFailureMessage("Veuillez saisir un nom !");
-	            } 
-	            else if(mdpTxt == null) {
-	            	 showFailureMessage("Veuillez saisir un mot de passe !");
-	            }
-	            else {
-	               // controller.seConnecter();
-	                model.pageAccueil();
-	            }
-	        } catch (Exception e) {
-	            showFailureMessage(e.getMessage());
-	        }
-	    }
-	    
 	    
 }
 	    

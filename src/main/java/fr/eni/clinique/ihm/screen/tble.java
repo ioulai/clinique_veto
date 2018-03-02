@@ -9,6 +9,10 @@ import javax.swing.border.EmptyBorder;
 
 public class tble extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9220153124753234920L;
 	private JPanel contentPane;
 
 	/**

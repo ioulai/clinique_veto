@@ -1,6 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -13,11 +13,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.JComboBox;
 
 public class EcranAnimal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8248264425509804877L;
 	private JPanel contentPane;
 	private JTextField txt_nomClient;
 	private JTextField txt_codeAnimal;
@@ -114,15 +117,15 @@ public class EcranAnimal extends JFrame {
 		lblRace.setBounds(160, 218, 32, 14);
 		contentPane.add(lblRace);
 		
-		JComboBox cbx_espèce = new JComboBox();
+		JComboBox<?> cbx_espèce = new JComboBox<Object>();
 		cbx_espèce.setBounds(65, 215, 86, 20);
 		contentPane.add(cbx_espèce);
 		
-		JComboBox cbx_Race = new JComboBox();
+		JComboBox<?> cbx_Race = new JComboBox<Object>();
 		cbx_Race.setBounds(188, 215, 88, 20);
 		contentPane.add(cbx_Race);
 		
-		JComboBox cbx_Sexe = new JComboBox();
+		JComboBox<?> cbx_Sexe = new JComboBox<Object>();
 		cbx_Sexe.setBounds(274, 165, 74, 20);
 		contentPane.add(cbx_Sexe);
 		
