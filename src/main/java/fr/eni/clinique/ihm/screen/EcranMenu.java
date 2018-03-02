@@ -2,11 +2,14 @@ package fr.eni.clinique.ihm.screen;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -54,20 +57,60 @@ public class EcranMenu extends JFrame {
 		
 		JMenuItem mntmFermer = new JMenuItem("Fermer");
 		mnFichier.add(mntmFermer);
+		mntmFermer.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+				
+			}
+		});
 		
 		JMenu mnGestionDesRendezvous = new JMenu("Gestion des rendez-vous");
 		menuBar.add(mnGestionDesRendezvous);
 		
 		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
 		mnGestionDesRendezvous.add(mntmGestionDesClients);
-		
+		mntmGestionDesClients.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EcranRDV frame = new EcranRDV();
+				frame.setVisible(true);
+				
+			}
+		});
 		JMenuItem mntmPriseDeRendezvous = new JMenuItem("Prise de rendez-vous");
 		mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
-		
+		mntmPriseDeRendezvous.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EcranRDV frame = new EcranRDV();
+				frame.setVisible(true);
+			}
+		});
 		JMenu mnAgenda = new JMenu("Agenda");
 		menuBar.add(mnAgenda);
+		mnAgenda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EcranAgenda frame = new EcranAgenda();
+				frame.setVisible(true);
+				
+			}
+		});
 		
 		JMenu mnGestionDuPersonnel = new JMenu("Gestion du personnel");
 		menuBar.add(mnGestionDuPersonnel);
+		mnGestionDuPersonnel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestionPersonnel frame = new GestionPersonnel();
+				frame.setVisible(true);
+				
+			}
+		});
 	}
 }
