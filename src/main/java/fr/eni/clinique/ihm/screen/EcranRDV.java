@@ -42,7 +42,7 @@ public class EcranRDV extends JFrame {
 	 */
 	public EcranRDV() {
 		setTitle("Prise de rendez-vous");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 522, 424);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
