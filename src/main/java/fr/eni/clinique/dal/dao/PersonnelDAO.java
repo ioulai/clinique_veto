@@ -15,5 +15,7 @@ public interface PersonnelDAO {
 	
 	List<Personnel> selectByRole(String role) throws DaoException;
 	
+	// savoir si une personne existe grace à son nom et mot de passe renvoie vrai si oui faux autrement
 	
+	public boolean authenticate (Personnel personnel) throws DaoException;
 }

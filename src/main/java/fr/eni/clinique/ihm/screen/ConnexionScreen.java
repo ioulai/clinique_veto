@@ -17,9 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.AppConstants;
 import fr.eni.clinique.ihm.controller.AdminController;
+import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.AdminModel;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class ConnexionScreen extends JFrame{
 
@@ -30,15 +35,20 @@ public class ConnexionScreen extends JFrame{
 
 	 	private JPanel mainPanel;
 	    private JLabel nomLbl;
-	    public JTextField nomTxt; 
+	    private JTextField nomTxt; 
 	    private JLabel mdpLbl; 
-	    public JPasswordField mdpTxt; 
-	
-	    private JButton validerConnexion;
-	    
+	    private JPasswordField mdpTxt;	
+	    private JButton validerConnexion;	    
 	    private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14); 
+	    
+	    private ConnexionController connnexioController;
+	    private ConnexionModel connexionModel; 
+	    private LoginMgerImpl managerBll = LoginMgerImpl.getInstance();
 	   
-	    public ConnexionScreen(String titre,AdminController adminController, AdminModel adminModel) {
+	    public ConnexionScreen(String titre,ConnexionController connnexioController, ConnexionModel connexionModel) {
+	    	
+	    	this.connexionModel = connexionModel;
+	    	this.connnexioController = connnexioController;
 
 	        setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
 	        setSize(300, 200); // Taille de la fenetre
@@ -46,7 +56,7 @@ public class ConnexionScreen extends JFrame{
 	        setTitle(titre);
 	        try {
 	            setUp(); 
-	            adminController.init();
+	            connnexioController.init();
 
 	        } catch (Exception e) {
 	            showFailureMessage(e.getMessage());
@@ -87,13 +97,18 @@ public class ConnexionScreen extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if(nomTxt.getText() =="" || mdpTxt.getPassword().toString()=="" ){
+					if(nomTxt.getText().equals("")|| mdpTxt.getPassword().toString().equals("") ){
 	            		showFailureMessage("Veuillez saisir tous les champs");	
 	            	}
-	            	else if(nomTxt.getText()=="test" && mdpTxt.getPassword().toString()=="1234"){
-	            		showSuccessMessage("Authentification réussie");
-	            		GestionPersonnel frame = new GestionPersonnel();
-						frame.setVisible(true);
+	            	else {
+	            		if(authenticate(nomTxt.getText(), String.valueOf(mdpTxt.getPassword()))){	            			
+	            			loadecranMenu();
+	            		}else{
+	            			showFailureMessage("Utilsateur inconnu");
+	            		}
+	            		
+	            		
+	            		
 	            	}
 					
 				}
@@ -133,6 +148,24 @@ public class ConnexionScreen extends JFrame{
 	        label.setFont(defaultLabelFont);
 
 	        return label;
+	    }
+	    
+	    private void loadecranMenu(){
+	    	EcranMenu ecranMenu = new EcranMenu();
+	    	
+	    	ecranMenu.setVisible(true);
+	    	ecranMenu.setLocationRelativeTo(null);	    	
+	    }
+	    
+	    private boolean authenticate(String nom, String pass){
+	    	boolean retour = false;
+			try {
+				retour =  managerBll.tryConnect(nom, pass);
+			} catch (BLLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	return retour;
 	    }
 	    
 }

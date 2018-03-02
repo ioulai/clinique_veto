@@ -23,7 +23,7 @@ public class AppliTestBO {
 		new Client(1, "nomClient", "prenomClient", "adresse1", "adresse2", "ville", "numTel", "assurance", "email", "remarque", true, lesAnimaux);
 		//veterinaire
 		Personnel veto = new Personnel(1, "nom", "motPasse", "role", true);		
-		new Rdv("26/02/2018", veto, A1);
+		Rdv rdv = new Rdv("26/02/2018", veto, A1);
 		
 		System.out.println(rdv);
 		

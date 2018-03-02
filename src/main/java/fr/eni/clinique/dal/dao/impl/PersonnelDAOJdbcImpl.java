@@ -24,6 +24,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	private static final String DELETE_QUERY ="DELETE FROM Personnels WHERE CodePers=?";
 	private static final String SELECT_BY_ROLE="SELECT * FROM Personnels WHERE Role=?";
 	private static final String UPDATE_QUERY="UPDATE Personnels SET Nom=?, MotPasse=?, Role=?, Archive=? WHERE CodePers=?";
+	private static final String SELECT_NOM_PASS = "select Nom, MotPasse from Personnels where Nom=? and MotPasse = ?";
 	
 	private Personnel getPersonnel(ResultSet res) throws SQLException{
 		Personnel personnel = new Personnel();
@@ -160,6 +161,34 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	        }
 	        
 	        return lesPersonnels;
+	}
+
+	@Override
+	public boolean authenticate(Personnel personnel) throws DaoException {
+		boolean retour = false;
+		Connection connection = null;
+		PreparedStatement statement =null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = MSSQLConnectionFactory.get();
+			statement = connection.prepareStatement(SELECT_NOM_PASS);
+			statement.setString(1, personnel.getNom());
+			statement.setString(2, personnel.getMotPasse());
+			
+			resultSet = statement.executeQuery();
+			if(resultSet.next()){
+				retour =true;
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(),e);
+		}finally {
+			ResourceUtil.safeClose(connection,statement,resultSet);
+		}
+		
+		return retour;
 	}
 
 }

@@ -39,14 +39,20 @@ public class LoginMgerImpl implements LoginMger{
 			}
 		
 	}
-	public Personnel tryConnect(String nom, String motDePasse)
-	{
-		Personnel personnel = null;
+	public boolean  tryConnect(String nom, String motDePasse) throws BLLException 	{
+		boolean retour = false;
+		Personnel personnel = new Personnel(nom, motDePasse);
 		
-		return personnel;
+	try {
+		retour =	personnelDAO.authenticate(personnel);
+	} catch (DaoException e) {
+	
+		throw new BLLException("erreur de connexion",e);		
+	}		
+		return retour;
 	}
 	
-	public Personnel selectById(Integer id) throws DaoException {
+	public Personnel selectById(Integer id) throws BLLException {
 	
 	    Personnel personnel = null;
 	

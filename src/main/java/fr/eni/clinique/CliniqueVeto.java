@@ -6,7 +6,9 @@ import javax.swing.UIManager;
 import fr.eni.clinique.common.AppConstants;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.ihm.controller.AdminController;
+import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.AdminModel;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 import fr.eni.clinique.ihm.screen.ConnexionScreen;
 
 public class CliniqueVeto {
@@ -19,9 +21,10 @@ public class CliniqueVeto {
 	            SwingUtilities.invokeLater(new Runnable() {
 	                @Override
 	                public void run() {
-	                    AdminModel adminModel = new AdminModel();
-	                    AdminController adminController = new AdminController(adminModel);
-						ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, adminController, adminModel);
+	                   ConnexionModel connexionModel = new ConnexionModel();
+	                   
+	                    ConnexionController connexionController = new ConnexionController(connexionModel);
+						ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, connexionController, connexionModel);
 	                }
 	            });
 	        } catch (Exception e) {
