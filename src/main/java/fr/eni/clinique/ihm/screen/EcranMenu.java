@@ -43,7 +43,7 @@ public class EcranMenu extends JFrame {
 	 */
 	public EcranMenu() {
 		setTitle("Clinique V\u00E9t\u00E9rinaire");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 378);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -107,10 +107,10 @@ public class EcranMenu extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GestionPersonnel frame = new GestionPersonnel();
-				frame.setVisible(true);
-				
-			}
+				if(e.getActionCommand().equals("Gestion du personnel")){
+				new GestionPersonnel().setVisible(true);
+					
+			}}
 		});
 	}
 }
