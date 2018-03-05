@@ -4,36 +4,38 @@ import java.util.List;
 import java.util.Observable;
 
 import fr.eni.clinique.bo.Animal;
-
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bll.exception.BLLException;
 
 
 import fr.eni.clinique.bo.Personnel;
 
 public class ConnexionModel extends Observable {
-	private TableModelPerso tableModel;
+	private TableModelPerso tableModelPerso;
 	private TableModelAnimal tableModelAnimal;
+	private TableModelClient tableModelClient;
+	
 	 public ConnexionModel() {
 	        super();
 	    }
 //Personnel
 	public void loadPersonnels(List<Personnel> personnels) {
-		tableModel = new TableModelPerso(personnels);		
+		tableModelPerso = new TableModelPerso(personnels);		
 	}
 	
 	public void addPersonnel(Personnel personnel){
-		tableModel.addPersonnel(personnel);
+		tableModelPerso.addPersonnel(personnel);
 		setChanged();
         notifyObservers();
         clearChanged();
 	}
 	
 	public void removePersonnel(int index) throws BLLException{		
-		tableModel.removePersonnel(index);				
+		tableModelPerso.removePersonnel(index);				
 	}
 
 	public TableModelPerso getTableModel(){
-		return tableModel;
+		return tableModelPerso;
 	}
 	
 	
@@ -55,5 +57,14 @@ public class ConnexionModel extends Observable {
 
 	public TableModelAnimal getTableModelAnimal(){
 		return tableModelAnimal;
+	}
+	
+	///Clients
+	public TableModelClient getTableModelClient(){
+		return tableModelClient;
+	}
+	
+	public void loadClients(List<Client> clients) {
+		tableModelClient = new TableModelClient(clients);		
 	}
 }

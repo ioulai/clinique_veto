@@ -31,8 +31,8 @@ public class GestionPerso extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(600, 500);
 		setResizable(true);
-		 connexionModel = new ConnexionModel();
-		 connexionController = new ConnexionController(connexionModel);
+		connexionModel = new ConnexionModel();
+		connexionController = new ConnexionController(connexionModel);
 	
 		tableau = new JTable(connexionModel.getTableModel());
 		setTitle("Gestion du personnel");

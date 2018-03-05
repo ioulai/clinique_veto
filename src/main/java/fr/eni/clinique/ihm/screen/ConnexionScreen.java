@@ -36,14 +36,14 @@ public class ConnexionScreen extends JFrame{
 	    private JButton validerConnexion;	    
 	    private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14); 
 	    
-	    private ConnexionController connnexioController;
+	    private ConnexionController connnexionController;
 	    private ConnexionModel connexionModel; 
 	    private LoginMgerImpl managerBll = LoginMgerImpl.getInstance();
 	   
-	    public ConnexionScreen(String titre,ConnexionController connnexioController, ConnexionModel connexionModel) {
+	    public ConnexionScreen(String titre,ConnexionController connnexionController, ConnexionModel connexionModel) {
 	    	
 	    	this.connexionModel = connexionModel;
-	    	this.connnexioController = connnexioController;
+	    	this.connnexionController = connnexionController;
 
 	        setDefaultCloseOperation(EXIT_ON_CLOSE); // Action de fermeture
 	        setSize(300, 200); // Taille de la fenetre
@@ -51,7 +51,7 @@ public class ConnexionScreen extends JFrame{
 	        setTitle(titre);
 	        try {
 	            setUp(); 
-	            connnexioController.init();
+	            connnexionController.init();
 
 	        } catch (Exception e) {
 	            showFailureMessage(e.getMessage());
@@ -100,7 +100,7 @@ public class ConnexionScreen extends JFrame{
 	            			loadecranMenu();
 	            			dispose();
 	            		}else{
-	            			showFailureMessage("Utilsateur inconnu");
+	            			showFailureMessage("Utilisateur inconnu");
 	            		}	            		
 	            	}
 					
@@ -155,7 +155,6 @@ public class ConnexionScreen extends JFrame{
 			try {
 				retour =  managerBll.tryConnect(nom, pass);
 			} catch (BLLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    	return retour;

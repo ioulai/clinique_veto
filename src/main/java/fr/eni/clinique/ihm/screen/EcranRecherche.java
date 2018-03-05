@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -15,9 +17,13 @@ import javax.swing.border.LineBorder;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.dal.dao.impl.ClientDAOJdbcImpl;
 import fr.eni.clinique.dal.exception.DaoException;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -27,8 +33,12 @@ public class EcranRecherche extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 3895627998525870940L;
+	private JTable tableau;
 	private JPanel contentPane;
 	private JTextField txtNomDuClient;
+	private  ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
+	private List<Client> lesClients = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -52,7 +62,7 @@ public class EcranRecherche extends JFrame {
 	public EcranRecherche() {
 		setTitle("R\u00E9sultat de la recherche");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 449, 358);
+		setBounds(100, 100, 467, 526);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -70,9 +80,12 @@ public class EcranRecherche extends JFrame {
 		txtNomDuClient.setToolTipText("Nom du client \u00E0 rechercher");
 		txtNomDuClient.setColumns(10);
 		
+		connexionModel = new ConnexionModel();
+		connexionController = new ConnexionController(connexionModel);
+	
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBounds(22, 94, 388, 214);
+		panel2.setBounds(0, 94, 441, 382);
 		contentPane.add(panel2);
 		
 		JButton btnRecherche = new JButton("");
@@ -95,6 +108,9 @@ public class EcranRecherche extends JFrame {
 		btnRecherche.setBounds(310, 11, 47, 47);
 		panel.add(btnRecherche);
 		btnRecherche.setIcon(new ImageIcon(EcranRecherche.class.getResource("/images/Rechercher.png")));
+		tableau = new JTable(connexionModel.getTableModelClient());
+		panel2.add(new JScrollPane(tableau), BorderLayout.CENTER);
+	
 	}
 
 }

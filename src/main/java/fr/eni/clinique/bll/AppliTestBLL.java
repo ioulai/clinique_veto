@@ -3,12 +3,10 @@ package fr.eni.clinique.bll;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import fr.eni.clinique.bll.manager.ihm.GestionPersonnel;
 import fr.eni.clinique.common.exception.TechnicalException;
-import fr.eni.clinique.ihm.controller.AdminController;
 import fr.eni.clinique.ihm.controller.ConnexionController;
-import fr.eni.clinique.ihm.model.AdminModel;
 import fr.eni.clinique.ihm.model.ConnexionModel;
+import fr.eni.clinique.ihm.screen.GestionPerso;
 
 public class AppliTestBLL {
 
@@ -21,11 +19,11 @@ public class AppliTestBLL {
                 @Override
                 public void run() {
                 	
-                    AdminModel adminModel = new AdminModel();
+                	ConnexionModel adminModel = new ConnexionModel();
                     
-                    AdminController adminController = new AdminController(adminModel);
+                    ConnexionController adminController = new ConnexionController(adminModel);
         
-                    GestionPersonnel screen = new GestionPersonnel(adminController, adminModel);
+                    GestionPerso screen = new GestionPerso();
                 }
             });
         } catch (Exception e) {

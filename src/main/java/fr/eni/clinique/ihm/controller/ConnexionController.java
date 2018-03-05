@@ -8,6 +8,7 @@ import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.model.ConnexionModel;
@@ -34,6 +35,9 @@ public class ConnexionController {
         
         List<Animal> animaux = loginManager.tousLesAnimaux();
         model.loadAnimaux(animaux);
+        
+        List<Client> clients = loginManager.tousLesClients();
+        model.loadClients(clients);
         
     }
     

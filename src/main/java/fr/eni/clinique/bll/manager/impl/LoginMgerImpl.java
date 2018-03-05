@@ -5,10 +5,12 @@ import java.util.List;
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.common.util.ObjectUtil;
 import fr.eni.clinique.dal.dao.AnimalDAO;
+import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
@@ -18,6 +20,7 @@ public class LoginMgerImpl implements LoginMger{
 	private static LoginMgerImpl SINGLETON;
 	private PersonnelDAO personnelDAO = DaoFactory.personnelDao();
 	private AnimalDAO animalDAO = DaoFactory.animalDao();
+	private ClientDAO clientDAO= DaoFactory.clientDAO();
 	
     private LoginMgerImpl() {
         
@@ -117,6 +120,17 @@ public class LoginMgerImpl implements LoginMger{
 			e.printStackTrace();
 		}
 		return animaux;
+	}
+
+	@Override
+	public List<Client> tousLesClients() throws BLLException {
+		List<Client> clients = null;
+		try {
+			clients = clientDAO.selectALL();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return clients;
 	}
     
     

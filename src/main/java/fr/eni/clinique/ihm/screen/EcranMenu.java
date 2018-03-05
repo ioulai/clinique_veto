@@ -7,9 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import fr.eni.clinique.CliniqueVeto;
-import fr.eni.clinique.ihm.controller.ConnexionController;
-import fr.eni.clinique.ihm.model.ConnexionModel;
-
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -20,8 +17,6 @@ public class EcranMenu extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -7889761062932513110L;
-	private ConnexionModel connexionModel;
-	private ConnexionController connexionController ;
 
 	/**
 	 * Launch the application.
