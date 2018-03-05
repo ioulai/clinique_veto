@@ -40,6 +40,8 @@ public class GestionPerso extends JFrame {
 		JPanel boutons = new JPanel();
 		boutons.add(new JButton(new AddAction()));
 		boutons.add(new JButton(new RemoveAction()));
+		 getContentPane().add(boutons, BorderLayout.SOUTH);
+		 pack();
 	}
 
 	private class AddAction extends AbstractAction {
