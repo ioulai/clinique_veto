@@ -19,6 +19,12 @@ public class ConnexionController {
     public ConnexionController(ConnexionModel model) {
         super();
         this.model = model;
+       try {
+		this.init();
+	} catch (BLLException | DaoException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
     
     public void init() throws BLLException, DaoException {

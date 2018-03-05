@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 import fr.eni.clinique.ihm.model.TableModel;
 
 import java.awt.BorderLayout;
@@ -25,14 +27,18 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Observable;
+import java.util.Observer;
 
-public class GestionPersonnel extends JFrame {
+public class GestionPersonnel extends JFrame implements Observer{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7897602906008254998L;
 	private JPanel contentPane;
+	private ConnexionModel connexionModel;
+	private ConnexionController connexionController;
 
 	/**
 	 * Launch the application.
@@ -68,7 +74,15 @@ public class GestionPersonnel extends JFrame {
 	public GestionPersonnel() {
 		
 		setTitle("Gestion du personnel");
+<<<<<<< HEAD
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+=======
+<<<<<<< HEAD
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+=======
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+>>>>>>> 0f2c436b1e5f79593a402ba97902473cf87424ae
+>>>>>>> 1f4d6d4f58523c3bfc664a4cfb1ed073677ae7dd
 		setBounds(100, 100, 510, 505);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -141,6 +155,11 @@ public class GestionPersonnel extends JFrame {
 			catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

@@ -5,6 +5,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+<<<<<<< HEAD
+=======
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import fr.eni.clinique.CliniqueVeto;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+>>>>>>> 1f4d6d4f58523c3bfc664a4cfb1ed073677ae7dd
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -15,6 +28,8 @@ public class EcranMenu extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -7889761062932513110L;
+	private ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
 
 	/**
 	 * Launch the application.
@@ -48,6 +63,14 @@ public class EcranMenu extends JFrame {
 		
 		JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
 		mnFichier.add(mntmDconnexion);
+		mntmDconnexion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CliniqueVeto.ecranConnexion();				
+			}
+		});
 		
 		JMenuItem mntmFermer = new JMenuItem("Fermer");
 		mnFichier.add(mntmFermer);
@@ -82,8 +105,12 @@ public class EcranMenu extends JFrame {
 			 new EcranRDV().setVisible(true);
 			}
 		});
+<<<<<<< HEAD
 		
 		JMenu mnAgenda = new JMenu("Agenda");
+=======
+		JMenuItem mnAgenda = new JMenuItem("Agenda");
+>>>>>>> 1f4d6d4f58523c3bfc664a4cfb1ed073677ae7dd
 		menuBar.add(mnAgenda);
 		mnAgenda.addActionListener(new ActionListener() {
 			
@@ -94,16 +121,15 @@ public class EcranMenu extends JFrame {
 			}
 		});
 		
-		JMenu mnGestionDuPersonnel = new JMenu("Gestion du personnel");
+		JMenuItem mnGestionDuPersonnel = new JMenuItem("Gestion du personnel");
 		menuBar.add(mnGestionDuPersonnel);
 		mnGestionDuPersonnel.addActionListener(new ActionListener() {
-			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("Gestion du personnel")){
-				new GestionPersonnel().setVisible(true);
-					
-			}}
+			public void actionPerformed(ActionEvent e) {	
+				GestionPerso gestionPerso = new GestionPerso();
+				gestionPerso.setVisible(true);
+								
+				}
 		});
 	}
 }
