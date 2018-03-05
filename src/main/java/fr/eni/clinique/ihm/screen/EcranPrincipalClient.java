@@ -1,13 +1,20 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
+
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -18,6 +25,10 @@ import java.awt.event.ActionEvent;
 
 public class EcranPrincipalClient extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5989549587705837199L;
 	private JPanel contentPane;
 	private JTextField txtCodeClient;
 	private JTextField txtNom;
@@ -26,10 +37,10 @@ public class EcranPrincipalClient extends JFrame {
 	private JTextField txtAdress2;
 	private JTextField txtCodePostal;
 	private JTextField txtVille;
-
-	/**
-	 * Launch the application.
-	 */
+	private  ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
+	private JTable tableau;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,18 +54,20 @@ public class EcranPrincipalClient extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public EcranPrincipalClient() {
+		
 		setTitle("Clients");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 734, 394);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 734, 588);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
+		 connexionModel = new ConnexionModel();
+		 connexionController = new ConnexionController(connexionModel);
+		 
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBounds(10, 11, 698, 73);
@@ -101,10 +114,15 @@ public class EcranPrincipalClient extends JFrame {
 		btnAnnuler.setBounds(642, 11, 46, 35);
 		panel.add(btnAnnuler);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Rechercher.png")));
-		btnNewButton.setBounds(10, 11, 46, 35);
-		panel.add(btnNewButton);
+		JButton btnRechercher = new JButton("");
+		btnRechercher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnRechercher.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Rechercher.png")));
+		btnRechercher.setBounds(10, 11, 46, 35);
+		panel.add(btnRechercher);
 		
 		JLabel lblCode = new JLabel("Code");
 		lblCode.setBounds(10, 95, 46, 14);
@@ -123,7 +141,7 @@ public class EcranPrincipalClient extends JFrame {
 		contentPane.add(lblAdresse);
 		
 		JLabel lblCodePostal = new JLabel("Code Postal");
-		lblCodePostal.setBounds(10, 244, 66, 14);
+		lblCodePostal.setBounds(10, 244, 110, 14);
 		contentPane.add(lblCodePostal);
 		
 		JLabel lblVille = new JLabel("Ville");
@@ -165,42 +183,48 @@ public class EcranPrincipalClient extends JFrame {
 		contentPane.add(txtVille);
 		txtVille.setColumns(10);
 		
+		JPanel panel_listeAnimaux = new JPanel();
+		panel_listeAnimaux.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_listeAnimaux.setBounds(246, 95, 462, 443);
+		contentPane.add(panel_listeAnimaux);
+		
+		tableau = new JTable(connexionModel.getTableModelAnimal());
+		panel_listeAnimaux.setLayout(null);
+		JScrollPane scrollPane = new JScrollPane(tableau);
+		scrollPane.setBounds(5, 6, 452, 364);
+		panel_listeAnimaux.add(scrollPane);
+		
 		JButton btnAjoutAnimal = new JButton("+");
+		btnAjoutAnimal.setBounds(302, 381, 37, 35);
+		panel_listeAnimaux.add(btnAjoutAnimal);
 		btnAjoutAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnAjoutAnimal.setBounds(546, 283, 46, 35);
-		contentPane.add(btnAjoutAnimal);
+		
+		JLabel lblAjouter_1 = new JLabel("Ajouter");
+		lblAjouter_1.setBounds(302, 418, 46, 14);
+		panel_listeAnimaux.add(lblAjouter_1);
 		
 		JButton btnSuppriAnimal = new JButton("-");
+		btnSuppriAnimal.setBounds(353, 381, 37, 35);
+		panel_listeAnimaux.add(btnSuppriAnimal);
 		btnSuppriAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		btnSuppriAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnSuppriAnimal.setBounds(610, 283, 46, 35);
-		contentPane.add(btnSuppriAnimal);
-		
-		JButton btnEditAnimal = new JButton("");
-		btnEditAnimal.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/editer.png")));
-		btnEditAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEditAnimal.setBounds(671, 283, 37, 35);
-		contentPane.add(btnEditAnimal);
-		
-		JLabel lblAjouter_1 = new JLabel("Ajouter");
-		lblAjouter_1.setBounds(546, 329, 46, 14);
-		contentPane.add(lblAjouter_1);
 		
 		JLabel lblSupprimer_1 = new JLabel("Supprimer");
-		lblSupprimer_1.setBounds(612, 329, 71, 14);
-		contentPane.add(lblSupprimer_1);
+		lblSupprimer_1.setBounds(353, 418, 71, 14);
+		panel_listeAnimaux.add(lblSupprimer_1);
+		
+		JButton btnEditAnimal = new JButton("");
+		btnEditAnimal.setBounds(406, 381, 37, 35);
+		panel_listeAnimaux.add(btnEditAnimal);
+		btnEditAnimal.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/editer.png")));
+		btnEditAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblEditer = new JLabel("Editer");
-		lblEditer.setBounds(671, 329, 46, 14);
-		contentPane.add(lblEditer);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel_1.setBounds(265, 95, 443, 181);
-		contentPane.add(panel_1);
+		lblEditer.setBounds(406, 418, 46, 14);
+		panel_listeAnimaux.add(lblEditer);
 	}
 
 }

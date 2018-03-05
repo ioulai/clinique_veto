@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
@@ -20,10 +22,11 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	private Connection connection = null;
 	
 	private static final String SELECT_ALL_QUERY = "select * from Clients";
-	private static final String INSERT_QUERY = "insert into Clients(nomClient, prenomClient, adresse1, adresse2,ville,assurance,email,remarque,archive,lesAnimaux) values(?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_QUERY = "insert into Clients(NomClient, PrenomClient, adresse1, adresse2,ville,assurance,email,remarque,archive,lesAnimaux) values(?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_QUERY ="DELETE FROM Clients WHERE codeClient=?";
-	private static final String SELECT_BY_NOM="SELECT * FROM Personnels WHERE nomClient=?";
+	private static final String SELECT_BY_NOM="SELECT NomClient,PrenomClient,CodePostal,Ville FROM Clients WHERE NomClient=?";
 	private static final String UPDATE_QUERY="UPDATE Clients SET nomClient=?, prenomClient=?, adresse1=?, adresse2=?,ville=?,assurance=?,email=?,remarque=?,archive=?,lesAnimaux=?";
+	
 	
 	private Client getClient(ResultSet res) throws SQLException{
 		Client client = new Client();
@@ -70,22 +73,25 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 
 	@Override
 	public List<Client> selectByNom(String nom) throws DaoException {
-		
-		  PreparedStatement statement = null;
+	        PreparedStatement statement = null;
 	        ResultSet resultSet = null;
 	        
 	        List<Client> lesClients = new ArrayList<Client>();
 	        try {
 	            connection = MSSQLConnectionFactory.get();
 	            statement = connection.prepareStatement(SELECT_BY_NOM);
-	            statement.setString(1, nom);
+	            statement.setString(1, "NomClient");
+	            statement.setString(2, "PrenomClient");
+	            statement.setString(3, "CodePostal");
+	            statement.setString(4, "Ville");
+	            
+	            statement.setString(5, nom);
 	            resultSet = statement.executeQuery();
 
 	            while (resultSet.next()) {
 	            	lesClients.add((Client) resultSet);
 	            }
-	            
-	        } catch(SQLException e) {
+	            } catch(SQLException e) {
 	            throw new DaoException(e.getMessage(), e);
 	        } finally {
 	            ResourceUtil.safeClose(connection, statement);

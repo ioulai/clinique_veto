@@ -9,6 +9,7 @@ public class Client {
 	private String prenomClient;
 	private String adresse1;
 	private String adresse2;
+	private Integer codePostal;
 	private String ville;
 	private String numTel;
 	private String assurance;
@@ -30,7 +31,7 @@ public class Client {
 	 * @param archive
 	 * @param lesAnimaux
 	 */
-	public Client(Integer codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,
+	public Client(Integer codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,Integer codePostal,
 			String ville, String numTel, String assurance, String email, String remarque, Boolean archive,
 			List<Animal> lesAnimaux) {
 		super();
@@ -39,6 +40,7 @@ public class Client {
 		this.prenomClient = prenomClient;
 		this.adresse1 = adresse1;
 		this.adresse2 = adresse2;
+		this.codePostal=codePostal;
 		this.ville = ville;
 		this.numTel = numTel;
 		this.assurance = assurance;
@@ -46,6 +48,12 @@ public class Client {
 		this.remarque = remarque;
 		this.archive = archive;
 		this.lesAnimaux = lesAnimaux;
+	}
+	public Integer getCodePostal() {
+		return codePostal;
+	}
+	public void setCodePostal(Integer codePostal) {
+		this.codePostal = codePostal;
 	}
 	public Integer getCodeClient() {
 		return codeClient;

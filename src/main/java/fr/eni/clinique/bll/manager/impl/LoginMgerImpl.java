@@ -4,9 +4,11 @@ import java.util.List;
 
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.common.util.ObjectUtil;
+import fr.eni.clinique.dal.dao.AnimalDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
@@ -15,6 +17,8 @@ public class LoginMgerImpl implements LoginMger{
 	
 	private static LoginMgerImpl SINGLETON;
 	private PersonnelDAO personnelDAO = DaoFactory.personnelDao();
+	private AnimalDAO animalDAO = DaoFactory.animalDao();
+	
     private LoginMgerImpl() {
         
     }
@@ -102,6 +106,17 @@ public class LoginMgerImpl implements LoginMger{
 	@Override
 	public void reinitialiserMDP(Personnel personnel) throws BLLException {
 		
+	}
+
+	@Override
+	public List<Animal> tousLesAnimaux() throws BLLException {
+		List<Animal> animaux = null;
+		try {
+			animaux = animalDAO.selectALL();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return animaux;
 	}
     
     

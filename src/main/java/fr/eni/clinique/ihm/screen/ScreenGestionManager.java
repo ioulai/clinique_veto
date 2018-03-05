@@ -19,8 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import fr.eni.clinique.bo.Personnel;
-import fr.eni.clinique.ihm.controller.AdminController;
-import fr.eni.clinique.ihm.model.AdminModel;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 public class ScreenGestionManager extends JFrame {
 
  	/**
@@ -40,7 +40,7 @@ public class ScreenGestionManager extends JFrame {
     private JButton deleteButton;
     private JButton newButton;
     
-    public ScreenGestionManager (AdminController controller, AdminModel model) {
+    public ScreenGestionManager (ConnexionController controller, ConnexionModel model) {
 
     setDefaultCloseOperation(EXIT_ON_CLOSE); 
     setSize(800, 500 ); 

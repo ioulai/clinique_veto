@@ -3,6 +3,7 @@ package fr.eni.clinique.bll.manager;
 import java.util.List;
 
 import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Personnel;
 
 public interface LoginMger {
@@ -18,6 +19,6 @@ public interface LoginMger {
 	
 	void reinitialiserMDP(Personnel personnel)throws BLLException;
 
-	
+	List<Animal> tousLesAnimaux() throws  BLLException;
 	 
 }

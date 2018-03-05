@@ -7,6 +7,7 @@ import java.util.List;
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.model.ConnexionModel;
@@ -22,7 +23,6 @@ public class ConnexionController {
        try {
 		this.init();
 	} catch (BLLException | DaoException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
     }
@@ -30,8 +30,11 @@ public class ConnexionController {
     public void init() throws BLLException, DaoException {
 
         List<Personnel> personnels = loginManager.toutLePersonnel();
-
         model.loadPersonnels(personnels);
+        
+        List<Animal> animaux = loginManager.tousLesAnimaux();
+        model.loadAnimaux(animaux);
+        
     }
     
 	public boolean seConnecter(String nom, String motPasse) {

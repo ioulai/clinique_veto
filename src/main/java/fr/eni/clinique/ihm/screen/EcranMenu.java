@@ -5,16 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import fr.eni.clinique.CliniqueVeto;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -50,7 +45,7 @@ public class EcranMenu extends JFrame {
 	public EcranMenu() {
 		setTitle("Clinique V\u00E9t\u00E9rinaire");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 378);
+		setBounds(100, 100, 501, 378);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -88,7 +83,7 @@ public class EcranMenu extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EcranRDV().setVisible(true);
+				new EcranPrincipalClient().setVisible(true);
 				
 			}
 		});

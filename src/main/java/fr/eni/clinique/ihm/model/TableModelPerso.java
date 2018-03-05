@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import fr.eni.clinique.bo.Personnel;
 
 
-public class TableModel extends AbstractTableModel {
+public class TableModelPerso extends AbstractTableModel {
 
 	private static final long serialVersionUID = 5339658835698597380L;
 	
@@ -16,7 +16,7 @@ public class TableModel extends AbstractTableModel {
     private final String[] entetes = { "Nom", "Rôle", "MotPasse"};
  
 
-    public TableModel(List<Personnel> personnels) {
+    public TableModelPerso(List<Personnel> personnels) {
         super();
         this.personnels = personnels;
     }

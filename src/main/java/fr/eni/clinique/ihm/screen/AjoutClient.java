@@ -1,6 +1,5 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,6 +14,10 @@ import javax.swing.ImageIcon;
 
 public class AjoutClient extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6433742721352939171L;
 	private JPanel contentPane;
 	private JTextField txtCodeClient;
 	private JTextField txtNomCli;
