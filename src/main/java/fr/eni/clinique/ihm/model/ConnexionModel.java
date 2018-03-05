@@ -3,9 +3,15 @@ package fr.eni.clinique.ihm.model;
 import java.util.List;
 import java.util.Observable;
 
+<<<<<<< HEAD
+import fr.eni.clinique.bo.Animal;
+
+import fr.eni.clinique.bll.exception.BLLException;
+=======
 
 import fr.eni.clinique.bll.exception.BLLException;
 
+>>>>>>> 41018e7894b810743925924aad5a617a7fff2079
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 
