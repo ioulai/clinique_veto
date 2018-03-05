@@ -27,7 +27,7 @@ public class EcranMenu extends JFrame {
 	 */
 	private static final long serialVersionUID = -7889761062932513110L;
 	private ConnexionModel connexionModel;
-	private ConnexionController connexionController;
+	private ConnexionController connexionController ;
 
 	/**
 	 * Launch the application.
@@ -104,7 +104,7 @@ public class EcranMenu extends JFrame {
 				frame.setVisible(true);
 			}
 		});
-		JMenu mnAgenda = new JMenu("Agenda");
+		JMenuItem mnAgenda = new JMenuItem("Agenda");
 		menuBar.add(mnAgenda);
 		mnAgenda.addActionListener(new ActionListener() {
 			
@@ -116,18 +116,14 @@ public class EcranMenu extends JFrame {
 			}
 		});
 		
-		JMenu mnGestionDuPersonnel = new JMenu("Gestion du personnel");
+		JMenuItem mnGestionDuPersonnel = new JMenuItem("Gestion du personnel");
 		menuBar.add(mnGestionDuPersonnel);
 		mnGestionDuPersonnel.addActionListener(new ActionListener() {
-			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-//				if(e.getActionCommand().equals("Gestion du personnel")){
-//			
-//					
-//			}
-				GestionPerso gestionPerso =	new GestionPerso(connexionModel,connexionController);
+			public void actionPerformed(ActionEvent e) {	
+				GestionPerso gestionPerso = new GestionPerso();
 				gestionPerso.setVisible(true);
+								
 				}
 		});
 	}

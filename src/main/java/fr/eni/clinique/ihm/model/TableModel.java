@@ -20,43 +20,20 @@ public class TableModel extends AbstractTableModel {
 	
 	private List<Personnel> personnels = new ArrayList<>();
     private final String[] entetes = { "Nom", "Rôle", "MotPasse"};
+ 
 
-	public TableModel( ResultSet resultSet )
-    {
-      try 
-      {
-        resultSet.getMetaData();
-      } 
-      catch (SQLException e) 
-      {
-        e.printStackTrace();
-      }
+    public TableModel(List<Personnel> personnels) {
+        super();
+        this.personnels = personnels;
     }
-    public void changeArticle(int index, Personnel personnel) {
-        this.personnels.set(index, personnel);
-    }
-    
-    public void addAllPersonnel(List<Personnel> personnel) {
-        this.personnels.addAll(personnel);
-    }
-    
     public void addPersonnel(Personnel personnel) {
         this.personnels.add(personnel);
     }
     
     public void removePersonnel(int index) {
         this.personnels.remove(index);
-    }
-    
-    public Personnel personnel(int index) {
-        return this.personnels.get(index);
-    }
-    
-
-    public TableModel(List<Personnel> personnels) {
-        super();
-        this.personnels = personnels;
-    }
+        fireTableRowsDeleted(index, index);
+    }  
 
     @Override
     public int getRowCount() {

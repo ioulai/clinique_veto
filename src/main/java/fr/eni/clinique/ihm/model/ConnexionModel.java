@@ -23,12 +23,9 @@ public class ConnexionModel extends Observable {
         clearChanged();
 	}
 	
-//	public void removePersonnel(){
-//		if(tableModel.getRowCount() !=0){
-//			tableModel.removePersonnel(currentIndex);
-//			
-//		}
-//	}
+	public void removePersonnel(int index){
+		tableModel.removePersonnel(index);
+	}
 
 	public TableModel getTableModel(){
 		return tableModel;
