@@ -16,8 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
-import fr.eni.clinique.ihm.controller.AdminController;
-import fr.eni.clinique.ihm.model.AdminModel;
 public class GestionPersonnel extends JFrame{
 
 	/**
