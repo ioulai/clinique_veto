@@ -5,7 +5,10 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.ihm.controller.ConnexionController;
 
 
 public class TableModel extends AbstractTableModel {
@@ -13,7 +16,7 @@ public class TableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 5339658835698597380L;
 	
 	private List<Personnel> personnels = new ArrayList<>();
-    private final String[] entetes = { "Nom", "Rôle", "MotPasse"};
+    private final String[] entetes = { "Nom", "MotPasse", "Rôle"};
  
 
     public TableModel(List<Personnel> personnels) {
@@ -24,8 +27,13 @@ public class TableModel extends AbstractTableModel {
         this.personnels.add(personnel);
     }
     
-    public void removePersonnel(int index) {
-        this.personnels.remove(index);
+    public void removePersonnel(int index) throws BLLException {
+//    	ConnexionController c = new ConnexionController(null);
+//    	c.deletePersonnel(personnels.get(index));
+    	
+		LoginMgerImpl.getInstance().removePersonnel(personnels.get(index));
+		
+        this.personnels.remove(index);        
         fireTableRowsDeleted(index, index);
     }  
 
@@ -54,7 +62,8 @@ public class TableModel extends AbstractTableModel {
         case 0:
             return personnels.get(rowIndex).getNom();
         case 1:
-            return personnels.get(rowIndex).getMotPasse();
+        	String perso = personnels.get(rowIndex).getMotPasse();
+            return perso.replace(perso, "********");
         case 2:
             return personnels.get(rowIndex).getRole();
         default:

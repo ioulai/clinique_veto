@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-
+import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
@@ -40,7 +40,7 @@ public class GestionPerso extends JFrame {
 		JPanel boutons = new JPanel();
 		boutons.add(new JButton(new AddAction()));
 		boutons.add(new JButton(new RemoveAction()));
-		 getContentPane().add(boutons, BorderLayout.SOUTH);
+		 getContentPane().add(boutons, BorderLayout.NORTH);
 		 pack();
 	}
 
@@ -56,8 +56,7 @@ public class GestionPerso extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			Personnel personnel = null;
-			connexionModel.addPersonnel(personnel);
+			connexionModel.addPersonnel(new Personnel());
 
 		}
 	}
@@ -75,10 +74,15 @@ public class GestionPerso extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			int[] selection = tableau.getSelectedRows();
-
+			
+			
 			for (int i = selection.length - 1; i >= 0; i--) {
-				connexionModel.removePersonnel(selection[i]);
-
+				try {
+					connexionModel.removePersonnel(selection[i]);
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}	
 }

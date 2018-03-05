@@ -37,9 +37,12 @@ public class ConnexionController {
         
     }
     
-	public boolean seConnecter(String nom, String motPasse) {
-		
-		return true;
+	public void deletePersonnel(Personnel personnel) throws BLLException{
+	
+		if(personnel.getCodePers() != null){
+			loginManager.removePersonnel(personnel);
+			model.removePersonnel(personnel.getCodePers());
+		}
 		
 		
 	}
