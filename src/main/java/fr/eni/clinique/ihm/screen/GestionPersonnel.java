@@ -68,7 +68,7 @@ public class GestionPersonnel extends JFrame {
 	public GestionPersonnel() {
 		
 		setTitle("Gestion du personnel");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 510, 505);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -1,6 +1,5 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,11 +18,7 @@ import javax.swing.JTextField;
 
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
-import fr.eni.clinique.bo.Personnel;
-import fr.eni.clinique.common.AppConstants;
-import fr.eni.clinique.ihm.controller.AdminController;
 import fr.eni.clinique.ihm.controller.ConnexionController;
-import fr.eni.clinique.ihm.model.AdminModel;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class ConnexionScreen extends JFrame{

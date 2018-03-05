@@ -1,16 +1,10 @@
 package fr.eni.clinique.ihm.screen;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -74,29 +68,28 @@ public class EcranMenu extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EcranRDV frame = new EcranRDV();
-				frame.setVisible(true);
+				new EcranRDV().setVisible(true);
 				
 			}
 		});
+		
 		JMenuItem mntmPriseDeRendezvous = new JMenuItem("Prise de rendez-vous");
 		mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
 		mntmPriseDeRendezvous.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EcranRDV frame = new EcranRDV();
-				frame.setVisible(true);
+			 new EcranRDV().setVisible(true);
 			}
 		});
+		
 		JMenu mnAgenda = new JMenu("Agenda");
 		menuBar.add(mnAgenda);
 		mnAgenda.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				EcranAgenda frame = new EcranAgenda();
-				frame.setVisible(true);
+				new EcranAgenda().setVisible(true);
 				
 			}
 		});

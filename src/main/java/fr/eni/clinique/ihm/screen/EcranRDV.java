@@ -8,10 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import org.jdatepicker.util.JDatePickerUtil;
 
 public class EcranRDV extends JFrame {
 
@@ -108,7 +111,9 @@ public class EcranRDV extends JFrame {
 		lblDate.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDate.setBounds(10, 11, 46, 14);
 		panel_2.add(lblDate);
-		
+		JDatePickerUtil jDate = new JDatePickerUtil();
+ 
+	
 		JLabel lblNewLabel = new JLabel("Heure");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setBounds(10, 52, 46, 14);
