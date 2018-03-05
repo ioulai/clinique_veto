@@ -5,8 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-<<<<<<< HEAD
-=======
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -17,7 +15,6 @@ import fr.eni.clinique.ihm.model.ConnexionModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
->>>>>>> 1f4d6d4f58523c3bfc664a4cfb1ed073677ae7dd
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -105,12 +102,9 @@ public class EcranMenu extends JFrame {
 			 new EcranRDV().setVisible(true);
 			}
 		});
-<<<<<<< HEAD
-		
-		JMenu mnAgenda = new JMenu("Agenda");
-=======
+
 		JMenuItem mnAgenda = new JMenuItem("Agenda");
->>>>>>> 1f4d6d4f58523c3bfc664a4cfb1ed073677ae7dd
+
 		menuBar.add(mnAgenda);
 		mnAgenda.addActionListener(new ActionListener() {
 			
