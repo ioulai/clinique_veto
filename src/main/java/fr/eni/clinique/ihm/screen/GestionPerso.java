@@ -56,8 +56,9 @@ public class GestionPerso extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			connexionModel.addPersonnel(new Personnel());
-
+//			connexionModel.addPersonnel(new Personnel());
+			AjoutPersonnel ajoutPersonnel = new AjoutPersonnel(connexionController, connexionModel);
+			ajoutPersonnel.setVisible(true);
 		}
 	}
 
