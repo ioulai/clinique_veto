@@ -74,7 +74,11 @@ public class GestionPersonnel extends JFrame implements Observer{
 	public GestionPersonnel() {
 		
 		setTitle("Gestion du personnel");
+<<<<<<< HEAD
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+=======
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+>>>>>>> 0f2c436b1e5f79593a402ba97902473cf87424ae
 		setBounds(100, 100, 510, 505);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
