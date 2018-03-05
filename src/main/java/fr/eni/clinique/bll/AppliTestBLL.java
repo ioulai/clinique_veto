@@ -6,9 +6,7 @@ import javax.swing.UIManager;
 
 import fr.eni.clinique.common.exception.TechnicalException;
 
-import fr.eni.clinique.ihm.controller.ConnexionController;
 
-import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class AppliTestBLL {
 
