@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
 import fr.eni.clinique.bo.Personnel;
 
 
-public class TableModel extends AbstractTableModel implements LayoutManager {
+public class TableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 5339658835698597380L;
 	
@@ -36,19 +36,19 @@ public class TableModel extends AbstractTableModel implements LayoutManager {
         this.personnels.set(index, personnel);
     }
     
-    public void addAllArticle(List<Personnel> personnel) {
+    public void addAllPersonnel(List<Personnel> personnel) {
         this.personnels.addAll(personnel);
     }
     
-    public void addArticle(Personnel personnel) {
+    public void addPersonnel(Personnel personnel) {
         this.personnels.add(personnel);
     }
     
-    public void removeArticle(int index) {
+    public void removePersonnel(int index) {
         this.personnels.remove(index);
     }
     
-    public Personnel article(int index) {
+    public Personnel personnel(int index) {
         return this.personnels.get(index);
     }
     
@@ -91,33 +91,6 @@ public class TableModel extends AbstractTableModel implements LayoutManager {
         }
 
     }
-    public void loadArticle(){
-    
-    }
-	@Override
-	public void addLayoutComponent(String arg0, Component arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void layoutContainer(Container arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public Dimension minimumLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Dimension preferredLayoutSize(Container arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void removeLayoutComponent(Component arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 
+	
 }

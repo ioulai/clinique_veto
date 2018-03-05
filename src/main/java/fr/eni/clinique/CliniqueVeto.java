@@ -14,21 +14,28 @@ import fr.eni.clinique.ihm.screen.ConnexionScreen;
 public class CliniqueVeto {
 
 	public static void main(String[] args) {
-		 try {
-	            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-	            
-	            SwingUtilities.invokeLater(new Runnable() {
-	                @Override
-	                public void run() {
-	                   ConnexionModel connexionModel = new ConnexionModel();
-	                   
-	                    ConnexionController connexionController = new ConnexionController(connexionModel);
-						ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, connexionController, connexionModel);
-	                }
-	            });
-	        } catch (Exception e) {
-	            throw new TechnicalException("Erreur Technique", e);
-	        }
+		ecranConnexion();
+	}
+	
+	public static ConnexionController ecranConnexion(){
+		
+		try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                   ConnexionModel connexionModel = new ConnexionModel();
+                   
+                    ConnexionController connexionController = new ConnexionController(connexionModel);
+					ConnexionScreen screen = new ConnexionScreen(AppConstants.APP_NAME, connexionController, connexionModel);
+                }
+            });
+        } catch (Exception e) {
+            throw new TechnicalException("Erreur Technique", e);
+        }
+		return null;
+		
 	}
 
 }

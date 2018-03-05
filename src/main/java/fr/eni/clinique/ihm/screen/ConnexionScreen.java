@@ -103,12 +103,10 @@ public class ConnexionScreen extends JFrame{
 	            	else {
 	            		if(authenticate(nomTxt.getText(), String.valueOf(mdpTxt.getPassword()))){	            			
 	            			loadecranMenu();
+	            			dispose();
 	            		}else{
 	            			showFailureMessage("Utilsateur inconnu");
-	            		}
-	            		
-	            		
-	            		
+	            		}	            		
 	            	}
 					
 				}

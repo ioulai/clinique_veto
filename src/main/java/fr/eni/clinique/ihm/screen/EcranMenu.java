@@ -8,6 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import fr.eni.clinique.CliniqueVeto;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -21,6 +26,8 @@ public class EcranMenu extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -7889761062932513110L;
+	private ConnexionModel connexionModel;
+	private ConnexionController connexionController;
 
 	/**
 	 * Launch the application.
@@ -54,6 +61,14 @@ public class EcranMenu extends JFrame {
 		
 		JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
 		mnFichier.add(mntmDconnexion);
+		mntmDconnexion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				CliniqueVeto.ecranConnexion();				
+			}
+		});
 		
 		JMenuItem mntmFermer = new JMenuItem("Fermer");
 		mnFichier.add(mntmFermer);
@@ -107,10 +122,13 @@ public class EcranMenu extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(e.getActionCommand().equals("Gestion du personnel")){
-				new GestionPersonnel().setVisible(true);
-					
-			}}
+//				if(e.getActionCommand().equals("Gestion du personnel")){
+//			
+//					
+//			}
+				GestionPerso gestionPerso =	new GestionPerso(connexionModel,connexionController);
+				gestionPerso.setVisible(true);
+				}
 		});
 	}
 }
