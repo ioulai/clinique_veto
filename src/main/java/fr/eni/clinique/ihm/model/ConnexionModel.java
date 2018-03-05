@@ -3,7 +3,9 @@ package fr.eni.clinique.ihm.model;
 import java.util.List;
 import java.util.Observable;
 
+import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.ihm.controller.ConnexionController;
 
 public class ConnexionModel extends Observable {
 	private TableModel tableModel;
@@ -23,8 +25,8 @@ public class ConnexionModel extends Observable {
         clearChanged();
 	}
 	
-	public void removePersonnel(int index){
-		tableModel.removePersonnel(index);
+	public void removePersonnel(int index) throws BLLException{		
+		tableModel.removePersonnel(index);				
 	}
 
 	public TableModel getTableModel(){
