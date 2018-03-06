@@ -46,8 +46,14 @@ public class ConnexionController {
 		if(personnel.getCodePers() != null){
 			loginManager.removePersonnel(personnel);
 			model.removePersonnel(personnel.getCodePers());
+		}		
+	}
+	
+	public void AjoutPersonnel(Personnel personnel) throws BLLException{
+		if(personnel.getCodePers() == null){
+			loginManager.ajoutPersonnel(personnel);			
 		}
-		
+		model.addPersonnel(personnel);
 		
 	}
 
