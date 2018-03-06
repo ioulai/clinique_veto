@@ -60,11 +60,8 @@ public class ConnexionScreen extends JFrame{
 	    
 	    private void showFailureMessage(String message) {
 	        JOptionPane.showMessageDialog(ConnexionScreen.this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
-	    }
-	    
-		private void showSuccessMessage(String message) {
-	        JOptionPane.showMessageDialog(ConnexionScreen.this,message);
-	    }
+	    }	    
+		
 	    
 	    private void setUp() {
 

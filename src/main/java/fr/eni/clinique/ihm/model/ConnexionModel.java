@@ -25,6 +25,7 @@ public class ConnexionModel extends Observable {
 	
 	public void addPersonnel(Personnel personnel){
 		tableModelPerso.addPersonnel(personnel);
+		
 		setChanged();
         notifyObservers();
         clearChanged();

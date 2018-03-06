@@ -2,6 +2,8 @@ package fr.eni.clinique.ihm.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,7 +12,7 @@ import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
 import fr.eni.clinique.bo.Personnel;
 
 
-public class TableModelPerso extends AbstractTableModel {
+public class TableModelPerso extends AbstractTableModel implements Observer{
 
 	private static final long serialVersionUID = 5339658835698597380L;
 	
@@ -70,6 +72,10 @@ public class TableModelPerso extends AbstractTableModel {
         }
 
     }
+	@Override
+	public void update(Observable o, Object arg) {
+		
+	}
 
 	
 }
