@@ -52,9 +52,6 @@ public class ConnexionController {
 		if(personnel.getCodePers() == null){
 			loginManager.ajoutPersonnel(personnel);			
 		}
-		model.addPersonnel(personnel);
-		
+		model.addPersonnel(personnel);		
 	}
-
-
 }

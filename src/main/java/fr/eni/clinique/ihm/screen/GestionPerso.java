@@ -2,7 +2,8 @@ package fr.eni.clinique.ihm.screen;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -10,14 +11,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 
 import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
 
-public class GestionPerso extends JFrame {
-
+public class GestionPerso extends JFrame implements Observer{
 	/**
 	 * 
 	 */
@@ -29,7 +31,7 @@ public class GestionPerso extends JFrame {
 	public GestionPerso() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setSize(600, 500);
-		setResizable(true);
+		setResizable(false);
 		connexionModel = new ConnexionModel();
 		connexionController = new ConnexionController(connexionModel);
 	
@@ -41,6 +43,8 @@ public class GestionPerso extends JFrame {
 		boutons.add(new JButton(new RemoveAction()));
 		 getContentPane().add(boutons, BorderLayout.NORTH);
 		 pack();
+		 
+		 connexionModel.addObserver(this);
 	}
 
 	private class AddAction extends AbstractAction {
@@ -86,6 +90,12 @@ public class GestionPerso extends JFrame {
 			}
 		}	
 }
+
+	@Override
+	public void update(Observable o, Object arg) {
+		((AbstractTableModel)tableau.getModel()).fireTableDataChanged();
+		
+	}
 
 	
 }

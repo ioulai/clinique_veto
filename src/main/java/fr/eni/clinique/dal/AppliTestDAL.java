@@ -32,7 +32,7 @@ public class AppliTestDAL {
 			
 			e.printStackTrace();
 		}
-		/*insert
+		//insert
 		Personnel personnel = new Personnel("TeTTPaMP", "mdpDAL","Sec",true);
 
 		try {
@@ -40,7 +40,7 @@ public class AppliTestDAL {
 		} catch (DaoException e) {
 			e.printStackTrace();
 		} 
-		
+		/*
 		//update
 		try {
 			pers.update(personnel,"OKOK");

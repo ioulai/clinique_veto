@@ -1,10 +1,14 @@
 package fr.eni.clinique.ihm.screen;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import fr.eni.clinique.CliniqueVeto;
 import javax.swing.JMenuBar;
@@ -40,6 +44,12 @@ public class EcranMenu extends JFrame {
 	public EcranMenu() {
 		setTitle("Clinique V\u00E9t\u00E9rinaire");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		
+		setLayout(new BorderLayout());
+		JLabel background=new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/fond_frame.jpg")));
+		add(background);
+		background.setLayout(new FlowLayout());
+		
 		setBounds(100, 100, 501, 378);
 		
 		JMenuBar menuBar = new JMenuBar();
