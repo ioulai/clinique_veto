@@ -26,5 +26,8 @@ hs_err_pid*
 >>>>>>> 14e620d76c6b618738a2c742086496a69dee414d
 .classpath
 .classpath
+<<<<<<< HEAD
+=======
 bin/settings.properties
 .classpath
+>>>>>>> 4981f64ecde3482ef7e0d681f32a638045affc2f
