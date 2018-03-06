@@ -2,6 +2,8 @@ package fr.eni.clinique.ihm.screen;
 
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -82,9 +84,16 @@ public class EcranAgenda extends JFrame {
 		JButton Bt_dossierMedical = new JButton("");
 		Bt_dossierMedical.setBounds(365, 261, 46, 23);
 		contentPane.add(Bt_dossierMedical);
+		Bt_dossierMedical.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EcranDossierMedical().setVisible(true);
+			}
+		});
 		
 		JLabel lblDossierMdical = new JLabel("Dossier m\u00E9dical");
-		lblDossierMdical.setBounds(351, 290, 73, 14);
+		lblDossierMdical.setBounds(346, 286, 124, 14);
 		contentPane.add(lblDossierMdical);
 	}
 

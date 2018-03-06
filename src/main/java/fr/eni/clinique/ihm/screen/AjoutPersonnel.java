@@ -41,14 +41,13 @@ public class AjoutPersonnel extends JDialog {
 
 	private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14);
 	private Font defaultFont = new Font("Arial", Font.PLAIN, 14);
-
+	private ConnexionModel connexionModel;
 	public AjoutPersonnel(ConnexionController connexionController, ConnexionModel connexionModel) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(600, 500);
 		setResizable(false);
 		setTitle("Ajout personnel");
 		setUp();
-
 	}
 
 	private void setUp() {
@@ -115,9 +114,9 @@ public class AjoutPersonnel extends JDialog {
 
 			if (String.valueOf(motPasseTxt.getPassword()).equals( String.valueOf(motPasseTxt2.getPassword()))) {
 				showSuccessMessage("Personnel ajouter !");
-				Personnel personnel = null;
-				connexionModel.addPersonnel(personnel = new Personnel(nomTxt.getText(), String.valueOf(motPasseTxt2.getPassword()),
-						roleTxt.getText(), Boolean.parseBoolean(archiveTxt.getText())));
+				Personnel personnel = new Personnel(nomTxt.getText(), String.valueOf(motPasseTxt2.getPassword()),
+						roleTxt.getText(), Boolean.parseBoolean(archiveTxt.getText()));
+				connexionModel.addPersonnel(personnel);
 				nomTxt.setText("");
 				motPasseTxt.setText("");
 				motPasseTxt2.setText("");

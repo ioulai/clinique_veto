@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.clinique.bo.Animal;
-import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Rdv;
 
@@ -20,7 +19,7 @@ public class AppliTestBO {
 		lesAnimaux.add(A3);
 		lesAnimaux.add(A2);
 		lesAnimaux.add(A1);
-		Client c=  new Client(1, "nomClient", "prenomClient", "adresse1", "adresse2", 37000,"ville", "numTel", "assurance", "email", "remarque", true, lesAnimaux);
+		//Client c=  new Client(1, "nomClient", "prenomClient", "adresse1", "adresse2", 37000,"ville", "numTel", "assurance", "email", "remarque", true, lesAnimaux);
 		//veterinaire
 		Personnel veto = new Personnel(1, "nom", "motPasse", "role", true);		
 		Rdv rdv = new Rdv("26/02/2018", veto, A1);

@@ -38,7 +38,6 @@ public class ConnexionController {
         
         List<Client> clients = loginManager.tousLesClients();
         model.loadClients(clients);
-        
     }
     
 	public void deletePersonnel(Personnel personnel) throws BLLException{
