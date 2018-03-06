@@ -42,9 +42,6 @@ public class AjoutPersonnel extends JDialog {
 	private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14);
 	private Font defaultFont = new Font("Arial", Font.PLAIN, 14);
 
-	private ConnexionController connexionController;
-	private ConnexionModel connexionModel;
-
 	public AjoutPersonnel(ConnexionController connexionController, ConnexionModel connexionModel) {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(600, 500);

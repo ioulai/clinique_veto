@@ -20,10 +20,10 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	private Connection connection = null;
 	
 	private static final String SELECT_ALL_QUERY = "select * from Clients";
-	private static final String INSERT_QUERY = "insert into Clients(NomClient, PrenomClient, adresse1, adresse2,ville,assurance,email,remarque,archive,lesAnimaux) values(?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_QUERY = "insert into Clients(NomClient, PrenomClient, Adresse1, Adresse2,Ville,Assurance,Email,Remarque,Archive,lesAnimaux) values(?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_QUERY ="DELETE FROM Clients WHERE codeClient=?";
 	private static final String SELECT_BY_NOM="SELECT NomClient,PrenomClient,CodePostal,Ville FROM Clients WHERE NomClient=?";
-	private static final String UPDATE_QUERY="UPDATE Clients SET nomClient=?, prenomClient=?, adresse1=?, adresse2=?,ville=?,assurance=?,email=?,remarque=?,archive=?,lesAnimaux=?";
+	private static final String UPDATE_QUERY="UPDATE Clients SET NomClient=?, PrenomClient=?, Adresse1=?, Adresse2=?,Ville=?,Assurance=?,Email=?,Remarque=?,Archive=?,lesAnimaux=?";
 	
 	
 	private Client getClient(ResultSet res) throws SQLException{
@@ -169,7 +169,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 
 	@Override
 	public void delete(Client newClient) throws DaoException {
-		  Connection connection = null;
+		    Connection connection = null;
 	        PreparedStatement statement = null;
 	        
 	        try {
@@ -180,6 +180,28 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	            
 	        } catch(SQLException e) {
 	            throw new DaoException(e.getMessage(), e);
+	        } finally {
+	            ResourceUtil.safeClose(connection, statement);
+	        }
+		
+	}
+	@Override
+	public void deleteById(int code) {
+		  Connection connection = null;
+	        PreparedStatement statement = null;
+	        
+	        try {
+	            connection = MSSQLConnectionFactory.get();
+	            statement = connection.prepareStatement(DELETE_QUERY);
+	            statement.setInt(1, code);
+	            statement.executeUpdate();
+	            
+	        } catch(SQLException e) {
+	            try {
+					throw new DaoException(e.getMessage(), e);
+				} catch (DaoException e1) {
+					e1.printStackTrace();
+				}
 	        } finally {
 	            ResourceUtil.safeClose(connection, statement);
 	        }
