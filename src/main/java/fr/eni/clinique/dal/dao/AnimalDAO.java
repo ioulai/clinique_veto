@@ -10,9 +10,13 @@ public interface AnimalDAO {
 List<Animal> selectALL() throws DaoException;
 	
 	Animal insert(Animal newAnimal) throws DaoException;
+	
 	void update(Animal newAnimal, int codeClient,String tatouage,String antecedents,Boolean archive) throws DaoException;
+	
 	void delete(Animal newAnimal) throws DaoException;
 	
 	List<Animal> selectByRace(String race) throws DaoException;
+
+	void deleteById(int parseInt) throws DaoException;
 	
 }

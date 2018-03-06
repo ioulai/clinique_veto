@@ -9,9 +9,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.dal.dao.AnimalDAO;
 import fr.eni.clinique.dal.dao.ClientDAO;
-import fr.eni.clinique.dal.dao.impl.ClientDAOJdbcImpl;
+import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
@@ -242,7 +242,21 @@ public class EcranPrincipalClient extends JFrame {
 		btnSuppriAnimal.setBounds(341, 381, 46, 35);
 		panel_listeAnimaux.add(btnSuppriAnimal);
 		btnSuppriAnimal.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int choix = JOptionPane.showConfirmDialog(EcranPrincipalClient.this,"Êtes-vous sûr de vouloir supprimer cet animal ?", "Suppression Animal",JOptionPane.OK_CANCEL_OPTION);
+				if (choix ==1){
+					AnimalDAO animal = new DaoFactory().AnimalDAO();
+					try {
+						animal.deleteById(Integer.parseInt(txtCodeClient.getText()));
+					} catch (NumberFormatException e1) {
+					
+						e1.printStackTrace();
+					} catch (DaoException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		btnSuppriAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));

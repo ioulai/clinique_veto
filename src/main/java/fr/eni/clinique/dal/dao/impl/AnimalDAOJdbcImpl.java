@@ -174,4 +174,22 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 	        return lesAnimaux;
 	}
 
+	@Override
+	public void deleteById(int code) throws DaoException {
+		  Connection connection = null;
+	        PreparedStatement statement = null;
+	        
+	        try {
+	            connection = MSSQLConnectionFactory.get();
+	            statement = connection.prepareStatement(DELETE_QUERY);
+	            statement.setInt(1,code);
+	            statement.executeUpdate();
+	            
+	        } catch(SQLException e) {
+	            throw new DaoException(e.getMessage(), e);
+	        } finally {
+	            ResourceUtil.safeClose(connection, statement);
+	        }
+	}
+
 }
