@@ -17,6 +17,8 @@ public interface ClientDAO {
 	Client insert(Client newClient) throws DaoException;
 	
 	void delete(Client newClient) throws DaoException;
+
+	void deleteById(int parseInt);
 	
 	
 }

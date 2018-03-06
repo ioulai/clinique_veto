@@ -9,6 +9,10 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.dal.dao.ClientDAO;
+import fr.eni.clinique.dal.dao.impl.ClientDAOJdbcImpl;
+import fr.eni.clinique.dal.factory.DaoFactory;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
@@ -16,6 +20,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -90,11 +95,31 @@ public class EcranPrincipalClient extends JFrame {
 		btnAjoutCli.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnAjoutCli.setBounds(251, 11, 46, 35);
 		panel.add(btnAjoutCli);
-		
+		btnAjoutCli.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AjoutClient().setVisible(true);
+				
+			}
+		});
+		   
+			
 		JButton btnSuppriCli = new JButton("-");
 		btnSuppriCli.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnSuppriCli.setBounds(326, 11, 46, 35);
 		panel.add(btnSuppriCli);
+		btnSuppriCli.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int choix = JOptionPane.showConfirmDialog(EcranPrincipalClient.this,"Êtes-vous sûr de vouloir supprimer ce client ?", "Suppression Client",JOptionPane.OK_CANCEL_OPTION);
+				if (choix ==1){
+					ClientDAO client = new DaoFactory().clientDAO();
+					client.deleteById(Integer.parseInt(txtCodeClient.getText()));
+				}
+			}
+		});
 		
 		JLabel lblValider = new JLabel("Valider");
 		lblValider.setBounds(572, 51, 46, 14);
@@ -115,14 +140,17 @@ public class EcranPrincipalClient extends JFrame {
 		panel.add(btnAnnuler);
 		
 		JButton btnRechercher = new JButton("");
-		btnRechercher.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
 		btnRechercher.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Rechercher.png")));
 		btnRechercher.setBounds(10, 11, 46, 35);
 		panel.add(btnRechercher);
+		btnRechercher.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EcranRecherche().setVisible(true);
+				
+			}
+		});
 		
 		JLabel lblCode = new JLabel("Code");
 		lblCode.setBounds(10, 95, 46, 14);
@@ -195,16 +223,23 @@ public class EcranPrincipalClient extends JFrame {
 		panel_listeAnimaux.add(scrollPane);
 		
 		JButton btnAjoutAnimal = new JButton("+");
-		btnAjoutAnimal.setBounds(302, 381, 37, 35);
+		btnAjoutAnimal.setBounds(273, 381, 46, 35);
 		panel_listeAnimaux.add(btnAjoutAnimal);
 		btnAjoutAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
-		
+		btnAjoutAnimal.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EcranAnimal().setVisible(true);
+				
+			}
+		});
 		JLabel lblAjouter_1 = new JLabel("Ajouter");
-		lblAjouter_1.setBounds(302, 418, 46, 14);
+		lblAjouter_1.setBounds(273, 418, 83, 14);
 		panel_listeAnimaux.add(lblAjouter_1);
 		
 		JButton btnSuppriAnimal = new JButton("-");
-		btnSuppriAnimal.setBounds(353, 381, 37, 35);
+		btnSuppriAnimal.setBounds(341, 381, 46, 35);
 		panel_listeAnimaux.add(btnSuppriAnimal);
 		btnSuppriAnimal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -213,18 +248,35 @@ public class EcranPrincipalClient extends JFrame {
 		btnSuppriAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
 		JLabel lblSupprimer_1 = new JLabel("Supprimer");
-		lblSupprimer_1.setBounds(353, 418, 71, 14);
+		lblSupprimer_1.setBounds(341, 418, 83, 14);
 		panel_listeAnimaux.add(lblSupprimer_1);
 		
 		JButton btnEditAnimal = new JButton("");
-		btnEditAnimal.setBounds(406, 381, 37, 35);
+		btnEditAnimal.setBounds(406, 381, 46, 35);
 		panel_listeAnimaux.add(btnEditAnimal);
 		btnEditAnimal.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/editer.png")));
 		btnEditAnimal.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnEditAnimal.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EcranAnimal().setVisible(true);
+				
+			}
+		});
 		
 		JLabel lblEditer = new JLabel("Editer");
-		lblEditer.setBounds(406, 418, 46, 14);
+		lblEditer.setBounds(406, 418, 78, 14);
 		panel_listeAnimaux.add(lblEditer);
+		
+		JButton btnCliPrec = new JButton("");
+		btnCliPrec.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Back24.gif")));
+		btnCliPrec.setBounds(86, 316, 46, 23);
+		contentPane.add(btnCliPrec);
+		
+		JButton btnCliSuiv = new JButton("");
+		btnCliSuiv.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Forward24.gif")));
+		btnCliSuiv.setBounds(190, 316, 46, 23);
+		contentPane.add(btnCliSuiv);
 	}
-
 }

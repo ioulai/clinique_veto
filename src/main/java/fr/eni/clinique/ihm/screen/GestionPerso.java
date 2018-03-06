@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import fr.eni.clinique.bll.exception.BLLException;
-import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
