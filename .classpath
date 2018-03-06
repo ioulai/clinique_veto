@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<<<<<<< HEAD
+	<classpathentry kind="lib" path="lib/sqljdbc42.jar"/>
+=======
 	<classpathentry kind="lib" path="lib/sqljdbc4.jar"/>
+>>>>>>> 23fec069176688d8124098adf29c10074997a51d
 	<classpathentry kind="output" path="bin"/>
 </classpath>
