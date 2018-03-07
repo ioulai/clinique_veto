@@ -58,12 +58,12 @@ public class EcranRDV extends JFrame {
 		
 		JLabel lblClient = new JLabel("Client");
 		lblClient.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblClient.setBounds(10, 11, 46, 14);
+		lblClient.setBounds(10, 11, 84, 14);
 		panel.add(lblClient);
 		
 		JLabel lblAnimal = new JLabel("Animal");
 		lblAnimal.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAnimal.setBounds(10, 52, 46, 14);
+		lblAnimal.setBounds(10, 52, 84, 14);
 		panel.add(lblAnimal);
 		
 		JComboBox<?> cbx_nomClient = new JComboBox<Object>();
@@ -76,12 +76,12 @@ public class EcranRDV extends JFrame {
 		
 		JButton Bt_ajoutClient = new JButton("+");
 		Bt_ajoutClient.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		Bt_ajoutClient.setBounds(104, 30, 40, 23);
+		Bt_ajoutClient.setBounds(104, 23, 40, 30);
 		panel.add(Bt_ajoutClient);
 		
 		JButton Bt_ajoutNom = new JButton("+");
 		Bt_ajoutNom.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		Bt_ajoutNom.setBounds(104, 70, 40, 23);
+		Bt_ajoutNom.setBounds(104, 63, 40, 30);
 		panel.add(Bt_ajoutNom);
 		
 		JPanel panel_1 = new JPanel();
@@ -96,7 +96,7 @@ public class EcranRDV extends JFrame {
 		
 		JLabel lblVtrinaire = new JLabel("V\u00E9t\u00E9rinaire");
 		lblVtrinaire.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblVtrinaire.setBounds(32, 11, 78, 14);
+		lblVtrinaire.setBounds(32, 11, 100, 14);
 		panel_1.add(lblVtrinaire);
 		
 		JPanel panel_2 = new JPanel();
