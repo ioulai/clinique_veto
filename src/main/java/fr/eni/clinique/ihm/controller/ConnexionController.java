@@ -15,12 +15,12 @@ import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class ConnexionController {
 	
-	private ConnexionModel model;
+	private ConnexionModel connexionModel;
     private LoginMger loginManager = ManagerFactory.loginMger();
     
-    public ConnexionController(ConnexionModel model) {
+    public ConnexionController(ConnexionModel connexionModel) {
         super();
-        this.model = model;
+        this.connexionModel = connexionModel;
        try {
 		this.init();
 	} catch (BLLException | DaoException e) {
@@ -31,20 +31,25 @@ public class ConnexionController {
     public void init() throws BLLException, DaoException {
 
         List<Personnel> personnels = loginManager.toutLePersonnel();
-        model.loadPersonnels(personnels);
+        connexionModel.loadPersonnels(personnels);
         
         List<Animal> animaux = loginManager.tousLesAnimaux();
-        model.loadAnimaux(animaux);
+        connexionModel.loadAnimaux(animaux);
         
         List<Client> clients = loginManager.tousLesClients();
+<<<<<<< HEAD
+        connexionModel.loadClients(clients);
+        
+=======
         model.loadClients(clients);
+>>>>>>> c22ca9670422402cf3bfe74b5499c8ba33d03987
     }
     
 	public void deletePersonnel(Personnel personnel) throws BLLException{
 	
 		if(personnel.getCodePers() != null){
 			loginManager.removePersonnel(personnel);
-			model.removePersonnel(personnel.getCodePers());
+			connexionModel.removePersonnel(personnel.getCodePers());
 		}		
 	}
 	
@@ -52,7 +57,7 @@ public class ConnexionController {
 		if(personnel.getCodePers() == null){
 			loginManager.ajoutPersonnel(personnel);			
 		}
-		model.addPersonnel(personnel);		
+		connexionModel.addPersonnel(personnel);		
 	}
 	
 	public void AjoutClient(Client c) throws BLLException{
