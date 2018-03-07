@@ -7,11 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Race;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.List;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
@@ -21,8 +31,8 @@ public class EcranAnimal extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -8248264425509804877L;
+	private LoginMger loginManager = ManagerFactory.loginMger();
 	private JPanel contentPane;
-	private JTextField txt_nomClient;
 	private JTextField txt_codeAnimal;
 	private JTextField txt_nomAnimal;
 	private JTextField txt_Couleur;
@@ -84,15 +94,23 @@ public class EcranAnimal extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_1.setBounds(10, 87, 354, 34);
+		panel_1.setBounds(10, 87, 354, 45);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		txt_nomClient = new JTextField();
-		txt_nomClient.setBounds(10, 7, 240, 20);
-		panel_1.add(txt_nomClient);
-		txt_nomClient.setColumns(10);
+		JComboBox<String> comboBoxClient = new JComboBox<String>();
+		comboBoxClient.setBounds(10, 11, 334, 20);
+		panel_1.add(comboBoxClient);
 		
+		try {
+			List<Client> clients = loginManager.tousLesClients();
+			for (Client client : clients) {
+				comboBoxClient.addItem(client.getNomClient()+" - "+client.getPrenomClient());		
+			}
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+		 
 		JLabel lblCode = new JLabel("Code");
 		lblCode.setBounds(10, 143, 46, 14);
 		contentPane.add(lblCode);
@@ -117,16 +135,34 @@ public class EcranAnimal extends JFrame {
 		lblRace.setBounds(160, 218, 32, 14);
 		contentPane.add(lblRace);
 		
-		JComboBox<?> cbx_espèce = new JComboBox<Object>();
+		JComboBox<String> cbx_espèce = new JComboBox<String>();
 		cbx_espèce.setBounds(65, 215, 86, 20);
 		contentPane.add(cbx_espèce);
+		try {
+			List<Race> races = loginManager.toutesLesRaces();
+			for (Race race : races) {
+				cbx_espèce.addItem(race.getEspece());		
+			}
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		
-		JComboBox<?> cbx_Race = new JComboBox<Object>();
+		JComboBox<String> cbx_Race = new JComboBox<String>();
 		cbx_Race.setBounds(188, 215, 88, 20);
 		contentPane.add(cbx_Race);
-		
-		JComboBox<?> cbx_Sexe = new JComboBox<Object>();
+		try {
+			List<Race> races = loginManager.toutesLesRaces();
+			for (Race race : races) {
+				cbx_Race.addItem(race.getRace());		
+			}
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
+		 
+		JComboBox<String> cbx_Sexe = new JComboBox<String>();
 		cbx_Sexe.setBounds(274, 165, 74, 20);
+		cbx_Sexe.addItem("Femelle");
+		cbx_Sexe.addItem("Mâle");
 		contentPane.add(cbx_Sexe);
 		
 		txt_codeAnimal = new JTextField();

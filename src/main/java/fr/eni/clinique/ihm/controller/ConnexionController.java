@@ -10,6 +10,7 @@ import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Race;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
@@ -37,10 +38,10 @@ public class ConnexionController {
         connexionModel.loadAnimaux(animaux);
         
         List<Client> clients = loginManager.tousLesClients();
-
-
         connexionModel.loadClients(clients);
 
+        List<Race> races = loginManager.toutesLesRaces();
+        connexionModel.loadRaces(races);
 
     }
     

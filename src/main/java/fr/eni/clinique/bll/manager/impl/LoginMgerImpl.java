@@ -7,11 +7,13 @@ import fr.eni.clinique.bll.manager.LoginMger;
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Race;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.common.util.ObjectUtil;
 import fr.eni.clinique.dal.dao.AnimalDAO;
 import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
+import fr.eni.clinique.dal.dao.RaceDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
 
@@ -19,8 +21,9 @@ public class LoginMgerImpl implements LoginMger{
 	
 	private static LoginMgerImpl SINGLETON;
 	private PersonnelDAO personnelDAO = DaoFactory.personnelDao();
-	private AnimalDAO animalDAO = DaoFactory.animalDao();
+	private AnimalDAO animalDAO = DaoFactory.animalDAO();
 	private ClientDAO clientDAO= DaoFactory.clientDAO();
+	private RaceDAO raceDAO= DaoFactory.raceDAO();
 	
     private LoginMgerImpl() {
         
@@ -161,6 +164,17 @@ public class LoginMgerImpl implements LoginMger{
 			throw new BLLException("Error inserting", e);
 		}
 		
+	}
+
+	@Override
+	public List<Race> toutesLesRaces() throws BLLException {
+		List<Race> races = null;
+		try {
+			races = raceDAO.selectALL();
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return races;
 	}
     
     

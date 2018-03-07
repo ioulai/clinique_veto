@@ -23,6 +23,7 @@ public class TableModelAnimal extends AbstractTableModel  {
         super();
         this.animaux = animaux;
     }
+    
     public void addAnimal(Animal animal) {
         this.animaux.add(animal);
     }

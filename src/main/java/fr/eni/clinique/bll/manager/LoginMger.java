@@ -6,6 +6,7 @@ import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Race;
 
 public interface LoginMger {
 
@@ -23,5 +24,6 @@ public interface LoginMger {
 	List<Animal> tousLesAnimaux() throws  BLLException;
 
 	List<Client> tousLesClients() throws  BLLException;
+	List<Race> toutesLesRaces() throws  BLLException;
 	void ajoutClient(Client c) throws BLLException;
 }
