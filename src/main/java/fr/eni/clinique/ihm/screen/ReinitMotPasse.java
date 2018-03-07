@@ -145,7 +145,7 @@ public class ReinitMotPasse extends JDialog{
 			
 		});
 
-		addComponentOnGrid(panel, validerBoutton, gridBagConstraints, 1, 1, 1);
+		addComponentOnGrid(panel, validerBoutton, gridBagConstraints, 1, 5, 1);
 		return panel;
 
 	}
