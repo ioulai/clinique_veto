@@ -89,12 +89,12 @@ public class ReinitMotPasse extends JDialog{
 		GridBagConstraints gridBagConstraints = createGridBagConstraints();
 		
 		addComponentOnGrid(mainPanel, personnelLabel, gridBagConstraints, 1, 1, 0.15);
-		addComponentOnGrid(mainPanel, personnelCombo, gridBagConstraints, 2, 1, 0.85);
+		addComponentOnGrid(mainPanel, personnelCombo, gridBagConstraints, 2, 1, 0.15);
 		addComponentOnGrid(mainPanel, motPasseLabel, gridBagConstraints, 1, 2, 0.15);
-		addComponentOnGrid(mainPanel, motPasse, gridBagConstraints, 2, 2, 0.85);
+		addComponentOnGrid(mainPanel, motPasse, gridBagConstraints, 2, 2, 0.15);
 		addComponentOnGrid(mainPanel, motPasseConfirmeLabel, gridBagConstraints, 1, 3, 0.15);
-		addComponentOnGrid(mainPanel, motPasseConfirme, gridBagConstraints, 2, 3, 0.85);
-		addComponentOnGrid(mainPanel, boutonAjouter(), gridBagConstraints, 2, 4, 1);
+		addComponentOnGrid(mainPanel, motPasseConfirme, gridBagConstraints, 2, 3, 0.15);
+		addComponentOnGrid(mainPanel, boutonAjouter(), gridBagConstraints, 5, 4, 1);
 		
 	}
 	private Personnel retourSaisi() {
@@ -145,7 +145,7 @@ public class ReinitMotPasse extends JDialog{
 			
 		});
 
-		addComponentOnGrid(panel, validerBoutton, gridBagConstraints, 1, 5, 1);
+		addComponentOnGrid(panel, validerBoutton, gridBagConstraints, 5, 5, 1);
 		return panel;
 
 	}
