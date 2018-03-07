@@ -41,6 +41,7 @@ public class GestionPerso extends JFrame implements Observer{
 		JPanel boutons = new JPanel();
 		boutons.add(new JButton(new AddAction()));
 		boutons.add(new JButton(new RemoveAction()));
+		boutons.add(new JButton(new ResetAction()));
 		 getContentPane().add(boutons, BorderLayout.NORTH);
 		 pack();
 		 
@@ -90,6 +91,27 @@ public class GestionPerso extends JFrame implements Observer{
 			}
 		}	
 }
+	private class ResetAction extends AbstractAction {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private ResetAction() {
+			super("Réinitialiser mot de passe");
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			ReinitMotPasse reinitMotPasse = new ReinitMotPasse(connexionModel, connexionController);
+			reinitMotPasse.setVisible(true);
+			
+			
+		}
+		
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
