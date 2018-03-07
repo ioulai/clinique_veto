@@ -7,7 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractAction;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -46,15 +46,10 @@ public class AjoutPersonnel extends JDialog {
 
 	private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14);
 	private Font defaultFont = new Font("Arial", Font.PLAIN, 14);
-<<<<<<< HEAD
-	private ConnexionModel connexionModel;
-=======
-
 	private ConnexionModel connexionModel;
 	private ConnexionController connexionController ;
 	private Integer codePers= 0;
 
->>>>>>> 89370dc368b938d6e6fbd24c74f92f51384f1d95
 	public AjoutPersonnel(ConnexionController connexionController, ConnexionModel connexionModel) {
 		this.connexionController = connexionController;
 		this.connexionModel = connexionModel;
@@ -89,7 +84,6 @@ public class AjoutPersonnel extends JDialog {
 		
 		// Creation de la grille et placement des composants sur la grille
 		GridBagConstraints gridBagConstraints = createGridBagConstraints();
-
 		addComponentOnGrid(mainPanel, nomLabel, gridBagConstraints, 1, 1, 0.15);
 		addComponentOnGrid(mainPanel, nomTxt, gridBagConstraints, 2, 1, 0.85);
 		addComponentOnGrid(mainPanel, motPasseLabel, gridBagConstraints, 1, 2, 0.15);
@@ -112,11 +106,9 @@ public class AjoutPersonnel extends JDialog {
 		JOptionPane.showMessageDialog(AjoutPersonnel.this, message);
 	}
 
-<<<<<<< HEAD
-	private class AddAction extends AbstractAction {
-		/**
-		 * 
-		 */
+
+	/*private class AddAction extends AbstractAction {
+	
 		private static final long serialVersionUID = 1L;
 
 		private AddAction() {
@@ -141,10 +133,11 @@ public class AjoutPersonnel extends JDialog {
 				showFailureMessage("Attention veuillez confirmer le mot de passe !");
 				motPasseTxt2.requestFocus();
 				motPasseTxt2.setText("");
-=======
+				}
+			}
+*/
 	private Personnel retourSaisi() {
 		Personnel personnel = new Personnel();
->>>>>>> 89370dc368b938d6e6fbd24c74f92f51384f1d95
 
 	//	personnel.setCodePers(codePers);
 		personnel.setNom(nomTxt.getText().trim());

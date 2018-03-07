@@ -25,7 +25,6 @@ public class ConnexionModel extends Observable {
 	
 	public void addPersonnel(Personnel personnel){
 		tableModelPerso.addPersonnel(personnel);
-		
 		setChanged();
         notifyObservers();
         clearChanged();
@@ -67,5 +66,11 @@ public class ConnexionModel extends Observable {
 	
 	public void loadClients(List<Client> clients) {
 		tableModelClient = new TableModelClient(clients);		
+	}
+	public void addClient(Client c){
+		tableModelClient.addClient(c);
+		setChanged();
+        notifyObservers();
+        clearChanged();
 	}
 }

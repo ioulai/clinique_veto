@@ -99,11 +99,10 @@ public class EcranPrincipalClient extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new AjoutClient().setVisible(true);
+				new AjoutClient(connexionController, connexionModel).setVisible(true);
 				
 			}
 		});
-		   
 			
 		JButton btnSuppriCli = new JButton("-");
 		btnSuppriCli.setFont(new Font("Tahoma", Font.BOLD, 14));

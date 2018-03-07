@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import fr.eni.clinique.CliniqueVeto;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -21,7 +24,8 @@ public class EcranMenu extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -7889761062932513110L;
-
+	private  ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +47,7 @@ public class EcranMenu extends JFrame {
 	 */
 	public EcranMenu() {
 		setTitle("Clinique V\u00E9t\u00E9rinaire");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		setLayout(new BorderLayout());
 		JLabel background=new JLabel(new ImageIcon(getClass().getClassLoader().getResource("images/fond_frame.jpg")));
@@ -51,6 +55,8 @@ public class EcranMenu extends JFrame {
 		background.setLayout(new FlowLayout());
 		
 		setBounds(100, 100, 501, 378);
+		connexionModel = new ConnexionModel();
+		connexionController = new ConnexionController(connexionModel);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -92,7 +98,8 @@ public class EcranMenu extends JFrame {
 				
 			}
 		});
-		
+
+	
 		JMenuItem mntmPriseDeRendezvous = new JMenuItem("Prise de rendez-vous");
 		mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
 		mntmPriseDeRendezvous.addActionListener(new ActionListener() {

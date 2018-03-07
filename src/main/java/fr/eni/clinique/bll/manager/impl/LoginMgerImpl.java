@@ -80,7 +80,26 @@ public class LoginMgerImpl implements LoginMger{
 				throw new TechnicalException("Erreur Technique", e1);
 			}
 	}
+	private void validerClient(Client c) throws BLLException {
+		try{
+			ObjectUtil.checkNotNull(c);
+			ObjectUtil.checkNotBlank(c.getNomClient());
+			ObjectUtil.checkNotBlank(c.getPrenomClient());
+			ObjectUtil.checkNotBlank(c.getCodePostal());
 
+			ObjectUtil.checkNotBlank(c.getVille());
+			ObjectUtil.checkNotBlank(c.getAssurance());
+			ObjectUtil.checkNotBlank(c.getAdresse1());
+
+			ObjectUtil.checkNotBlank(c.getAdresse2());
+			
+			}
+		catch(IllegalArgumentException e){
+				throw new BLLException("Champs Manquants : ", e);
+			} catch (Exception e1) {
+				throw new TechnicalException("Erreur Technique", e1);
+			}
+	}
 	@Override
 	public void updatePersonnel(Personnel personnel) throws BLLException {
 		
@@ -131,6 +150,19 @@ public class LoginMgerImpl implements LoginMger{
 			e.printStackTrace();
 		}
 		return clients;
+	}
+
+	@Override
+	public void ajoutClient(Client c) throws BLLException {
+		ObjectUtil.checkNotNull(c);
+		try{
+			validerClient(c);
+			clientDAO.insert(c);
+		}
+		catch(DaoException e){
+			throw new BLLException("Error inserting", e);
+		}
+		
 	}
     
     
