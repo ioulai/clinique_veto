@@ -59,4 +59,11 @@ public class ConnexionController {
 		}
 		connexionModel.addPersonnel(personnel);		
 	}
+	
+	public void AjoutClient(Client c) throws BLLException{
+		if(Client.getCodeClient() == null){
+			loginManager.ajoutClient(c);			
+		}
+		model.addClient(c);		
+	}
 }

@@ -9,7 +9,7 @@ import fr.eni.clinique.bo.Personnel;
 
 public interface LoginMger {
 
-	//Personnel
+
 	void ajoutPersonnel(Personnel newPersonnel) throws BLLException;
 	
 	void updatePersonnel(Personnel personnel) throws BLLException;
@@ -23,5 +23,5 @@ public interface LoginMger {
 	List<Animal> tousLesAnimaux() throws  BLLException;
 
 	List<Client> tousLesClients() throws  BLLException;
-	 
+	void ajoutClient(Client c) throws BLLException;
 }

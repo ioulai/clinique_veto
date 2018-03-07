@@ -1,32 +1,52 @@
 package fr.eni.clinique.ihm.screen;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
+
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
 public class AjoutClient extends JFrame {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6433742721352939171L;
+	private static final long serialVersionUID = -5584980528885898448L;
 	private JPanel contentPane;
-	private JTextField txtCodeClient;
 	private JTextField txtNomCli;
 	private JTextField txtPrenomCli;
 	private JTextField txtAdress1;
 	private JTextField txtAdress2;
 	private JTextField txtCodePost;
 	private JTextField txtVille;
-
+	private ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
+	private Integer codeClient = 0;
+	private JTextField txtTel;
+	private JTextField txtRemq;
+	private JRadioButton rdbtnOui;
+	private JRadioButton rdbtnNon;
+	private JTextField txtAssur;
+	private JButton btnAnnuler;
+	private JButton btnValider;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -34,8 +54,9 @@ public class AjoutClient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AjoutClient frame = new AjoutClient();
-					frame.setVisible(true);
+					ConnexionModel connexionModel = new ConnexionModel();
+					ConnexionController connexionController = new ConnexionController(connexionModel);
+					new AjoutClient(connexionController, connexionModel).setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,96 +67,185 @@ public class AjoutClient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AjoutClient() {
-		setTitle("Ajouter un Client");
+	public AjoutClient(ConnexionController connexionController, ConnexionModel connexionModel) {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 331);
+		setBounds(100, 100, 450, 327);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setVisible(true);
+		setLocationRelativeTo(null);
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel.setBounds(10, 11, 414, 70);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		setUp();
+	}	
+		private void setUp() {
+	    	contentPane.setLayout(null);
+			
+			JLabel lblNom = new JLabel("Nom");
+			lblNom.setBounds(10, 69, 57, 14);
+			contentPane.add(lblNom);
+			
+			JLabel lblPrnom = new JLabel("Pr\u00E9nom");
+			lblPrnom.setBounds(10, 100, 64, 14);
+			contentPane.add(lblPrnom);
+			
+			JLabel lblAdresse = new JLabel("Adresse");
+			lblAdresse.setBounds(10, 131, 64, 14);
+			contentPane.add(lblAdresse);
+			
+			JLabel lblCodePostal = new JLabel("Code Postal");
+			lblCodePostal.setBounds(10, 193, 70, 14);
+			contentPane.add(lblCodePostal);
+			
+			JLabel lblVille = new JLabel("Ville");
+			lblVille.setBounds(10, 224, 64, 14);
+			contentPane.add(lblVille);
+			
+			txtNomCli = new JTextField();
+			txtNomCli.setBounds(90, 66, 110, 20);
+			contentPane.add(txtNomCli);
+			txtNomCli.setColumns(10);
+			
+			txtPrenomCli = new JTextField();
+			txtPrenomCli.setBounds(90, 97, 110, 20);
+			contentPane.add(txtPrenomCli);
+			txtPrenomCli.setColumns(10);
+			
+			txtAdress1 = new JTextField();
+			txtAdress1.setBounds(90, 128, 110, 20);
+			contentPane.add(txtAdress1);
+			txtAdress1.setColumns(10);
+			
+			txtAdress2 = new JTextField();
+			txtAdress2.setBounds(90, 159, 110, 20);
+			contentPane.add(txtAdress2);
+			txtAdress2.setColumns(10);
+			
+			txtCodePost = new JTextField();
+			txtCodePost.setBounds(90, 190, 110, 20);
+			contentPane.add(txtCodePost);
+			txtCodePost.setColumns(10);
+			
+			txtVille = new JTextField();
+			txtVille.setBounds(90, 221, 110, 20);
+			contentPane.add(txtVille);
+			txtVille.setColumns(10);
+			
+			JLabel lblTl = new JLabel("T\u00E9l");
+			lblTl.setBounds(236, 94, 50, 14);
+			contentPane.add(lblTl);
+			
+			JLabel lblRemarque = new JLabel("Remarque");
+			lblRemarque.setBounds(236, 144, 57, 14);
+			contentPane.add(lblRemarque);
+			
+			JLabel lblArchive = new JLabel("Archive");
+			lblArchive.setBounds(236, 196, 72, 14);
+			contentPane.add(lblArchive);
+			
+			JRadioButton rdbtnOui = new JRadioButton("Oui");
+			rdbtnOui.setBounds(315, 189, 50, 23);
+			contentPane.add(rdbtnOui);
+			
+			JRadioButton rdbtnNon = new JRadioButton("Non");
+			rdbtnNon.setBounds(367, 189, 57, 23);
+			contentPane.add(rdbtnNon);
+			
+		    ButtonGroup buttonGroup = new ButtonGroup();
+		    buttonGroup.add(rdbtnOui);
+		    buttonGroup.add(rdbtnNon);
+			
+			txtTel = new JTextField();
+			txtTel.setBounds(309, 91, 110, 20);
+			contentPane.add(txtTel);
+			txtTel.setColumns(10);
+			
+			txtRemq = new JTextField();
+			txtRemq.setBounds(309, 119, 110, 65);
+			contentPane.add(txtRemq);
+			txtRemq.setColumns(10);
+			
+			JLabel lblAssurance = new JLabel("Assurance");
+			lblAssurance.setBounds(236, 69, 72, 14);
+			contentPane.add(lblAssurance);
+			
+			txtAssur = new JTextField();
+			txtAssur.setBounds(309, 66, 110, 20);
+			contentPane.add(txtAssur);
+			txtAssur.setColumns(10);
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+			panel_1.setBounds(50, 10, 372, 28);
+			contentPane.add(panel_1);
+			
+			JLabel lblAjouterUnNouveau = new JLabel("AJOUTER UN NOUVEAU CLIENT");
+			panel_1.add(lblAjouterUnNouveau);
+			
+			JButton btnValider = new JButton("");
+			btnValider.setIcon(new ImageIcon(AjoutClient.class.getResource("/images/Save24.gif")));
+			btnValider.setBounds(283, 252, 57, 33);
+			contentPane.add(btnValider);
+			btnValider.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Client c = retourSaisi();
+					try {
+						connexionController.AjoutClient(c);
+					} 
+					catch (BLLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+			JButton btnAnnuler = new JButton("");
+			btnAnnuler.setIcon(new ImageIcon(AjoutClient.class.getResource("/images/aim.png")));
+			btnAnnuler.setBounds(367, 252, 57, 33);
+			contentPane.add(btnAnnuler);
+			btnAnnuler.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					
+				}
+			});
 		
-		JButton btnValider = new JButton("");
-		btnValider.setIcon(new ImageIcon(AjoutClient.class.getResource("/images/Save24.gif")));
-		btnValider.setBounds(288, 11, 46, 36);
-		panel.add(btnValider);
+		}
 		
-		JLabel lblValider = new JLabel("Valider");
-		lblValider.setBounds(288, 45, 46, 14);
-		panel.add(lblValider);
+		private Client retourSaisi() {
+			
+			Client client = new Client();
+
+			client.setNomClient(txtNomCli.getText().trim());
+			
+			client.setPrenomClient(txtNomCli.getText().trim());
+			
+			client.setAdresse1(txtAdress1.getText().trim());
+			
+			client.setAdresse2(txtAdress2.getText().trim());
+			
+			client.setCodePostal(txtCodePost.getText().trim());
+			
+			client.setVille(txtVille.getText().trim());
+			
+			client.setNumTel(txtTel.getText().trim());
+			
+			client.setRemarque(txtRemq.getText().trim());
+			
+			client.setAssurance(txtAssur.getText());	
+			
+			 if(rdbtnOui.isSelected()){
+				 client.setArchive(Boolean.parseBoolean("0"));
+			 }
+			 else if(rdbtnNon.isSelected()){
+				 client.setArchive(Boolean.parseBoolean("1"));
+			 }
+			return client;
+		}
 		
-		JButton btnAnnuler = new JButton("");
-		btnAnnuler.setIcon(new ImageIcon(AjoutClient.class.getResource("/images/aim.png")));
-		btnAnnuler.setBounds(344, 11, 46, 36);
-		panel.add(btnAnnuler);
 		
-		JLabel lblAnnuler = new JLabel("Annuler");
-		lblAnnuler.setBounds(344, 45, 46, 14);
-		panel.add(lblAnnuler);
-		
-		JLabel lblCode = new JLabel("Code");
-		lblCode.setBounds(72, 92, 46, 14);
-		contentPane.add(lblCode);
-		
-		JLabel lblNom = new JLabel("Nom");
-		lblNom.setBounds(72, 117, 46, 14);
-		contentPane.add(lblNom);
-		
-		JLabel lblPrnom = new JLabel("Pr\u00E9nom");
-		lblPrnom.setBounds(72, 142, 46, 14);
-		contentPane.add(lblPrnom);
-		
-		JLabel lblAdresse = new JLabel("Adresse");
-		lblAdresse.setBounds(72, 167, 46, 14);
-		contentPane.add(lblAdresse);
-		
-		JLabel lblCodePostal = new JLabel("Code Postal");
-		lblCodePostal.setBounds(72, 229, 69, 14);
-		contentPane.add(lblCodePostal);
-		
-		JLabel lblVille = new JLabel("Ville");
-		lblVille.setBounds(72, 254, 46, 14);
-		contentPane.add(lblVille);
-		
-		txtCodeClient = new JTextField();
-		txtCodeClient.setBounds(142, 89, 150, 20);
-		contentPane.add(txtCodeClient);
-		txtCodeClient.setColumns(10);
-		
-		txtNomCli = new JTextField();
-		txtNomCli.setBounds(142, 114, 150, 20);
-		contentPane.add(txtNomCli);
-		txtNomCli.setColumns(10);
-		
-		txtPrenomCli = new JTextField();
-		txtPrenomCli.setBounds(142, 139, 150, 20);
-		contentPane.add(txtPrenomCli);
-		txtPrenomCli.setColumns(10);
-		
-		txtAdress1 = new JTextField();
-		txtAdress1.setBounds(142, 164, 150, 20);
-		contentPane.add(txtAdress1);
-		txtAdress1.setColumns(10);
-		
-		txtAdress2 = new JTextField();
-		txtAdress2.setBounds(142, 195, 150, 20);
-		contentPane.add(txtAdress2);
-		txtAdress2.setColumns(10);
-		
-		txtCodePost = new JTextField();
-		txtCodePost.setBounds(142, 226, 150, 20);
-		contentPane.add(txtCodePost);
-		txtCodePost.setColumns(10);
-		
-		txtVille = new JTextField();
-		txtVille.setBounds(142, 254, 150, 20);
-		contentPane.add(txtVille);
-		txtVille.setColumns(10);
 	}
-}
+
+

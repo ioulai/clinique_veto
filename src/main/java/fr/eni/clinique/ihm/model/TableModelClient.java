@@ -53,5 +53,9 @@ public class TableModelClient extends AbstractTableModel {
 	            return null;
 	        }
 	}
+	public void addClient(Client c) {
+		   this.clients.add(c);
+		
+	}
 
 }

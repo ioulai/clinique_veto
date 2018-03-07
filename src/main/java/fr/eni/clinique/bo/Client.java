@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-	private Integer codeClient;
+	private static Integer codeClient;
 	private String nomClient;
 	private String prenomClient;
 	private String adresse1;
 	private String adresse2;
-	private Integer codePostal;
+	private String codePostal;
 	private String ville;
 	private String numTel;
 	private String assurance;
@@ -31,7 +31,7 @@ public class Client {
 	 * @param archive
 	 * @param lesAnimaux
 	 */
-	public Client(Integer codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,Integer codePostal,
+	public Client(Integer codeClient, String nomClient, String prenomClient, String adresse1, String adresse2,String codePostal,
 			String ville, String numTel, String assurance, String email, String remarque, Boolean archive,
 			List<Animal> lesAnimaux) {
 		super();
@@ -49,13 +49,13 @@ public class Client {
 		this.archive = archive;
 		this.lesAnimaux = lesAnimaux;
 	}
-	public Integer getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
-	public void setCodePostal(Integer codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
-	public Integer getCodeClient() {
+	public static Integer getCodeClient() {
 		return codeClient;
 	}
 	public void setCodeClient(Integer codeClient) {
