@@ -37,12 +37,12 @@ public class ConnexionController {
         connexionModel.loadAnimaux(animaux);
         
         List<Client> clients = loginManager.tousLesClients();
-<<<<<<< HEAD
+
         connexionModel.loadClients(clients);
         
-=======
-        model.loadClients(clients);
->>>>>>> c22ca9670422402cf3bfe74b5499c8ba33d03987
+
+        connexionModel.loadClients(clients);
+
     }
     
 	public void deletePersonnel(Personnel personnel) throws BLLException{
@@ -64,6 +64,6 @@ public class ConnexionController {
 		if(Client.getCodeClient() == null){
 			loginManager.ajoutClient(c);			
 		}
-		model.addClient(c);		
+		connexionModel.addClient(c);		
 	}
 }
