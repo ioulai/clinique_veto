@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_144"/>
-	<classpathentry kind="lib" path="lib/sqljdbc42.jar"/>
+	<classpathentry kind="lib" path="lib/sqljdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,4 +1,8 @@
 # Compiled class file
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec6ba0cd0b0ca25b5bcee17efadc57affcf01be9
 
 # Log file
 *.log
@@ -10,6 +14,10 @@
 .mtj.tmp/
 
 # Package Files #
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec6ba0cd0b0ca25b5bcee17efadc57affcf01be9
 *.war
 *.ear
 *.zip
@@ -20,4 +28,9 @@
 hs_err_pid*
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ec6ba0cd0b0ca25b5bcee17efadc57affcf01be9
 
