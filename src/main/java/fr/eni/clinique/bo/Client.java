@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-	private static Integer codeClient;
+	private Integer codeClient;
 	private String nomClient;
 	private String prenomClient;
 	private String adresse1;
@@ -49,13 +49,30 @@ public class Client {
 		this.archive = archive;
 		this.lesAnimaux = lesAnimaux;
 	}
+	
+	public Client(String nomClient, String prenomClient, String adresse1, String adresse2, String codePostal,
+			String ville, String numTel, String assurance, String email, String remarque, Boolean archive) {
+		super();
+		this.nomClient = nomClient;
+		this.prenomClient = prenomClient;
+		this.adresse1 = adresse1;
+		this.adresse2 = adresse2;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.numTel = numTel;
+		this.assurance = assurance;
+		this.email = email;
+		this.remarque = remarque;
+		this.archive = archive;
+	}
+
 	public String getCodePostal() {
 		return codePostal;
 	}
 	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
-	public static Integer getCodeClient() {
+	public Integer getCodeClient() {
 		return codeClient;
 	}
 	public void setCodeClient(Integer codeClient) {
