@@ -34,7 +34,7 @@ public class TableModelPerso extends AbstractTableModel implements Observer{
     	
 		LoginMgerImpl.getInstance().removePersonnel(personnels.get(index));
 		
-        this.personnels.remove(index);        
+//        this.personnels.remove(index);        
         fireTableRowsDeleted(index, index);
     }  
 
