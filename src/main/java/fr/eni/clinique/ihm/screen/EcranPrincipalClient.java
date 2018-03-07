@@ -229,7 +229,7 @@ public class EcranPrincipalClient extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EcranAnimal().setVisible(true);
+				new EcranAnimal(connexionController, connexionModel).setVisible(true);
 				
 			}
 		});
@@ -273,7 +273,7 @@ public class EcranPrincipalClient extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EcranAnimal().setVisible(true);
+				new EcranAnimal(connexionController, connexionModel).setVisible(true);
 				
 			}
 		});

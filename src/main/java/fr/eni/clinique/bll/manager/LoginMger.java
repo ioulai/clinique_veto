@@ -26,4 +26,5 @@ public interface LoginMger {
 	List<Client> tousLesClients() throws  BLLException;
 	List<Race> toutesLesRaces() throws  BLLException;
 	void ajoutClient(Client c) throws BLLException;
+	void ajoutAnimal(Animal a) throws BLLException;
 }

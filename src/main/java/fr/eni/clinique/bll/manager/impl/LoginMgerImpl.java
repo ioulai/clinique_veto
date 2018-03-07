@@ -101,6 +101,25 @@ public class LoginMgerImpl implements LoginMger{
 				throw new TechnicalException("Erreur Technique", e1);
 			}
 	}
+	
+	private void validerAnimal(Animal a) throws BLLException {
+		try{
+			
+			ObjectUtil.checkNotNull(a.getCodeClient());
+			ObjectUtil.checkNotNull(a.getCodeAnimal());
+			ObjectUtil.checkNotBlank(a.getSexe());
+			ObjectUtil.checkNotBlank(a.getRace());
+			ObjectUtil.checkNotBlank(a.getCouleur());
+			ObjectUtil.checkNotBlank(a.getTatouage());
+			ObjectUtil.checkNotBlank(a.getNomAnimal());
+			
+			}
+		catch(IllegalArgumentException e){
+				throw new BLLException("Champs Manquants : ", e);
+			} catch (Exception e1) {
+				throw new TechnicalException("Erreur Technique", e1);
+			}
+	}
 	@Override
 	public void updatePersonnel(Personnel personnel) throws BLLException {
 		
@@ -175,6 +194,19 @@ public class LoginMgerImpl implements LoginMger{
 			e.printStackTrace();
 		}
 		return races;
+	}
+
+	@Override
+	public void ajoutAnimal(Animal a) throws BLLException {
+		ObjectUtil.checkNotNull(a);
+		try{
+			validerAnimal(a);
+			animalDAO.insert(a);
+		}
+		catch(DaoException e){
+			throw new BLLException("Error inserting", e);
+		}
+		
 	}
     
     

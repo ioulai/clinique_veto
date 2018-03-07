@@ -66,4 +66,12 @@ public class ConnexionController {
 		}
 		connexionModel.addClient(c);		
 	}
+
+	public void AjoutAnimal(Animal a)throws BLLException {
+		
+		if(a.getCodeAnimal() == null){
+			loginManager.ajoutAnimal(a);			
+		}
+		connexionModel.addAnimal(a);		
+	}
 }

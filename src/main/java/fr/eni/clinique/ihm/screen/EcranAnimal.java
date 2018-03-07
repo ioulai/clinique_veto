@@ -11,15 +11,19 @@ import javax.swing.border.LineBorder;
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
-import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Race;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
 
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -36,8 +40,15 @@ public class EcranAnimal extends JFrame {
 	private JTextField txt_codeAnimal;
 	private JTextField txt_nomAnimal;
 	private JTextField txt_Couleur;
-	private JTextField cbx_tatouage;
-
+	private JComboBox<String> comboBoxClient;
+	JComboBox<String> cbx_Sexe;
+	JComboBox<String> cbx_espèce;
+	JComboBox<String> cbx_Race;
+	JComboBox<String> cbx_tatouage;
+	private ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
+	private Integer codeAnimal=0;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,8 +56,10 @@ public class EcranAnimal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EcranAnimal frame = new EcranAnimal();
-					frame.setVisible(true);
+					ConnexionModel connexionModel = new ConnexionModel();
+					ConnexionController connexionController = new ConnexionController(connexionModel);
+					
+					new EcranAnimal(connexionController, connexionModel).setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,7 +70,11 @@ public class EcranAnimal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EcranAnimal() {
+	public EcranAnimal(ConnexionController connexionController, ConnexionModel connexionModel) {
+		
+		this.connexionController=connexionController;
+		this.connexionModel=connexionModel;
+		
 		setTitle("Animaux");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 390, 312);
@@ -72,20 +89,43 @@ public class EcranAnimal extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setBounds(225, 11, 57, 33);
-		btnNewButton.setIcon(new ImageIcon(EcranAnimal.class.getResource("/images/Save24.gif")));
-		panel.add(btnNewButton);
+		JButton valider = new JButton("");
+		valider.setBounds(225, 11, 57, 33);
+		valider.setIcon(new ImageIcon(EcranAnimal.class.getResource("/images/Save24.gif")));
+		panel.add(valider);
+		valider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Animal a = retourSaisi();
+				try {
+					connexionController.AjoutAnimal(a);
+				} 
+				catch (BLLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		
 		
 		JLabel lblValider = new JLabel("Valider");
 		lblValider.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValider.setBounds(235, 41, 46, 14);
 		panel.add(lblValider);
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(EcranAnimal.class.getResource("/images/aim.png")));
-		button.setBounds(302, 11, 57, 33);
-		panel.add(button);
+		
+		JButton annuler = new JButton("");
+		annuler.setIcon(new ImageIcon(EcranAnimal.class.getResource("/images/aim.png")));
+		annuler.setBounds(302, 11, 57, 33);
+		panel.add(annuler);
+		annuler.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		JLabel lblAnnuler = new JLabel("Annuler");
 		lblAnnuler.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -98,7 +138,7 @@ public class EcranAnimal extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox<String> comboBoxClient = new JComboBox<String>();
+		comboBoxClient = new JComboBox<String>();
 		comboBoxClient.setBounds(10, 11, 334, 20);
 		panel_1.add(comboBoxClient);
 		
@@ -135,7 +175,7 @@ public class EcranAnimal extends JFrame {
 		lblRace.setBounds(160, 218, 32, 14);
 		contentPane.add(lblRace);
 		
-		JComboBox<String> cbx_espèce = new JComboBox<String>();
+		cbx_espèce = new JComboBox<String>();
 		cbx_espèce.setBounds(65, 215, 86, 20);
 		contentPane.add(cbx_espèce);
 		try {
@@ -147,7 +187,7 @@ public class EcranAnimal extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JComboBox<String> cbx_Race = new JComboBox<String>();
+		cbx_Race = new JComboBox<String>();
 		cbx_Race.setBounds(188, 215, 88, 20);
 		contentPane.add(cbx_Race);
 		try {
@@ -159,7 +199,7 @@ public class EcranAnimal extends JFrame {
 			e.printStackTrace();
 		}
 		 
-		JComboBox<String> cbx_Sexe = new JComboBox<String>();
+		cbx_Sexe = new JComboBox<String>();
 		cbx_Sexe.setBounds(274, 165, 74, 20);
 		cbx_Sexe.addItem("Femelle");
 		cbx_Sexe.addItem("Mâle");
@@ -181,14 +221,45 @@ public class EcranAnimal extends JFrame {
 		contentPane.add(txt_Couleur);
 		txt_Couleur.setColumns(10);
 		
-		cbx_tatouage = new JTextField();
-		cbx_tatouage.setBounds(66, 240, 198, 20);
+		cbx_tatouage = new JComboBox<String>();
+		cbx_tatouage.setBounds(66, 240, 86, 20);
 		contentPane.add(cbx_tatouage);
-		cbx_tatouage.setColumns(10);
+		cbx_tatouage.addItem("Oui");
+		cbx_tatouage.addItem("Non");
 		
 		JLabel lblClient = new JLabel("Client :");
 		lblClient.setBounds(10, 67, 46, 21);
 		contentPane.add(lblClient);
 		lblClient.setFont(new Font("Tahoma", Font.BOLD, 11));
+	}
+	
+	private Animal retourSaisi() {
+		
+		Animal animal = new Animal();
+		
+		animal.setCodeAnimal(codeAnimal);
+		animal.setNomAnimal(txt_nomAnimal.getText().trim());
+		
+		if(cbx_Sexe.getSelectedIndex()==0){
+			animal.setSexe("F");
+		}
+		else if(cbx_Sexe.getSelectedIndex()==1){
+			animal.setSexe("M");
+		}
+		animal.setCouleur(txt_Couleur.getText().trim());
+		
+		animal.setRace((String) cbx_Race.getSelectedItem());
+		
+		animal.setEspece((String) cbx_espèce.getSelectedItem());
+		
+		animal.setCodeClient(comboBoxClient.getSelectedIndex());
+	
+		animal.setTatouage((String) cbx_tatouage.getSelectedItem());
+		
+		animal.setAntecedents("");
+		
+		animal.setArchive(false);
+		
+		return animal;
 	}
 }
