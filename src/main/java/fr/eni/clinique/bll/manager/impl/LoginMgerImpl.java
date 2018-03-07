@@ -15,74 +15,89 @@ import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
 
-public class LoginMgerImpl implements LoginMger{
-	
+public class LoginMgerImpl implements LoginMger {
+
 	private static LoginMgerImpl SINGLETON;
 	private PersonnelDAO personnelDAO = DaoFactory.personnelDao();
 	private AnimalDAO animalDAO = DaoFactory.animalDao();
-	private ClientDAO clientDAO= DaoFactory.clientDAO();
-	
-    private LoginMgerImpl() {
-        
-    }
- 
-    public static LoginMgerImpl getInstance() {
-        if(SINGLETON == null) {
-            SINGLETON = new LoginMgerImpl();
-        }
-        return SINGLETON;
-    }
-   
+	private ClientDAO clientDAO = DaoFactory.clientDAO();
+
+	private LoginMgerImpl() {
+
+	}
+
+	public static LoginMgerImpl getInstance() {
+		if (SINGLETON == null) {
+			SINGLETON = new LoginMgerImpl();
+		}
+		return SINGLETON;
+	}
+
 	@Override
 	public void ajoutPersonnel(Personnel newPersonnel) throws BLLException {
 
 		ObjectUtil.checkNotNull(newPersonnel);
-			try{
-				validerPersonnel(newPersonnel);
-				personnelDAO.insert(newPersonnel);
-			}
-			catch(DaoException e){
-				throw new BLLException("Error inserting", e);
-			}
-		
+		try {
+			validerPersonnel(newPersonnel);
+			personnelDAO.insert(newPersonnel);
+		} catch (DaoException e) {
+			throw new BLLException("Error inserting", e);
+		}
+
 	}
-	public boolean  tryConnect(String nom, String motDePasse) throws BLLException 	{
+
+	public boolean tryConnect(String nom, String motDePasse) throws BLLException {
 		boolean retour = false;
 		Personnel personnel = new Personnel(nom, motDePasse);
-		
-	try {
-		retour =	personnelDAO.authenticate(personnel);
-	} catch (DaoException e) {
-	
-		throw new BLLException("erreur de connexion",e);		
-	}		
+
+		try {
+			retour = personnelDAO.authenticate(personnel);
+		} catch (DaoException e) {
+
+			throw new BLLException("erreur de connexion", e);
+		}
 		return retour;
 	}
-	
+
+	public Personnel connect(String nom, String motDePasse) throws BLLException {
+		Personnel personnel = null;
+		Personnel personnel2 = new Personnel(nom, motDePasse);
+
+		try {
+			personnel = personnelDAO.connexion(personnel2);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			throw new BLLException("erreur de connexion", e);
+		}
+
+		return personnel;
+
+	}
+
 	public Personnel selectById(Integer id) throws BLLException {
-	
-	    Personnel personnel = null;
-	
-	    return personnel;
+
+		Personnel personnel = null;
+
+		return personnel;
 	}
 
 	private void validerPersonnel(Personnel newPersonnel) throws BLLException {
-		try{
+		try {
 			ObjectUtil.checkNotNull(newPersonnel);
 			ObjectUtil.checkNotBlank(newPersonnel.getNom());
 			ObjectUtil.checkNotBlank(newPersonnel.getMotPasse());
 			ObjectUtil.checkNotBlank(newPersonnel.getRole());
 			ObjectUtil.checkNotNull(newPersonnel.isArchive());
-			}
-		catch(IllegalArgumentException e){
-				throw new BLLException("Champs Manquants : ", e);
-			} catch (Exception e1) {
-				throw new TechnicalException("Erreur Technique", e1);
-			}
+		} catch (IllegalArgumentException e) {
+			throw new BLLException("Champs Manquants : ", e);
+		} catch (Exception e1) {
+			throw new TechnicalException("Erreur Technique", e1);
+		}
 	}
+
 	private void validerClient(Client c) throws BLLException {
-		try{
-			
+		try {
+
 			ObjectUtil.checkNotBlank(c.getNomClient());
 			ObjectUtil.checkNotBlank(c.getPrenomClient());
 			ObjectUtil.checkNotBlank(c.getCodePostal());
@@ -90,17 +105,17 @@ public class LoginMgerImpl implements LoginMger{
 			ObjectUtil.checkNotBlank(c.getAssurance());
 			ObjectUtil.checkNotBlank(c.getAdresse1());
 			ObjectUtil.checkNotBlank(c.getAdresse2());
-			
-			}
-		catch(IllegalArgumentException e){
-				throw new BLLException("Champs Manquants : ", e);
-			} catch (Exception e1) {
-				throw new TechnicalException("Erreur Technique", e1);
-			}
+
+		} catch (IllegalArgumentException e) {
+			throw new BLLException("Champs Manquants : ", e);
+		} catch (Exception e1) {
+			throw new TechnicalException("Erreur Technique", e1);
+		}
 	}
+
 	@Override
 	public void updatePersonnel(Personnel personnel) throws BLLException {
-		
+
 	}
 
 	@Override
@@ -125,7 +140,7 @@ public class LoginMgerImpl implements LoginMger{
 
 	@Override
 	public void reinitialiserMDP(Personnel personnel) throws BLLException {
-		
+
 	}
 
 	@Override
@@ -153,15 +168,13 @@ public class LoginMgerImpl implements LoginMger{
 	@Override
 	public void ajoutClient(Client c) throws BLLException {
 		ObjectUtil.checkNotNull(c);
-		try{
+		try {
 			validerClient(c);
 			clientDAO.insert(c);
-		}
-		catch(DaoException e){
+		} catch (DaoException e) {
 			throw new BLLException("Error inserting", e);
 		}
-		
+
 	}
-    
-    
+
 }

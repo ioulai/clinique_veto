@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -66,8 +67,11 @@ public class GestionPerso extends JFrame implements Observer{
 			ajoutPersonnel.setLocation(400, 300);
 		}
 	}
+	private void showSuccessMessage(String message) {
+		JOptionPane.showMessageDialog(GestionPerso.this, message);
+	}
 
-	private class RemoveAction extends AbstractAction {
+	private class RemoveAction extends AbstractAction{
 		/**
 		 * 
 		 */
@@ -85,6 +89,7 @@ public class GestionPerso extends JFrame implements Observer{
 			for (int i = selection.length - 1; i >= 0; i--) {
 				try {
 					connexionModel.removePersonnel(selection[i]);
+					showSuccessMessage("Supprimé");
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

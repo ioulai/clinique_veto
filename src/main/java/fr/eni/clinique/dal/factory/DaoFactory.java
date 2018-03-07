@@ -3,10 +3,12 @@ package fr.eni.clinique.dal.factory;
 import fr.eni.clinique.dal.dao.AnimalDAO;
 import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
+import fr.eni.clinique.dal.dao.RaceDAO;
 import fr.eni.clinique.dal.dao.impl.AnimalDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.ClientDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.ConnexionDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.PersonnelDAOJdbcImpl;
+import fr.eni.clinique.dal.dao.impl.RaceDAOJdbcImpl;
 import fr.eni.clinique.dal.jdbc.ConnexionDAO;
 
 public class DaoFactory {
@@ -21,7 +23,7 @@ public class DaoFactory {
 		return personnel;
 	}
 	
-	public static AnimalDAO animalDao() {
+	public static AnimalDAO animalDAO() {
 		AnimalDAOJdbcImpl animal = new AnimalDAOJdbcImpl();
 		return animal;
 	}
@@ -32,8 +34,8 @@ public class DaoFactory {
 		return client;
 	}
 
-	public AnimalDAO AnimalDAO() {
-		AnimalDAOJdbcImpl animal = new AnimalDAOJdbcImpl();
-		
-		return animal;	}
+	public static RaceDAO raceDAO() {
+		RaceDAOJdbcImpl race = new RaceDAOJdbcImpl();
+		return race;	
+		}
 }

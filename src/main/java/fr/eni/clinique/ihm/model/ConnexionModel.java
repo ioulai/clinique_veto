@@ -9,11 +9,13 @@ import fr.eni.clinique.bll.exception.BLLException;
 
 
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Race;
 
 public class ConnexionModel extends Observable {
 	private TableModelPerso tableModelPerso;
 	private TableModelAnimal tableModelAnimal;
 	private TableModelClient tableModelClient;
+	private TableModelRace   tableModelRace;
 	
 	 public ConnexionModel() {
 	        super();
@@ -31,7 +33,10 @@ public class ConnexionModel extends Observable {
 	}
 	
 	public void removePersonnel(int index) throws BLLException{		
-		tableModelPerso.removePersonnel(index);				
+		tableModelPerso.removePersonnel(index);	
+		setChanged();
+        notifyObservers();
+        clearChanged();
 	}
 
 	public TableModelPerso getTableModel(){
@@ -72,5 +77,9 @@ public class ConnexionModel extends Observable {
 		setChanged();
         notifyObservers();
         clearChanged();
+	}
+	
+	public void loadRaces(List<Race> races) {
+		tableModelRace = new TableModelRace(races);		
 	}
 }

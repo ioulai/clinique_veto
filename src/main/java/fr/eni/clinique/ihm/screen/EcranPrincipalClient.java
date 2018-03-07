@@ -229,7 +229,7 @@ public class EcranPrincipalClient extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EcranAnimal().setVisible(true);
+				new EcranAnimal(connexionController, connexionModel).setVisible(true);
 				
 			}
 		});
@@ -246,7 +246,7 @@ public class EcranPrincipalClient extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int choix = JOptionPane.showConfirmDialog(EcranPrincipalClient.this,"Êtes-vous sûr de vouloir supprimer cet animal ?", "Suppression Animal",JOptionPane.OK_CANCEL_OPTION);
 				if (choix ==1){
-					AnimalDAO animal = new DaoFactory().AnimalDAO();
+					AnimalDAO animal = new DaoFactory().animalDAO();
 					try {
 						animal.deleteById(Integer.parseInt(txtCodeClient.getText()));
 					} catch (NumberFormatException e1) {
@@ -273,7 +273,7 @@ public class EcranPrincipalClient extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EcranAnimal().setVisible(true);
+				new EcranAnimal(connexionController, connexionModel).setVisible(true);
 				
 			}
 		});

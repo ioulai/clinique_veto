@@ -24,6 +24,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 	private static final String UPDATE_QUERY="UPDATE Animaux SET CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
 	
 	private Animal getAnimal(ResultSet res) throws SQLException{
+		
 		Animal animal = new Animal();
 		animal.setCodeAnimal(res.getInt("CodeAnimal"));
 		animal.setNomAnimal(res.getString("NomAnimal"));

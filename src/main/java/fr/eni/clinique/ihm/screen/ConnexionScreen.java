@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
@@ -96,10 +97,11 @@ public class ConnexionScreen extends JFrame{
 	            		if(authenticate(nomTxt.getText(), String.valueOf(mdpTxt.getPassword()))){	            			
 	            			loadecranMenu();
 	            			dispose();
-	            		}else{
+	            		}else{	            			
 	            			showFailureMessage("Utilisateur inconnu");
 	            		}	            		
 	            	}
+					
 					
 				}
 			});
@@ -156,6 +158,8 @@ public class ConnexionScreen extends JFrame{
 			}
 	    	return retour;
 	    }
+	    
+	 
 	    
 }
 	    

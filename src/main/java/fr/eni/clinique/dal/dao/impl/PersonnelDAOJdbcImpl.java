@@ -19,12 +19,13 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	
 	private Connection connection = null;
 	
-	private static final String SELECT_ALL_QUERY = "select * from Personnels";	
+	private static final String SELECT_ALL_QUERY = "select * from Personnels where Archive not in ('true')";	
 	private static final String INSERT_QUERY = "insert into Personnels(Nom, MotPasse, Role, Archive) values(?,?,?,?)";
 	private static final String DELETE_QUERY ="UPDATE Personnels SET Archive=? WHERE CodePers=?";
 	private static final String SELECT_BY_ROLE="SELECT * FROM Personnels WHERE Role=?";
 	private static final String UPDATE_QUERY="UPDATE Personnels SET Nom=?, MotPasse=?, Role=?, Archive=? WHERE CodePers=?";
 	private static final String SELECT_NOM_PASS = "select Nom, MotPasse from Personnels where Nom=? and MotPasse = ?";
+	private static final String SELECT_CONNECT = "select Nom, MotPasse,Role,Archive from Personnels where Nom=? and MotPasse = ?";
 	
 	private Personnel getPersonnel(ResultSet res) throws SQLException{
 		
@@ -194,5 +195,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 		
 		return retour;
 	}
+
+	
 
 }
