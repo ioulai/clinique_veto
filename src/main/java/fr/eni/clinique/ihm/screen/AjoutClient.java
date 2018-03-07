@@ -68,15 +68,17 @@ public class AjoutClient extends JFrame {
 	 * Create the frame.
 	 */
 	public AjoutClient(ConnexionController connexionController, ConnexionModel connexionModel) {
+		this.connexionController=connexionController;
+		this.connexionModel=connexionModel;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 327);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setContentPane(contentPane);
-		
 		setUp();
+		setContentPane(contentPane);
 	}	
 		private void setUp() {
 	    	contentPane.setLayout(null);
@@ -143,11 +145,11 @@ public class AjoutClient extends JFrame {
 			lblArchive.setBounds(236, 196, 72, 14);
 			contentPane.add(lblArchive);
 			
-			JRadioButton rdbtnOui = new JRadioButton("Oui");
+			rdbtnOui = new JRadioButton("Oui");
 			rdbtnOui.setBounds(315, 189, 50, 23);
 			contentPane.add(rdbtnOui);
 			
-			JRadioButton rdbtnNon = new JRadioButton("Non");
+			rdbtnNon = new JRadioButton("Non");
 			rdbtnNon.setBounds(367, 189, 57, 23);
 			contentPane.add(rdbtnNon);
 			
@@ -217,7 +219,7 @@ public class AjoutClient extends JFrame {
 		private Client retourSaisi() {
 			
 			Client client = new Client();
-
+			client.setCodeClient(codeClient);
 			client.setNomClient(txtNomCli.getText().trim());
 			
 			client.setPrenomClient(txtNomCli.getText().trim());

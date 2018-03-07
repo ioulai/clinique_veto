@@ -143,6 +143,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 			  statement = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
 			
 			  statement.setString(1,res.getString("nomClient"));
+			  statement.setString(2,res.getString("prenomClient"));
 			  statement.setString(2,res.getString("adresse1"));
 			  statement.setString(3,res.getString("adresse2"));
 			  statement.setString(4,res.getString("ville"));
