@@ -35,6 +35,8 @@ public class EcranMenu extends JFrame {
 				try {
 					EcranMenu frame = new EcranMenu();
 					frame.setVisible(true);
+					frame.setLocation(400, 300);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -129,6 +131,7 @@ public class EcranMenu extends JFrame {
 			public void actionPerformed(ActionEvent e) {	
 				GestionPerso gestionPerso = new GestionPerso();
 				gestionPerso.setVisible(true);
+				gestionPerso.setLocation(420, 300);
 								
 				}
 		});

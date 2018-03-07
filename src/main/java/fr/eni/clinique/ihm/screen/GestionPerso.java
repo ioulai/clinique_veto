@@ -63,6 +63,7 @@ public class GestionPerso extends JFrame implements Observer{
 //			connexionModel.addPersonnel(new Personnel());
 			AjoutPersonnel ajoutPersonnel = new AjoutPersonnel(connexionController, connexionModel);
 			ajoutPersonnel.setVisible(true);
+			ajoutPersonnel.setLocation(400, 300);
 		}
 	}
 

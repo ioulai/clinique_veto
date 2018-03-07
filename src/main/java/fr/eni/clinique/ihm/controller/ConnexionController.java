@@ -38,6 +38,7 @@ public class ConnexionController {
         
         List<Client> clients = loginManager.tousLesClients();
 
+
         connexionModel.loadClients(clients);
 
 
