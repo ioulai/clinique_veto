@@ -27,7 +27,9 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	private static final String SELECT_NOM_PASS = "select Nom, MotPasse from Personnels where Nom=? and MotPasse = ?";
 	
 	private Personnel getPersonnel(ResultSet res) throws SQLException{
+		
 		Personnel personnel = new Personnel();
+		
 		personnel.setCodePers(res.getInt("CodePers"));
 		personnel.setNom(res.getString("Nom"));
 		personnel.setMotPasse(res.getString("MotPasse"));

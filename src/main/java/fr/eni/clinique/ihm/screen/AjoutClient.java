@@ -141,22 +141,6 @@ public class AjoutClient extends JFrame {
 			lblRemarque.setBounds(236, 144, 57, 14);
 			contentPane.add(lblRemarque);
 			
-			JLabel lblArchive = new JLabel("Archive");
-			lblArchive.setBounds(236, 196, 72, 14);
-			contentPane.add(lblArchive);
-			
-			rdbtnOui = new JRadioButton("Oui");
-			rdbtnOui.setBounds(315, 189, 50, 23);
-			contentPane.add(rdbtnOui);
-			
-			rdbtnNon = new JRadioButton("Non");
-			rdbtnNon.setBounds(367, 189, 57, 23);
-			contentPane.add(rdbtnNon);
-			
-		    ButtonGroup buttonGroup = new ButtonGroup();
-		    buttonGroup.add(rdbtnOui);
-		    buttonGroup.add(rdbtnNon);
-			
 			txtTel = new JTextField();
 			txtTel.setBounds(309, 91, 110, 20);
 			contentPane.add(txtTel);
@@ -219,7 +203,9 @@ public class AjoutClient extends JFrame {
 		private Client retourSaisi() {
 			
 			Client client = new Client();
+			
 			client.setCodeClient(codeClient);
+			
 			client.setNomClient(txtNomCli.getText().trim());
 			
 			client.setPrenomClient(txtNomCli.getText().trim());
@@ -238,12 +224,8 @@ public class AjoutClient extends JFrame {
 			
 			client.setAssurance(txtAssur.getText());	
 			
-			 if(rdbtnOui.isSelected()){
-				 client.setArchive(Boolean.parseBoolean("0"));
-			 }
-			 else if(rdbtnNon.isSelected()){
-				 client.setArchive(Boolean.parseBoolean("1"));
-			 }
+			client.setArchive(false);
+			
 			return client;
 		}
 		

@@ -38,7 +38,9 @@ public class ConnexionController {
         
         List<Client> clients = loginManager.tousLesClients();
 
+
         connexionModel.loadClients(clients);
+
 
     }
     
@@ -58,7 +60,7 @@ public class ConnexionController {
 	}
 	
 	public void AjoutClient(Client c) throws BLLException{
-		if(Client.getCodeClient() == 0){
+		if(c.getCodeClient() == 0){
 			loginManager.ajoutClient(c);			
 		}
 		connexionModel.addClient(c);		

@@ -82,15 +82,13 @@ public class LoginMgerImpl implements LoginMger{
 	}
 	private void validerClient(Client c) throws BLLException {
 		try{
-			ObjectUtil.checkNotNull(c);
+			
 			ObjectUtil.checkNotBlank(c.getNomClient());
 			ObjectUtil.checkNotBlank(c.getPrenomClient());
 			ObjectUtil.checkNotBlank(c.getCodePostal());
-
 			ObjectUtil.checkNotBlank(c.getVille());
 			ObjectUtil.checkNotBlank(c.getAssurance());
 			ObjectUtil.checkNotBlank(c.getAdresse1());
-
 			ObjectUtil.checkNotBlank(c.getAdresse2());
 			
 			}

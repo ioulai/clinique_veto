@@ -20,27 +20,34 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	private Connection connection = null;
 	
 	private static final String SELECT_ALL_QUERY = "select * from Clients";
-	private static final String INSERT_QUERY = "insert into Clients(NomClient, PrenomClient, Adresse1, Adresse2,Ville,Assurance,Email,Remarque,Archive,lesAnimaux) values(?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT_QUERY = "insert into Clients(NomClient, PrenomClient, Adresse1, Adresse2,Ville,NumTel,Assurance,Email,Remarque,Archive) values(?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_QUERY ="DELETE FROM Clients WHERE codeClient=?";
 	private static final String SELECT_BY_NOM="SELECT NomClient,PrenomClient,CodePostal,Ville FROM Clients WHERE NomClient=?";
 	private static final String UPDATE_QUERY="UPDATE Clients SET NomClient=?, PrenomClient=?, Adresse1=?, Adresse2=?,Ville=?,Assurance=?,Email=?,Remarque=?,Archive=?,lesAnimaux=?";
 	
 	
 	private Client getClient(ResultSet res) throws SQLException{
+		
 		Client client = new Client();
+		
 		client.setCodeClient(res.getInt("CodeClient"));
-		client.setNomClient(res.getString("nomClient"));
-		client.setAdresse1(res.getString("adresse1"));
-		client.setAdresse2(res.getString("adresse2"));
-		client.setVille(res.getString("ville"));
-		client.setAssurance(res.getString("assurance"));
-		client.setEmail(res.getString("email"));
-		client.setRemarque(res.getString("remarque"));
+		client.setNomClient(res.getString("NomClient"));
+		client.setPrenomClient(res.getString("PrenomClient"));
+		client.setAdresse1(res.getString("Adresse1"));
+		client.setAdresse2(res.getString("Adresse2"));
+		client.setVille(res.getString("Ville"));
+		client.setNumTel(res.getString("NumTel"));
+		client.setAssurance(res.getString("Assurance"));
+		client.setEmail(res.getString("Email"));
+		client.setRemarque(res.getString("Remarque"));
 		client.setArchive(res.getBoolean("Archive"));
-		//client.setLesAnimaux(res.getString("LesAnimaux"));
 	
 		return client;
 	}
+	
+	
+	
+	
 	private void ouvertureConnection() throws DaoException{
 		try {
 			if (connection == null){
@@ -119,8 +126,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
             statement.setString(7, newClient.getEmail());
             statement.setString(8, newClient.getRemarque());
             statement.setBoolean(9, newClient.getArchive());
-         //   statement.setFloat(5, newClient.getLesAnimaux());
-            statement.executeUpdate();
+            
             
         } catch(SQLException e) {
             throw new DaoException(e.getMessage(), e);
@@ -129,12 +135,10 @@ public class ClientDAOJdbcImpl implements ClientDAO{
         }
 	}
 		
-	
 
-	@SuppressWarnings({ "null", "resource" })
 	@Override
 	public Client insert(Client client) throws DaoException {
-		   Connection connection = null;
+		    Connection connection = null;
 	        PreparedStatement statement = null;
 	        ResultSet res = null;
 	        
@@ -142,28 +146,28 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 			  connection = MSSQLConnectionFactory.get();
 			  statement = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
 			
-			  statement.setString(1,res.getString("nomClient"));
-			  statement.setString(2,res.getString("prenomClient"));
-			  statement.setString(2,res.getString("adresse1"));
-			  statement.setString(3,res.getString("adresse2"));
-			  statement.setString(4,res.getString("ville"));
-			  statement.setString(5,res.getString("assurance"));
-			  statement.setString(6,res.getString("email"));
-			  statement.setString(7,res.getString("remarque"));
-			  statement.setBoolean(8,res.getBoolean("Archive"));
-			//client.setLesAnimaux(res.getString("LesAnimaux"));
-	            
-	            if (statement.executeUpdate() == 1) {
-	                res = statement.getGeneratedKeys();
+			  statement.setString(1,client.getNomClient());
+			  statement.setString(2,client.getPrenomClient());
+			  statement.setString(3,client.getAdresse1());
+			  statement.setString(4,client.getAdresse2());
+			  statement.setString(5,client.getVille());
+			  statement.setString(6,client.getNumTel());
+			  statement.setString(7,client.getAssurance());
+			  statement.setString(8,client.getEmail());
+			  statement.setString(9,client.getRemarque());
+			  statement.setBoolean(10,client.getArchive());
+			  
+			  if (statement.executeUpdate() == 1) {
+	                res= statement.getGeneratedKeys();
 	                if (res.next()) {
 	                	client.setCodeClient(res.getInt(1));
 	                }
 			} }
 		catch (SQLException e) {
-			throw new DaoException("Erreur d'insertion personnel",e);
+			throw new DaoException("Erreur d'insertion client",e); 
 		}finally {
-           ResourceUtil.safeClose(connection,statement,res);
-       }
+          ResourceUtil.safeClose(connection,statement,res);
+      }
 		return client;
 	}
 	
