@@ -6,25 +6,16 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.util.List;
 
-<<<<<<< HEAD
 
-=======
-import javax.swing.AbstractAction;
-import javax.swing.ButtonGroup;
->>>>>>> 531f352d71a1c5cd87e6a2e2043e18d55b0714fb
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import fr.eni.clinique.bll.exception.BLLException;
@@ -48,14 +39,10 @@ public class AjoutPersonnel extends JDialog {
 	private JTextField nomTxt;
 	private JPasswordField motPasseTxt;
 	private JPasswordField motPasseTxt2;
-	
+	private JTextField roleTxt;
 	private JTextField archiveTxt;
-	private JRadioButton archiveOuiRadio;
-	private JRadioButton archiveNonRadio;
-	private JComboBox<String> RoleCombo;
 
 	private JButton boutonAjouter;
-	
 
 	private Font defaultLabelFont = new Font("Arial", Font.BOLD, 14);
 	private Font defaultFont = new Font("Arial", Font.PLAIN, 14);
@@ -83,18 +70,17 @@ public class AjoutPersonnel extends JDialog {
 		setContentPane(mainPanel);
 
 		mainPanel.setLayout(new GridBagLayout());
-		
-		// Creation des composants
+
 		nomLabel = createLabel("Nom : ");
 		nomTxt = createTextField(null, "Entrez le Nom");
 		motPasseLabel = createLabel("Mot de passe : ");
 		motPasseTxt = createPassField(null, "Entrez le Mot de passe");
 		motPasseLabel2 = createLabel("Confirmer Mot de passe : ");
 		motPasseTxt2 = createPassField(null, "Confirmer le Mot de passe");
-		roleLabel = createLabel("Rôle () :");
-		RoleCombo = createComboBox(Arrays.asList("Adm","Sec","Vet"), "Choisisissez un Rôle ");
-		archiveLabel = createLabel("Archivé : ");
-		archiveTxt = createTextField(null, "Archivé ?");
+		roleLabel = createLabel("Rôle (Adm / Sec/ Vet) :");
+		roleTxt = createTextField(null, "Entrez le Rôle ");
+		archiveLabel = createLabel("Archive : ");
+		archiveTxt = createTextField(null, "Archiver ?");
 		
 		// Creation de la grille et placement des composants sur la grille
 		GridBagConstraints gridBagConstraints = createGridBagConstraints();
@@ -105,9 +91,9 @@ public class AjoutPersonnel extends JDialog {
 		addComponentOnGrid(mainPanel, motPasseLabel2, gridBagConstraints, 1, 3, 0.15);
 		addComponentOnGrid(mainPanel, motPasseTxt2, gridBagConstraints, 2, 3, 0.85);
 		addComponentOnGrid(mainPanel, roleLabel, gridBagConstraints, 1, 4, 0.15);
-		addComponentOnGrid(mainPanel, RoleCombo, gridBagConstraints, 2, 4, 0.85);
+		addComponentOnGrid(mainPanel, roleTxt, gridBagConstraints, 2, 4, 0.85);
 		addComponentOnGrid(mainPanel, archiveLabel, gridBagConstraints, 1, 5, 0.15);
-		addComponentOnGrid(mainPanel, createArchiveRadio(), gridBagConstraints, 2, 5, 0.85);
+		addComponentOnGrid(mainPanel, archiveTxt, gridBagConstraints, 2, 5, 0.85);
 		addComponentOnGrid(mainPanel, boutonAjouter(), gridBagConstraints, 3, 5, 0.85);
 
 	}
@@ -156,9 +142,8 @@ public class AjoutPersonnel extends JDialog {
 	//	personnel.setCodePers(codePers);
 		personnel.setNom(nomTxt.getText().trim());
 		personnel.setMotPasse(String.valueOf(motPasseTxt2.getPassword()));
-		personnel.setRole(RoleCombo.getSelectedItem().toString());
-		String arch = archiveOuiRadio.isSelected() ? "1" : "0";
-		personnel.setArchive(Boolean.parseBoolean(arch));
+		personnel.setRole(roleTxt.getText().trim());
+		personnel.setArchive(Boolean.parseBoolean(archiveTxt.getText()));
 
 		return personnel;
 	}
@@ -221,13 +206,15 @@ public class AjoutPersonnel extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (String.valueOf(motPasseTxt.getPassword()).equals(String.valueOf(motPasseTxt2.getPassword()))) {
-						
-						connexionController.AjoutPersonnel(retourSaisi());
+						Personnel p =retourSaisi();
+						connexionController.AjoutPersonnel(p);
+//						connexionController.AjoutPersonnel(retourSaisi());
 						showSuccessMessage("Personnel ajouter !");
 
 						nomTxt.setText("");
 						motPasseTxt.setText("");
-						motPasseTxt2.setText("");						
+						motPasseTxt2.setText("");
+						roleTxt.setText("");
 						archiveTxt.setText("");
 					} else {
 						showFailureMessage("Attention veuillez confirmer le mot de passe !");
@@ -245,45 +232,6 @@ public class AjoutPersonnel extends JDialog {
 		addComponentOnGrid(panel, boutonAjouter, gridBagConstraints, 1, 1, 1);
 		return panel;
 
-	}
-	private JComboBox<String> createComboBox(List<String> options, String tooltip) {
-
-        JComboBox<String> combo = new JComboBox<>();
-        combo.setToolTipText(tooltip);
-
-        for (String option : options) {
-            combo.addItem(option);
-        }
-        return combo;
-    }
-	
-	private JRadioButton createRadioButton(String text, String tooltip) {
-
-        JRadioButton radioButton = new JRadioButton(text);
-        radioButton.setToolTipText(tooltip);
-
-        return radioButton;
-    }
-	
-	private JPanel createArchiveRadio(){
-		JPanel panel = new JPanel();
-		panel.setOpaque(true);
-		panel.setLayout(new GridBagLayout());
-		
-		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		archiveOuiRadio = createRadioButton(String.valueOf("Oui"), "Archivé");
-		archiveNonRadio = createRadioButton(String.valueOf("Non"), "Actif");
-		
-		addComponentOnGrid(panel, archiveOuiRadio, gridBagConstraints, 1, 1, 1);
-		addComponentOnGrid(panel, archiveNonRadio, gridBagConstraints, 2, 1, 1);
-		
-		ButtonGroup buttonGroup = new ButtonGroup();
-		buttonGroup.add(archiveOuiRadio);
-		buttonGroup.add(archiveNonRadio);
-		
-		return panel;
-		
-		
 	}
 
 }
