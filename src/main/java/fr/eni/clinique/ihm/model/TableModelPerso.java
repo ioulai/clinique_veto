@@ -17,6 +17,7 @@ public class TableModelPerso extends AbstractTableModel implements Observer{
 	private static final long serialVersionUID = 5339658835698597380L;
 	
 	private List<Personnel> personnels = new ArrayList<>();
+	
     private final String[] entetes = { "Nom", "MotPasse", "Rôle"};
  
 
@@ -24,6 +25,7 @@ public class TableModelPerso extends AbstractTableModel implements Observer{
         super();
         this.personnels = personnels;
     }
+    
     public void addPersonnel(Personnel personnel) {
         this.personnels.add(personnel);
     }

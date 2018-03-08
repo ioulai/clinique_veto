@@ -8,28 +8,28 @@ import java.util.Observer;
 import javax.swing.table.AbstractTableModel;
 
 import fr.eni.clinique.bo.Client;
-import fr.eni.clinique.bo.Personnel;
-
 public class TableModelClientRecherche extends AbstractTableModel implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -629320565905656212L;
+	
 	private List<Client> clients = new ArrayList<>();
+	
     private final String[] entetes = { "NomClient", "PrenomClient", "CodePostal","Ville"};
     
     public TableModelClientRecherche(List<Client> clients) {
         super();
         this.clients = clients;
     }
+    
     public void addClient(Client client) {
         this.clients.add(client);
     }
     
 	@Override
 	public int getColumnCount() {
-	
 		return entetes.length;
 	}
 
