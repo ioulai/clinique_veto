@@ -44,7 +44,6 @@ public class EcranPrincipalClient extends JFrame {
 	private JTextField txtVille;
 	private  ConnexionModel connexionModel;
 	private ConnexionController connexionController ;
-	private JTable tableau;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -214,12 +213,7 @@ public class EcranPrincipalClient extends JFrame {
 		panel_listeAnimaux.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_listeAnimaux.setBounds(246, 95, 462, 443);
 		contentPane.add(panel_listeAnimaux);
-		
-		tableau = new JTable(connexionModel.getTableModelAnimal());
 		panel_listeAnimaux.setLayout(null);
-		JScrollPane scrollPane = new JScrollPane(tableau);
-		scrollPane.setBounds(5, 6, 452, 364);
-		panel_listeAnimaux.add(scrollPane);
 		
 		JButton btnAjoutAnimal = new JButton("+");
 		btnAjoutAnimal.setBounds(273, 381, 46, 35);

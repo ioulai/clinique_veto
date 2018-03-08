@@ -10,6 +10,7 @@ import java.util.List;
 
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.common.util.ResourceUtil;
 import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.exception.DaoException;
@@ -70,7 +71,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 				clients.add(getClient(resultSet));
 			}
 		} catch (SQLException e) {
-			throw new DaoException("erreur recupération du personnels");
+			throw new DaoException("erreur recupération du client");
 		}
 	
 		return clients;
@@ -85,12 +86,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	        try {
 	            connection = MSSQLConnectionFactory.get();
 	            statement = connection.prepareStatement(SELECT_BY_NOM);
-	            statement.setString(1, "NomClient");
-	            statement.setString(2, "PrenomClient");
-	            statement.setString(3, "CodePostal");
-	            statement.setString(4, "Ville");
-	            
-	            statement.setString(5, nom);
+	            statement.setString(1, nom);
 	            resultSet = statement.executeQuery();
 
 	            while (resultSet.next()) {
@@ -99,12 +95,11 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	            } catch(SQLException e) {
 	            throw new DaoException(e.getMessage(), e);
 	        } finally {
-	            ResourceUtil.safeClose(connection, statement);
+	            ResourceUtil.safeClose(connection, statement,resultSet);
 	        }
 	        
 	        return lesClients;
 	}
-	
 
 	@Override
 	public void update(Client newClient, String nomClient, String prenomClient, String adresse1, String adresse2,

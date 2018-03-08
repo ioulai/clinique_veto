@@ -33,12 +33,12 @@ public class EcranRecherche extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 3895627998525870940L;
-	private JTable tableau;
 	private JPanel contentPane;
 	private JTextField txtNomDuClient;
 	private  ConnexionModel connexionModel;
 	private ConnexionController connexionController ;
 	private List<Client> lesClients = new ArrayList<>();
+	private JTable tableau;
 
 	/**
 	 * Launch the application.
@@ -68,6 +68,9 @@ public class EcranRecherche extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		connexionModel = new ConnexionModel();
+		connexionController = new ConnexionController(connexionModel);
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBounds(22, 11, 388, 72);
@@ -80,14 +83,6 @@ public class EcranRecherche extends JFrame {
 		txtNomDuClient.setToolTipText("Nom du client \u00E0 rechercher");
 		txtNomDuClient.setColumns(10);
 		
-		connexionModel = new ConnexionModel();
-		connexionController = new ConnexionController(connexionModel);
-	
-		
-		JPanel panel2 = new JPanel();
-		panel2.setBounds(0, 94, 441, 382);
-		contentPane.add(panel2);
-		
 		JButton btnRecherche = new JButton("");
 		btnRecherche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +93,8 @@ public class EcranRecherche extends JFrame {
 					ClientDAOJdbcImpl clientJDBC = new ClientDAOJdbcImpl();
 					try {
 						List<Client> lesClients = clientJDBC.selectByNom(txtNomDuClient.getText());
-						
+						tableau = new JTable(connexionModel.loadClientRecherche(lesClients));
+						getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 					} catch (DaoException e1) {
 						e1.printStackTrace();
 					}
@@ -108,8 +104,6 @@ public class EcranRecherche extends JFrame {
 		btnRecherche.setBounds(310, 11, 47, 47);
 		panel.add(btnRecherche);
 		btnRecherche.setIcon(new ImageIcon(EcranRecherche.class.getResource("/images/Rechercher.png")));
-		tableau = new JTable(connexionModel.getTableModelClient());
-		panel2.add(new JScrollPane(tableau), BorderLayout.CENTER);
 	
 	}
 

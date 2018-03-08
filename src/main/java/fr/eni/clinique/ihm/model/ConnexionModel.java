@@ -13,6 +13,7 @@ import fr.eni.clinique.bo.Race;
 
 public class ConnexionModel extends Observable {
 	private TableModelPerso tableModelPerso;
+	private TableModelClientRecherche tableModelClientRecherche;
 	private TableModelAnimal tableModelAnimal;
 	private TableModelClient tableModelClient;
 	private TableModelRace   tableModelRace;
@@ -82,4 +83,19 @@ public class ConnexionModel extends Observable {
 	public void loadRaces(List<Race> races) {
 		tableModelRace = new TableModelRace(races);		
 	}
+	
+	//Client recherché
+	
+	public TableModelClientRecherche loadClientRecherche (List<Client> clients) {
+		tableModelClientRecherche = new TableModelClientRecherche(clients);		
+		return tableModelClientRecherche;
+	}
+
+	public void addClientRecherche(Client client){
+		tableModelClientRecherche.addClient(client);
+		setChanged();
+        notifyObservers();
+        clearChanged();
+	}
+	
 }

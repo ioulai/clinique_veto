@@ -15,7 +15,6 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import fr.eni.clinique.bll.exception.BLLException;
-import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
