@@ -7,10 +7,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Personnel;
+
 import java.awt.Color;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.util.List;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
@@ -21,8 +29,19 @@ public class EcranRDV extends JFrame {
 	 */
 	private static final long serialVersionUID = 3455097310174582783L;
 	private JPanel contentPane;
+	private JComboBox<String> cbx_veterinaire;
+	private LoginMger loginManager = ManagerFactory.loginMger();
+	
+	private JComboBox<String> createComboBox(List<Personnel> personnels, String tooltip) {
 
+        JComboBox<String> combo = new JComboBox<>();
+        combo.setToolTipText(tooltip);
 
+        for (Personnel personnel : personnels) {
+            combo.addItem(personnel.getNom());
+        }
+        return combo;
+    }
 	/**
 	 * Create the frame.
 	 */
@@ -75,7 +94,22 @@ public class EcranRDV extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JComboBox<?> cbx_veterinaire = new JComboBox<Object>();
+		List<Personnel> personnels;
+		try {
+			personnels = loginManager.toutLePersonnel();
+			for (Personnel personnel : personnels) {
+				if(personnel.getRole().equals("Vet")){
+					cbx_veterinaire = createComboBox(personnels, "Selectionner un personnel");
+					System.out.println(personnel);
+				}
+				
+			}
+		} catch (BLLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		 
 		cbx_veterinaire.setBounds(32, 31, 100, 20);
 		panel_1.add(cbx_veterinaire);
 		
