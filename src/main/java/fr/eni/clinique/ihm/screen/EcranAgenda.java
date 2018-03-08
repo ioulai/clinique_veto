@@ -4,12 +4,19 @@ package fr.eni.clinique.ihm.screen;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Personnel;
+
 import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -25,22 +32,19 @@ public class EcranAgenda extends JFrame {
 	 */
 
 	private JPanel contentPane;
+	private JComboBox<String> cbx_veterinaire;
+	private LoginMger loginManager = ManagerFactory.loginMger();
+	private JComboBox<String> createComboBox(List<Personnel> personnels, String tooltip) {
+        JComboBox<String> combo = new JComboBox<>();
+        combo.setToolTipText(tooltip);
+        for (Personnel personnel : personnels) {
+        	if(personnel.getRole().equals("Vet")){
+            combo.addItem(personnel.getNom());
+        	}
+        }
+        return combo;
+    }
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EcranAgenda frame = new EcranAgenda();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -68,7 +72,21 @@ public class EcranAgenda extends JFrame {
 		lblVtrinaire.setBounds(10, 27, 70, 14);
 		panel.add(lblVtrinaire);
 		
-		JComboBox<?> cbx_veterinaire = new JComboBox<Object>();
+		
+		List<Personnel> personnels;
+		try {
+			personnels = loginManager.toutLePersonnel();
+			for (Personnel personnel : personnels) {
+			
+					cbx_veterinaire = createComboBox(personnels, "Selectionner un veterinaire");
+				
+			}
+		} catch (BLLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		cbx_veterinaire.setBounds(74, 24, 136, 20);
 		panel.add(cbx_veterinaire);
 		
