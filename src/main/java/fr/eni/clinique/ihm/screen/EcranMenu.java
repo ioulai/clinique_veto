@@ -29,27 +29,28 @@ public class EcranMenu extends JFrame {
 	private static final long serialVersionUID = -7889761062932513110L;
 	private ConnexionModel connexionModel;
 	private ConnexionController connexionController;
-//	private ConnexionScreen connexionScreen = null;
-	private String personnelNom ;
-	 private LoginMgerImpl managerBll = LoginMgerImpl.getInstance();
+	// private ConnexionScreen connexionScreen = null;
+	private String personnelNom;
+	private LoginMgerImpl managerBll = LoginMgerImpl.getInstance();
+	private Personnel personnelConnecter = null;
 
 	/**
 	 * Launch the application.
 	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					EcranMenu frame = new EcranMenu();
-//					frame.setVisible(true);
-//					frame.setLocation(400, 300);
-//
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	// public static void main(String[] args) {
+	// EventQueue.invokeLater(new Runnable() {
+	// public void run() {
+	// try {
+	// EcranMenu frame = new EcranMenu();
+	// frame.setVisible(true);
+	// frame.setLocation(400, 300);
+	//
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// });
+	// }
 
 	/**
 	 * Create the frame.
@@ -71,8 +72,8 @@ public class EcranMenu extends JFrame {
 		setJMenuBar(menuBar);
 		personnelNom = connexionScreen.getNomTxt().getText();
 		try {
-			Personnel personnelConnecter =managerBll.connexion(personnelNom);
-			
+			personnelConnecter = managerBll.connexion(personnelNom);
+
 		} catch (BLLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -100,13 +101,12 @@ public class EcranMenu extends JFrame {
 
 			}
 		});
-		
-		
+
 		JMenu mnGestionDesRendezvous = new JMenu("Gestion des rendez-vous");
-		menuBar.add(mnGestionDesRendezvous);
+//		menuBar.add(mnGestionDesRendezvous);
 
 		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
-		mnGestionDesRendezvous.add(mntmGestionDesClients);
+		// mnGestionDesRendezvous.add(mntmGestionDesClients);
 		mntmGestionDesClients.addActionListener(new ActionListener() {
 
 			@Override
@@ -117,7 +117,7 @@ public class EcranMenu extends JFrame {
 		});
 
 		JMenuItem mntmPriseDeRendezvous = new JMenuItem("Prise de rendez-vous");
-		mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
+		// mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
 		mntmPriseDeRendezvous.addActionListener(new ActionListener() {
 
 			@Override
@@ -128,18 +128,20 @@ public class EcranMenu extends JFrame {
 
 		JMenuItem mnAgenda = new JMenuItem("Agenda");
 
-		menuBar.add(mnAgenda);
+		// menuBar.add(mnAgenda);
 		mnAgenda.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new EcranAgenda().setVisible(true);
+				EcranAgenda ecranAgenda=new EcranAgenda();
+				ecranAgenda.setVisible(true);
+				ecranAgenda.setLocation(420, 300);
 
 			}
 		});
 
 		JMenuItem mnGestionDuPersonnel = new JMenuItem("Gestion du personnel");
-		menuBar.add(mnGestionDuPersonnel);
+		// menuBar.add(mnGestionDuPersonnel);
 		mnGestionDuPersonnel.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -149,5 +151,22 @@ public class EcranMenu extends JFrame {
 
 			}
 		});
+		switch (personnelConnecter.getRole()) {
+		case "Sec":
+			menuBar.add(mnGestionDesRendezvous);
+			mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
+			mnGestionDesRendezvous.add(mntmGestionDesClients);
+			break;
+		case "Vet":
+			menuBar.add(mnAgenda);			
+			break;
+		case "Adm":
+			menuBar.add(mnGestionDesRendezvous);
+			mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
+			mnGestionDesRendezvous.add(mntmGestionDesClients);
+			menuBar.add(mnAgenda);
+			menuBar.add(mnGestionDuPersonnel);
+			break;
+		}
 	}
 }
