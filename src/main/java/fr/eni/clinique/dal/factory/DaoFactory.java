@@ -4,11 +4,13 @@ import fr.eni.clinique.dal.dao.AnimalDAO;
 import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.dao.RaceDAO;
+import fr.eni.clinique.dal.dao.RdvDAO;
 import fr.eni.clinique.dal.dao.impl.AnimalDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.ClientDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.ConnexionDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.PersonnelDAOJdbcImpl;
 import fr.eni.clinique.dal.dao.impl.RaceDAOJdbcImpl;
+import fr.eni.clinique.dal.dao.impl.RdvDAOJdbcImpl;
 import fr.eni.clinique.dal.jdbc.ConnexionDAO;
 
 public class DaoFactory {
@@ -37,5 +39,9 @@ public class DaoFactory {
 	public static RaceDAO raceDAO() {
 		RaceDAOJdbcImpl race = new RaceDAOJdbcImpl();
 		return race;	
+		}
+	public static RdvDAO rdvDAO() {
+		RdvDAOJdbcImpl rdv = new RdvDAOJdbcImpl();
+		return rdv;	
 		}
 }
