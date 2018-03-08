@@ -59,7 +59,9 @@ public class TableModelPerso extends AbstractTableModel implements Observer{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+    	
         switch (columnIndex) {
+        
         case 0:
             return personnels.get(rowIndex).getNom();
         case 1:
