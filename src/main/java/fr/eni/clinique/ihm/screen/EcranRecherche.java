@@ -87,16 +87,18 @@ public class EcranRecherche extends JFrame {
 				   JOptionPane.showMessageDialog(EcranRecherche.this, "Veuillez saisir un nom");
 				}
 				else{
-					ClientDAOJdbcImpl clientJDBC = new ClientDAOJdbcImpl();
-					try {
-						connexionModel = new ConnexionModel();
-						connexionController = new ConnexionController(connexionModel);
 					
-						List<Client> lesClients = clientJDBC.selectByNom(txtNomDuClient.getText());
+					try {
+						
+						 connexionModel = new ConnexionModel();
+						 connexionController = new ConnexionController(connexionModel);
+						 
+						 ClientDAOJdbcImpl clientJDBC = new ClientDAOJdbcImpl();
+						 List<Client> lesClients = clientJDBC.selectByNom(txtNomDuClient.getText());
 						
 						tableau = new JTable(connexionModel.loadClientRecherche(lesClients));
 						contentPane.add(new JScrollPane(tableau));
-						
+						EcranRecherche.this.repaint();
 					} catch (DaoException e1) {
 						e1.printStackTrace();
 					}

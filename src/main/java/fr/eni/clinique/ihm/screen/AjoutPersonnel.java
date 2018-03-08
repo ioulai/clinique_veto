@@ -191,7 +191,7 @@ public class AjoutPersonnel extends JDialog {
 					if (String.valueOf(motPasseTxt.getPassword()).equals(String.valueOf(motPasseTxt2.getPassword()))) {
 						
 						connexionController.AjoutPersonnel(retourSaisi());
-						showSuccessMessage("Personnel ajouter !");
+						showSuccessMessage("Le personnel :" +retourSaisi().getNom()+ " a été ajouté !");
 
 						nomTxt.setText("");
 						motPasseTxt.setText("");
