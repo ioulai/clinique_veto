@@ -37,7 +37,7 @@ public class EcranRDV extends JFrame {
 
 	private  ConnexionModel connexionModel;
 	private ConnexionController connexionController ;
-
+	private Integer codeCli;
 	private LoginMger loginManager = ManagerFactory.loginMger();
 	
 	/**
@@ -95,8 +95,10 @@ public class EcranRDV extends JFrame {
 		try {
 			List<Client> clients = loginManager.tousLesClients();
 			for (Client client : clients) {
-				cbx_Client.addItem(client.getNomClient()+" - "+client.getPrenomClient());		
+				cbx_Client.addItem(client.getNomClient()+" - "+client.getPrenomClient());	
+			//	codeCli=client.getCodeClient();
 			}
+			
 		} catch (BLLException e) {
 			e.printStackTrace();
 		}
@@ -105,6 +107,8 @@ public class EcranRDV extends JFrame {
 		cbx_Animal.setBounds(10, 71, 123, 20);
 		panel.add(cbx_Animal);
 		try {
+		
+			//List<Animal> animaux = loginManager.tousLesAnimauxParCodeClient(codeCli);
 			List<Animal> animaux = loginManager.tousLesAnimaux();
 			for (Animal animal : animaux) {
 				cbx_Animal.addItem(animal.getRace()+" - "+animal.getNomAnimal());		
