@@ -101,15 +101,7 @@ public class EcranMenu extends JFrame {
 			}
 		});
 		
-		switch () {
-		case value:
-			
-			break;
-
-		default:
-			break;
-		}
-
+		
 		JMenu mnGestionDesRendezvous = new JMenu("Gestion des rendez-vous");
 		menuBar.add(mnGestionDesRendezvous);
 
