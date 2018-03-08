@@ -1,7 +1,6 @@
 package fr.eni.clinique.ihm.screen;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +19,7 @@ import fr.eni.clinique.ihm.model.ConnexionModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class EcranMenu extends JFrame {
 
@@ -29,28 +29,12 @@ public class EcranMenu extends JFrame {
 	private static final long serialVersionUID = -7889761062932513110L;
 	private ConnexionModel connexionModel;
 	private ConnexionController connexionController;
-	// private ConnexionScreen connexionScreen = null;
 	private String personnelNom;
 	private LoginMgerImpl managerBll = LoginMgerImpl.getInstance();
 	private Personnel personnelConnecter = null;
-
-	/**
-	 * Launch the application.
-	 */
-	// public static void main(String[] args) {
-	// EventQueue.invokeLater(new Runnable() {
-	// public void run() {
-	// try {
-	// EcranMenu frame = new EcranMenu();
-	// frame.setVisible(true);
-	// frame.setLocation(400, 300);
-	//
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// });
-	// }
+	private void showFailureMessage(String message) {
+        JOptionPane.showMessageDialog(EcranMenu.this, message, "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
 
 	/**
 	 * Create the frame.
@@ -67,10 +51,9 @@ public class EcranMenu extends JFrame {
 		setBounds(100, 100, 501, 378);
 		connexionModel = new ConnexionModel();
 		connexionController = new ConnexionController(connexionModel);
-
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
 		personnelNom = connexionScreen.getNomTxt().getText();
+		
+
 		try {
 			personnelConnecter = managerBll.connexion(personnelNom);
 
@@ -78,95 +61,104 @@ public class EcranMenu extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		JMenu mnFichier = new JMenu("Menu");
-		menuBar.add(mnFichier);
+		if (personnelConnecter.isArchive() == false) {
 
-		JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
-		mnFichier.add(mntmDconnexion);
-		mntmDconnexion.addActionListener(new ActionListener() {
+			JMenuBar menuBar = new JMenuBar();
+			setJMenuBar(menuBar);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				CliniqueVeto.ecranConnexion();
+			JMenu mnFichier = new JMenu("Menu");
+			menuBar.add(mnFichier);
+
+			JMenuItem mntmDconnexion = new JMenuItem("D\u00E9connexion");
+			mnFichier.add(mntmDconnexion);
+			mntmDconnexion.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					CliniqueVeto.ecranConnexion();
+				}
+			});
+
+			JMenuItem mntmFermer = new JMenuItem("Fermer");
+			mnFichier.add(mntmFermer);
+			mntmFermer.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+
+				}
+			});
+
+			JMenu mnGestionDesRendezvous = new JMenu("Gestion des rendez-vous");
+			// menuBar.add(mnGestionDesRendezvous);
+
+			JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
+			// mnGestionDesRendezvous.add(mntmGestionDesClients);
+			mntmGestionDesClients.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					new EcranPrincipalClient().setVisible(true);
+
+				}
+			});
+
+			JMenuItem mntmPriseDeRendezvous = new JMenuItem("Prise de rendez-vous");
+			// mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
+			mntmPriseDeRendezvous.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					new EcranRDV().setVisible(true);
+				}
+			});
+
+			JMenuItem mnAgenda = new JMenuItem("Agenda");
+
+			// menuBar.add(mnAgenda);
+			mnAgenda.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					EcranAgenda ecranAgenda = new EcranAgenda();
+					ecranAgenda.setVisible(true);
+					ecranAgenda.setLocation(420, 300);
+
+				}
+			});
+
+			JMenuItem mnGestionDuPersonnel = new JMenuItem("Gestion du personnel");
+			// menuBar.add(mnGestionDuPersonnel);
+			mnGestionDuPersonnel.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GestionPerso gestionPerso = new GestionPerso();
+					gestionPerso.setVisible(true);
+					gestionPerso.setLocation(420, 300);
+
+				}
+			});
+			// gestion des roles
+			switch (personnelConnecter.getRole()) {
+			case "Sec":
+				menuBar.add(mnGestionDesRendezvous);
+				mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
+				mnGestionDesRendezvous.add(mntmGestionDesClients);
+				break;
+			case "Vet":
+				menuBar.add(mnAgenda);
+				break;
+			case "Adm":
+				menuBar.add(mnGestionDesRendezvous);
+				mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
+				mnGestionDesRendezvous.add(mntmGestionDesClients);
+				menuBar.add(mnAgenda);
+				menuBar.add(mnGestionDuPersonnel);
+				break;
 			}
-		});
-
-		JMenuItem mntmFermer = new JMenuItem("Fermer");
-		mnFichier.add(mntmFermer);
-		mntmFermer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-
-			}
-		});
-
-		JMenu mnGestionDesRendezvous = new JMenu("Gestion des rendez-vous");
-//		menuBar.add(mnGestionDesRendezvous);
-
-		JMenuItem mntmGestionDesClients = new JMenuItem("Gestion des clients");
-		// mnGestionDesRendezvous.add(mntmGestionDesClients);
-		mntmGestionDesClients.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new EcranPrincipalClient().setVisible(true);
-
-			}
-		});
-
-		JMenuItem mntmPriseDeRendezvous = new JMenuItem("Prise de rendez-vous");
-		// mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
-		mntmPriseDeRendezvous.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new EcranRDV().setVisible(true);
-			}
-		});
-
-		JMenuItem mnAgenda = new JMenuItem("Agenda");
-
-		// menuBar.add(mnAgenda);
-		mnAgenda.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EcranAgenda ecranAgenda=new EcranAgenda();
-				ecranAgenda.setVisible(true);
-				ecranAgenda.setLocation(420, 300);
-
-			}
-		});
-
-		JMenuItem mnGestionDuPersonnel = new JMenuItem("Gestion du personnel");
-		// menuBar.add(mnGestionDuPersonnel);
-		mnGestionDuPersonnel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				GestionPerso gestionPerso = new GestionPerso();
-				gestionPerso.setVisible(true);
-				gestionPerso.setLocation(420, 300);
-
-			}
-		});
-		switch (personnelConnecter.getRole()) {
-		case "Sec":
-			menuBar.add(mnGestionDesRendezvous);
-			mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
-			mnGestionDesRendezvous.add(mntmGestionDesClients);
-			break;
-		case "Vet":
-			menuBar.add(mnAgenda);			
-			break;
-		case "Adm":
-			menuBar.add(mnGestionDesRendezvous);
-			mnGestionDesRendezvous.add(mntmPriseDeRendezvous);
-			mnGestionDesRendezvous.add(mntmGestionDesClients);
-			menuBar.add(mnAgenda);
-			menuBar.add(mnGestionDuPersonnel);
-			break;
+		}else{
+			showFailureMessage("Accès non autorisé !");			
 		}
 	}
 }
