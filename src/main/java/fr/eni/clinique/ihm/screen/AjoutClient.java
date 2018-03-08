@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -41,8 +42,6 @@ public class AjoutClient extends JFrame {
 	private Integer codeClient = 0;
 	private JTextField txtTel;
 	private JTextField txtRemq;
-	private JRadioButton rdbtnOui;
-	private JRadioButton rdbtnNon;
 	private JTextField txtAssur;
 	private JButton btnAnnuler;
 	private JButton btnValider;
@@ -79,6 +78,7 @@ public class AjoutClient extends JFrame {
 		setLocationRelativeTo(null);
 		setUp();
 		setContentPane(contentPane);
+		setTitle("Enregistrement d'un nouveau client");
 	}	
 		private void setUp() {
 	    	contentPane.setLayout(null);
@@ -177,13 +177,19 @@ public class AjoutClient extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Client c = retourSaisi();
+					if(txtNomCli.getText().equals("") || txtPrenomCli.getText().equals("") || txtAdress1.getText().equals("") || txtAdress2.getText().equals("") || txtCodePost.getText().equals("") || txtVille.getText().equals("") || txtTel.getText().equals("") || txtRemq.getText().equals("") || txtAssur.getText().equals("")){
+						JOptionPane.showMessageDialog(AjoutClient.this, "Tous les champs sont obligatoires !");
+						
+					}else{
 					try {
 						connexionController.AjoutClient(c);
+						JOptionPane.showMessageDialog(AjoutClient.this, "Client : " + c.getNomClient()+ " " + c.getPrenomClient()+ " bien enregistré");
+						dispose();
 					} 
 					catch (BLLException e1) {
 						e1.printStackTrace();
 					}
-				}
+				}}
 			});
 			JButton btnAnnuler = new JButton("");
 			btnAnnuler.setIcon(new ImageIcon(AjoutClient.class.getResource("/images/aim.png")));
