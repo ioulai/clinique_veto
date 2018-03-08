@@ -213,7 +213,7 @@ public class EcranRDV extends JFrame implements Observer {
 		connexionController = new ConnexionController(connexionModel);
 		
 		tableau = new JTable(connexionModel.getTableModelAgenda());
-		panel_3.add(new JScrollPane(tableau), BorderLayout.CENTER);
+		panel_3.add(new JScrollPane(tableau), BorderLayout.EAST);
 		
 		connexionModel.addObserver(this);
 		

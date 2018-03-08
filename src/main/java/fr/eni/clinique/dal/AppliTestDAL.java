@@ -9,7 +9,9 @@ import java.util.List;
 
 //import fr.eni.clinique.bll.manager.ihm.GestionPersonnel;
 import fr.eni.clinique.bo.Personnel;
+import fr.eni.clinique.bo.Rdv;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
+import fr.eni.clinique.dal.dao.RdvDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
 
@@ -21,6 +23,8 @@ public class AppliTestDAL {
 //		List <Personnel> ps= new ArrayList<>();
 //		
 		PersonnelDAO pers =DaoFactory.personnelDao();
+		
+		RdvDAO rdv = DaoFactory.rdvDAO();
 //		//select all
 //		try {
 //			ps = pers.selectALL();
@@ -45,6 +49,11 @@ public class AppliTestDAL {
 		try {
 			Personnel p=pers.connexion("bosapin");
 			System.out.println(p);
+			
+			List<Rdv> r = rdv.selectALL();
+			for (Rdv rdv2 : r) {
+				System.out.println(r);
+			}
 				
 		} catch (DaoException e) {
 			e.printStackTrace();

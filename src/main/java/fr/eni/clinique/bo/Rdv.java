@@ -83,6 +83,18 @@ public class Rdv {
 	public void setAnimal(Integer animal) {
 		this.codeAnimal = animal;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Rdv [dateRDV=").append(dateRDV).append(", codeVet=").append(codeVet).append(", codeAnimal=")
+				.append(codeAnimal).append("]");
+		return builder.toString();
+	}
 	
 	
 	

@@ -11,6 +11,7 @@ import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Race;
+import fr.eni.clinique.bo.Rdv;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
@@ -42,6 +43,9 @@ public class ConnexionController {
 
         List<Race> races = loginManager.toutesLesRaces();
         connexionModel.loadRaces(races);
+        
+        List<Rdv> rdv = loginManager.toutLesRdv();
+        connexionModel.loadAgenda(rdv);
 
     }
     

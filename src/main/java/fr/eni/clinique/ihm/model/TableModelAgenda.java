@@ -2,6 +2,8 @@ package fr.eni.clinique.ihm.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -9,7 +11,7 @@ import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
 import fr.eni.clinique.bo.Rdv;
 
-public class TableModelAgenda extends AbstractTableModel{
+public class TableModelAgenda extends AbstractTableModel implements Observer{
 
 	/**
 	 * 
@@ -64,6 +66,12 @@ public class TableModelAgenda extends AbstractTableModel{
             return null;
         }
 
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+	
+		
 	}
 
 }

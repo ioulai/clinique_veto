@@ -56,4 +56,12 @@ private Rdv getAgenda(ResultSet res) throws SQLException{
 		throw new DaoException("Erreur connexion",e);
 		}
 	}
+
+
+
+	@Override
+	public void delete(Rdv rdv) throws DaoException {
+		// TODO Auto-generated method stub
+		
+	}
 }

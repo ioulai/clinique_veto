@@ -240,5 +240,18 @@ public class LoginMgerImpl implements LoginMger {
 		return animaux;
 	}
 
+	@Override
+	public List<Rdv> toutLesRdv() throws BLLException {
+		List<Rdv> lesRdv = null;
+		
+		try {
+			lesRdv = rdvDAO.selectALL();
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lesRdv;
+	}
+
 
 }

@@ -7,6 +7,7 @@ import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Race;
+import fr.eni.clinique.bo.Rdv;
 
 public interface LoginMger {
 
@@ -18,6 +19,7 @@ public interface LoginMger {
 	void removePersonnel(Personnel personnel) throws BLLException;
 	
 	List<Personnel> toutLePersonnel() throws  BLLException;
+	List<Rdv> toutLesRdv() throws BLLException;
 	
 	void reinitialiserMDP(Personnel personnel)throws BLLException;
 
