@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -18,6 +20,7 @@ import javax.swing.JTextField;
 
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.manager.impl.LoginMgerImpl;
+import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
 
@@ -96,10 +99,11 @@ public class ConnexionScreen extends JFrame{
 	            		if(authenticate(nomTxt.getText(), String.valueOf(mdpTxt.getPassword()))){	            			
 	            			loadecranMenu();
 	            			dispose();
-	            		}else{
+	            		}else{	            			
 	            			showFailureMessage("Utilisateur inconnu");
 	            		}	            		
 	            	}
+					
 					
 				}
 			});
@@ -141,7 +145,7 @@ public class ConnexionScreen extends JFrame{
 	    }
 	    
 	    private void loadecranMenu(){
-	    	EcranMenu ecranMenu = new EcranMenu();
+	    	EcranMenu ecranMenu = new EcranMenu(this);
 	    	
 	    	ecranMenu.setVisible(true);
 	    	ecranMenu.setLocationRelativeTo(null);	    	
@@ -156,6 +160,31 @@ public class ConnexionScreen extends JFrame{
 			}
 	    	return retour;
 	    }
-	    
+
+		/**
+		 * @return the nomTxt
+		 */
+		public JTextField getNomTxt() {
+			return nomTxt;
+		}
+
+//	    public  Personnel personnelConnecter(){
+//	    	Personnel lePersonnel = null;
+//	    	List<Personnel> lesPersonnels = new ArrayList<Personnel>();
+//	    	try {
+//				lesPersonnels = managerBll.toutLePersonnel();
+//				for (Personnel personnel : lesPersonnels) {
+//					if(personnel.getNom().equals(nomTxt)){
+//						lePersonnel = new Personnel(personnel.getCodePers(),personnel.getNom(),personnel.getMotPasse(),personnel.getRole(),personnel.isArchive());
+//					}
+//				}
+//			} catch (BLLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//			return lePersonnel;
+//	    	
+//	    }
 }
 	    

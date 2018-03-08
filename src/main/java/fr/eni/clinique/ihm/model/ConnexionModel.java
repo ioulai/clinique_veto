@@ -34,7 +34,10 @@ public class ConnexionModel extends Observable {
 	}
 	
 	public void removePersonnel(int index) throws BLLException{		
-		tableModelPerso.removePersonnel(index);				
+		tableModelPerso.removePersonnel(index);	
+		setChanged();
+        notifyObservers();
+        clearChanged();
 	}
 
 	public TableModelPerso getTableModel(){

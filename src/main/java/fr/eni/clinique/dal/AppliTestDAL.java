@@ -16,27 +16,36 @@ import fr.eni.clinique.dal.factory.DaoFactory;
 public class AppliTestDAL {
 
 	public static void main(String[] args) {
-		System.out.println("b");
-		
-		List <Personnel> ps= new ArrayList<>();
-		
+//		System.out.println("b");
+//		
+//		List <Personnel> ps= new ArrayList<>();
+//		
 		PersonnelDAO pers =DaoFactory.personnelDao();
-		//select all
-		try {
-			ps = pers.selectALL();
-			for(Personnel p : ps)
-			{
-				System.out.println("a"+p);
-			}
-		} catch (DaoException e) {
-			
-			e.printStackTrace();
-		}
+//		//select all
+//		try {
+//			ps = pers.selectALL();
+//			for(Personnel p : ps)
+//			{
+//				System.out.println("a"+p);
+//			}
+//		} catch (DaoException e) {
+//			
+//			e.printStackTrace();
+//		}
 		//insert
-		Personnel personnel = new Personnel("TeTTPaMP", "mdpDAL","Sec",true);
-
+//		Personnel personnel = new Personnel("TeTTPaMP", "mdpDAL","Sec",true);
+//
+//		try {
+//			pers.insert(personnel);
+//		} catch (DaoException e) {
+//			e.printStackTrace();
+//		} 
+		
+		//select bosapin
 		try {
-			pers.insert(personnel);
+			Personnel p=pers.connexion("bosapin");
+			System.out.println(p);
+				
 		} catch (DaoException e) {
 			e.printStackTrace();
 		} 
