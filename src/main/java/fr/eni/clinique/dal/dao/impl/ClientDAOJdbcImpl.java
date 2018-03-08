@@ -95,7 +95,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	            } catch(SQLException e) {
 	            throw new DaoException(e.getMessage(), e);
 	        } finally {
-	            ResourceUtil.safeClose(connection, statement,resultSet);
+	            ResourceUtil.safeClose(connection, statement);
 	        }
 	        
 	        return lesClients;
