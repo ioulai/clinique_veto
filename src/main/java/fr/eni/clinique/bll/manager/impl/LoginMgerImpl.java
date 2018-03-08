@@ -8,12 +8,14 @@ import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Race;
+import fr.eni.clinique.bo.Rdv;
 import fr.eni.clinique.common.exception.TechnicalException;
 import fr.eni.clinique.common.util.ObjectUtil;
 import fr.eni.clinique.dal.dao.AnimalDAO;
 import fr.eni.clinique.dal.dao.ClientDAO;
 import fr.eni.clinique.dal.dao.PersonnelDAO;
 import fr.eni.clinique.dal.dao.RaceDAO;
+import fr.eni.clinique.dal.dao.RdvDAO;
 import fr.eni.clinique.dal.exception.DaoException;
 import fr.eni.clinique.dal.factory.DaoFactory;
 
@@ -24,6 +26,7 @@ public class LoginMgerImpl implements LoginMger {
 	private AnimalDAO animalDAO = DaoFactory.animalDAO();
 	private ClientDAO clientDAO = DaoFactory.clientDAO();
 	private RaceDAO raceDAO = DaoFactory.raceDAO();
+	private RdvDAO rdvDAO = DaoFactory.rdvDAO();
 
 	private LoginMgerImpl() {
 
@@ -133,6 +136,14 @@ public class LoginMgerImpl implements LoginMger {
 		}
 	}
 
+	public void removeRdv(Rdv rdv) {
+		try {
+			rdvDAO.delete(rdv);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}	
+	}
+	
 	@Override
 	public List<Personnel> toutLePersonnel() throws BLLException {
 		List<Personnel> personnels = null;
@@ -228,5 +239,6 @@ public class LoginMgerImpl implements LoginMger {
 		}
 		return animaux;
 	}
+
 
 }

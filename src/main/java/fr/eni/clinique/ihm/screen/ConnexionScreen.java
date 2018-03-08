@@ -95,16 +95,13 @@ public class ConnexionScreen extends JFrame{
 					if(nomTxt.getText().equals("")|| mdpTxt.getPassword().toString().equals("") ){
 	            		showFailureMessage("Veuillez saisir tous les champs");	
 	            	}
-	            	else {
-	            		if(authenticate(nomTxt.getText(), String.valueOf(mdpTxt.getPassword()))){	            			
+	            	else if(authenticate(nomTxt.getText(), String.valueOf(mdpTxt.getPassword()))){	            			
 	            			loadecranMenu();
 	            			dispose();
 	            		}else{	            			
 	            			showFailureMessage("Utilisateur inconnu");
 	            		}	            		
-	            	}
-					
-					
+	            	
 				}
 			});
 	        GridBagConstraints gridBagConstraints = createGridBagConstraints();

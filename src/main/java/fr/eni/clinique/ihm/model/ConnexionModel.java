@@ -10,6 +10,7 @@ import fr.eni.clinique.bll.exception.BLLException;
 
 import fr.eni.clinique.bo.Personnel;
 import fr.eni.clinique.bo.Race;
+import fr.eni.clinique.bo.Rdv;
 
 public class ConnexionModel extends Observable {
 	private TableModelPerso tableModelPerso;
@@ -17,6 +18,7 @@ public class ConnexionModel extends Observable {
 	private TableModelAnimal tableModelAnimal;
 	private TableModelClient tableModelClient;
 	private TableModelRace   tableModelRace;
+	private TableModelAgenda tableModelAgenda;
 	
 	 public ConnexionModel() {
 	        super();
@@ -101,4 +103,12 @@ public class ConnexionModel extends Observable {
         clearChanged();
 	}
 	
+	///rdv
+	public TableModelAgenda getTableModelAgenda(){
+		return tableModelAgenda;
+	}
+	
+	public void loadAgenda(List<Rdv> agenda) {
+		tableModelAgenda = new TableModelAgenda(agenda);		
+	}
 }

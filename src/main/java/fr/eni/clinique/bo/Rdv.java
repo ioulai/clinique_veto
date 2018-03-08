@@ -6,19 +6,35 @@ public class Rdv {
 	
 	
 	private String dateRDV;	
-	private Personnel veterinaire;
-	private Animal animal;
+	
+	private Integer codeVet;
+	private Integer codeAnimal;
 	/**
+	 * 
 	 * @param dateRDV
 	 * @param veterinaire
 	 * @param animal
 	 */
-	public Rdv(String dateRDV, Personnel veterinaire, Animal animal) {
+	public Rdv(String dateRDV, Integer veterinaire, Integer animal) {
 		super();
 		this.dateRDV = dateRDV;
-		this.veterinaire = veterinaire;
-		this.animal = animal;
+		this.codeVet = veterinaire;
+		this.codeAnimal = animal;
 	}
+	
+	
+	public Rdv() {
+		super();
+	}
+
+
+	public Rdv(String dateRDV, Integer codeVet) {
+		super();
+		this.dateRDV = dateRDV;
+		this.codeVet = codeVet;
+	}
+
+
 	/**
 	 * @return the dateRDV
 	 */
@@ -34,26 +50,38 @@ public class Rdv {
 	/**
 	 * @return the veterinaire
 	 */
-	public Personnel getVeterinaire() {
-		return veterinaire;
+	public Integer getVeterinaire() {
+		return codeVet;
 	}
 	/**
 	 * @param veterinaire the veterinaire to set
 	 */
-	public void setVeterinaire(Personnel veterinaire) {
-		this.veterinaire = veterinaire;
+	public void setVeterinaire(Integer veterinaire) {
+		this.codeVet = veterinaire;
+	}
+	public Integer getCodeVet() {
+		return codeVet;
+	}
+	public void setCodeVet(Integer codeVet) {
+		this.codeVet = codeVet;
+	}
+	public Integer getCodeAnimal() {
+		return codeAnimal;
+	}
+	public void setCodeAnimal(Integer codeAnimal) {
+		this.codeAnimal = codeAnimal;
 	}
 	/**
 	 * @return the animal
 	 */
-	public Animal getAnimal() {
-		return animal;
+	public Integer getAnimal() {
+		return codeAnimal;
 	}
 	/**
 	 * @param animal the animal to set
 	 */
-	public void setAnimal(Animal animal) {
-		this.animal = animal;
+	public void setAnimal(Integer animal) {
+		this.codeAnimal = animal;
 	}
 	
 	
