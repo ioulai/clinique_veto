@@ -11,12 +11,23 @@ import javax.swing.border.LineBorder;
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
+
 import fr.eni.clinique.bo.Personnel;
+
+import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
+
 
 import java.awt.Color;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -30,8 +41,8 @@ public class EcranRDV extends JFrame {
 	private static final long serialVersionUID = 3455097310174582783L;
 	private JPanel contentPane;
 	private JComboBox<String> cbx_veterinaire;
-	private LoginMger loginManager = ManagerFactory.loginMger();
-	
+
+
 	private JComboBox<String> createComboBox(List<Personnel> personnels, String tooltip) {
 
         JComboBox<String> combo = new JComboBox<>();
@@ -43,6 +54,13 @@ public class EcranRDV extends JFrame {
         return combo;
     }
 
+
+
+	private  ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
+
+	private LoginMger loginManager = ManagerFactory.loginMger();
+	
 
 	/**
 	 * Create the frame.
@@ -96,6 +114,7 @@ public class EcranRDV extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
+
 		List<Personnel> personnels;
 		try {
 			personnels = loginManager.toutLePersonnel();
@@ -109,8 +128,7 @@ public class EcranRDV extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		 
+
 		cbx_veterinaire.setBounds(32, 31, 100, 20);
 		panel_1.add(cbx_veterinaire);
 		

@@ -218,4 +218,15 @@ public class LoginMgerImpl implements LoginMger {
 
 	}
 
+	@Override
+	public List<Animal> tousLesAnimauxParCodeClient(Integer code) throws BLLException {
+		List<Animal> animaux = null;
+		try {
+			animaux = animalDAO.selectByCodeClient(code);
+		} catch (DaoException e) {
+			e.printStackTrace();
+		}
+		return animaux;
+	}
+
 }
