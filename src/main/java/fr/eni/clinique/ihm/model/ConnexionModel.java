@@ -73,6 +73,7 @@ public class ConnexionModel extends Observable {
 	public void loadClients(List<Client> clients) {
 		tableModelClient = new TableModelClient(clients);		
 	}
+	
 	public void addClient(Client c){
 		tableModelClient.addClient(c);
 		setChanged();
@@ -87,7 +88,9 @@ public class ConnexionModel extends Observable {
 	//Client recherché
 	
 	public TableModelClientRecherche loadClientRecherche (List<Client> clients) {
+		
 		tableModelClientRecherche = new TableModelClientRecherche(clients);		
+		
 		return tableModelClientRecherche;
 	}
 

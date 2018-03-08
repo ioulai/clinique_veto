@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Panel;
 
 public class EcranRecherche extends JFrame {
 
@@ -68,9 +69,6 @@ public class EcranRecherche extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		connexionModel = new ConnexionModel();
-		connexionController = new ConnexionController(connexionModel);
-		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel.setBounds(22, 11, 388, 72);
@@ -82,7 +80,6 @@ public class EcranRecherche extends JFrame {
 		panel.add(txtNomDuClient);
 		txtNomDuClient.setToolTipText("Nom du client \u00E0 rechercher");
 		txtNomDuClient.setColumns(10);
-		
 		JButton btnRecherche = new JButton("");
 		btnRecherche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,9 +89,14 @@ public class EcranRecherche extends JFrame {
 				else{
 					ClientDAOJdbcImpl clientJDBC = new ClientDAOJdbcImpl();
 					try {
+						connexionModel = new ConnexionModel();
+						connexionController = new ConnexionController(connexionModel);
+					
 						List<Client> lesClients = clientJDBC.selectByNom(txtNomDuClient.getText());
+						
 						tableau = new JTable(connexionModel.loadClientRecherche(lesClients));
-						getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+						contentPane.add(new JScrollPane(tableau));
+						
 					} catch (DaoException e1) {
 						e1.printStackTrace();
 					}
@@ -104,7 +106,8 @@ public class EcranRecherche extends JFrame {
 		btnRecherche.setBounds(310, 11, 47, 47);
 		panel.add(btnRecherche);
 		btnRecherche.setIcon(new ImageIcon(EcranRecherche.class.getResource("/images/Rechercher.png")));
+		
+		
 	
 	}
-
 }

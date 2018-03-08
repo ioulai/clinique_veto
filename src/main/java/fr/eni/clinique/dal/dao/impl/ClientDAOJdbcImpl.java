@@ -19,11 +19,15 @@ import fr.eni.clinique.dal.factory.MSSQLConnectionFactory;
 public class ClientDAOJdbcImpl implements ClientDAO{
 
 	private Connection connection = null;
+
+	private  PreparedStatement statement = null;
+	private ResultSet resultSet = null;
+	private ResultSet res = null;
 	
 	private static final String SELECT_ALL_QUERY = "select * from Clients";
 	private static final String INSERT_QUERY = "insert into Clients(NomClient, PrenomClient, Adresse1, Adresse2,Ville,NumTel,Assurance,Email,Remarque,Archive) values(?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_QUERY ="DELETE FROM Clients WHERE codeClient=?";
-	private static final String SELECT_BY_NOM="SELECT NomClient,PrenomClient,CodePostal,Ville FROM Clients WHERE NomClient=?";
+	private static final String SELECT_BY_NOM="SELECT CodeClient, NomClient, PrenomClient, Adresse1, Adresse2,Ville,NumTel,Assurance,Email,Remarque,Archive FROM Clients WHERE NomClient=?";
 	private static final String UPDATE_QUERY="UPDATE Clients SET NomClient=?, PrenomClient=?, Adresse1=?, Adresse2=?,Ville=?,Assurance=?,Email=?,Remarque=?,Archive=?,lesAnimaux=?";
 	
 	
@@ -79,8 +83,6 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 
 	@Override
 	public List<Client> selectByNom(String nom) throws DaoException {
-	        PreparedStatement statement = null;
-	        ResultSet resultSet = null;
 	        
 	        List<Client> lesClients = new ArrayList<Client>();
 	        try {
@@ -90,7 +92,7 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	            resultSet = statement.executeQuery();
 
 	            while (resultSet.next()) {
-	            	lesClients.add((Client) resultSet);
+	            	lesClients.add(getClient(resultSet));
 	            }
 	            } catch(SQLException e) {
 	            throw new DaoException(e.getMessage(), e);
@@ -105,8 +107,6 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 	public void update(Client newClient, String nomClient, String prenomClient, String adresse1, String adresse2,
 			String ville, String assurance, String email, String remarque, Boolean archive, List<Animal> lesAnimaux)
 			throws DaoException {
-		Connection connection = null;
-        PreparedStatement statement = null;
         
         try {
             connection = MSSQLConnectionFactory.get();
@@ -133,9 +133,6 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 
 	@Override
 	public Client insert(Client client) throws DaoException {
-		    Connection connection = null;
-	        PreparedStatement statement = null;
-	        ResultSet res = null;
 	        
 		try {
 			  connection = MSSQLConnectionFactory.get();
@@ -169,8 +166,6 @@ public class ClientDAOJdbcImpl implements ClientDAO{
 
 	@Override
 	public void delete(Client newClient) throws DaoException {
-		    Connection connection = null;
-	        PreparedStatement statement = null;
 	        
 	        try {
 	            connection = MSSQLConnectionFactory.get();
