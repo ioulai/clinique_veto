@@ -7,10 +7,23 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import fr.eni.clinique.bll.exception.BLLException;
+import fr.eni.clinique.bll.factory.ManagerFactory;
+import fr.eni.clinique.bll.manager.LoginMger;
+import fr.eni.clinique.bo.Animal;
+import fr.eni.clinique.bo.Client;
+import fr.eni.clinique.ihm.controller.ConnexionController;
+import fr.eni.clinique.ihm.model.ConnexionModel;
+
 import java.awt.Color;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
@@ -22,6 +35,11 @@ public class EcranRDV extends JFrame {
 	private static final long serialVersionUID = 3455097310174582783L;
 	private JPanel contentPane;
 
+	private  ConnexionModel connexionModel;
+	private ConnexionController connexionController ;
+
+	private LoginMger loginManager = ManagerFactory.loginMger();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -42,9 +60,14 @@ public class EcranRDV extends JFrame {
 	 * Create the frame.
 	 */
 	public EcranRDV() {
+
+		 connexionModel = new ConnexionModel();
+		 connexionController = new ConnexionController(connexionModel);
+		 
+		 
 		setTitle("Prise de rendez-vous");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 522, 424);
+		setBounds(100, 100, 642, 424);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,7 +75,7 @@ public class EcranRDV extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel.setBounds(10, 23, 154, 102);
+		panel.setBounds(10, 23, 193, 102);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -66,27 +89,58 @@ public class EcranRDV extends JFrame {
 		lblAnimal.setBounds(10, 52, 84, 14);
 		panel.add(lblAnimal);
 		
-		JComboBox<?> cbx_nomClient = new JComboBox<Object>();
-		cbx_nomClient.setBounds(10, 31, 89, 20);
-		panel.add(cbx_nomClient);
+		JComboBox<String> cbx_Client = new JComboBox<String>();
+		cbx_Client.setBounds(10, 31, 123, 20);
+		panel.add(cbx_Client);
+		try {
+			List<Client> clients = loginManager.tousLesClients();
+			for (Client client : clients) {
+				cbx_Client.addItem(client.getNomClient()+" - "+client.getPrenomClient());		
+			}
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		
-		JComboBox<?> cbx_Animal = new JComboBox<Object>();
-		cbx_Animal.setBounds(10, 71, 89, 20);
+		JComboBox<String> cbx_Animal = new JComboBox<String>();
+		cbx_Animal.setBounds(10, 71, 123, 20);
 		panel.add(cbx_Animal);
+		try {
+			List<Animal> animaux = loginManager.tousLesAnimaux();
+			for (Animal animal : animaux) {
+				cbx_Animal.addItem(animal.getRace()+" - "+animal.getNomAnimal());		
+			}
+		} catch (BLLException e) {
+			e.printStackTrace();
+		}
 		
 		JButton Bt_ajoutClient = new JButton("+");
 		Bt_ajoutClient.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		Bt_ajoutClient.setBounds(104, 23, 40, 30);
+		Bt_ajoutClient.setBounds(143, 11, 40, 34);
 		panel.add(Bt_ajoutClient);
+		Bt_ajoutClient.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new AjoutClient(connexionController, connexionModel).setVisible(true);
+				
+			}
+		});
 		
-		JButton Bt_ajoutNom = new JButton("+");
-		Bt_ajoutNom.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		Bt_ajoutNom.setBounds(104, 63, 40, 30);
-		panel.add(Bt_ajoutNom);
-		
+		JButton Bt_ajoutAnimal = new JButton("+");
+		Bt_ajoutAnimal.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		Bt_ajoutAnimal.setBounds(143, 57, 40, 34);
+		panel.add(Bt_ajoutAnimal);
+		Bt_ajoutAnimal.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new EcranAnimal(connexionController, connexionModel).setVisible(true);
+				
+			}
+		});
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_1.setBounds(178, 23, 154, 102);
+		panel_1.setBounds(248, 23, 154, 102);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -101,7 +155,7 @@ public class EcranRDV extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_2.setBounds(342, 23, 154, 102);
+		panel_2.setBounds(446, 23, 154, 102);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -136,28 +190,28 @@ public class EcranRDV extends JFrame {
 		
 		JLabel lblPar = new JLabel("Par");
 		lblPar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPar.setBounds(178, -2, 46, 29);
+		lblPar.setBounds(248, -2, 46, 29);
 		contentPane.add(lblPar);
 		
 		JLabel lblQuand = new JLabel("Quand");
 		lblQuand.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblQuand.setBounds(342, -2, 46, 29);
+		lblQuand.setBounds(446, -2, 46, 29);
 		contentPane.add(lblQuand);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
 		panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_3.setBounds(10, 148, 486, 208);
+		panel_3.setBounds(10, 148, 590, 208);
 		contentPane.add(panel_3);
 		
 		JButton btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnSupprimer.setBounds(312, 360, 101, 23);
+		btnSupprimer.setBounds(416, 362, 101, 23);
 		contentPane.add(btnSupprimer);
 		
 		JButton btnValider = new JButton("Valider");
 		btnValider.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnValider.setBounds(423, 360, 73, 23);
+		btnValider.setBounds(527, 362, 73, 23);
 		contentPane.add(btnValider);
 
 	}

@@ -62,7 +62,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 				animaux.add(getAnimal(resultSet));
 			}
 		} catch (SQLException e) {
-			throw new DaoException("erreur recupération des animaux");
+			throw new DaoException("Erreur recupération des animaux");
 		}
 	
 		return animaux;

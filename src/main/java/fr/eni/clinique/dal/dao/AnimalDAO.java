@@ -7,7 +7,7 @@ import fr.eni.clinique.dal.exception.DaoException;
 
 public interface AnimalDAO {
 	
-List<Animal> selectALL() throws DaoException;
+	List<Animal> selectALL() throws DaoException;
 	
 	Animal insert(Animal newAnimal) throws DaoException;
 	
