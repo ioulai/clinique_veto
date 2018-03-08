@@ -11,24 +11,17 @@ import javax.swing.border.LineBorder;
 import fr.eni.clinique.bll.exception.BLLException;
 import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
-<<<<<<< HEAD
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.ihm.controller.ConnexionController;
 import fr.eni.clinique.ihm.model.ConnexionModel;
-=======
-import fr.eni.clinique.bo.Personnel;
->>>>>>> 24749a436ca63e04f2f3a5e5f75fefcccf2c8e74
 
 import java.awt.Color;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
->>>>>>> 24749a436ca63e04f2f3a5e5f75fefcccf2c8e74
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -41,12 +34,7 @@ public class EcranRDV extends JFrame {
 	 */
 	private static final long serialVersionUID = 3455097310174582783L;
 	private JPanel contentPane;
-	private JComboBox<String> cbx_veterinaire;
-	private LoginMger loginManager = ManagerFactory.loginMger();
-	
-	private JComboBox<String> createComboBox(List<Personnel> personnels, String tooltip) {
 
-<<<<<<< HEAD
 	private  ConnexionModel connexionModel;
 	private ConnexionController connexionController ;
 
@@ -67,16 +55,7 @@ public class EcranRDV extends JFrame {
 			}
 		});
 	}
-=======
-        JComboBox<String> combo = new JComboBox<>();
-        combo.setToolTipText(tooltip);
->>>>>>> 24749a436ca63e04f2f3a5e5f75fefcccf2c8e74
 
-        for (Personnel personnel : personnels) {
-            combo.addItem(personnel.getNom());
-        }
-        return combo;
-    }
 	/**
 	 * Create the frame.
 	 */
@@ -165,22 +144,7 @@ public class EcranRDV extends JFrame {
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		List<Personnel> personnels;
-		try {
-			personnels = loginManager.toutLePersonnel();
-			for (Personnel personnel : personnels) {
-				if(personnel.getRole().equals("Vet")){
-					cbx_veterinaire = createComboBox(personnels, "Selectionner un personnel");
-					System.out.println(personnel);
-				}
-				
-			}
-		} catch (BLLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		 
+		JComboBox<?> cbx_veterinaire = new JComboBox<Object>();
 		cbx_veterinaire.setBounds(32, 31, 100, 20);
 		panel_1.add(cbx_veterinaire);
 		

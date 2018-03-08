@@ -22,6 +22,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 	private static final String DELETE_QUERY ="DELETE FROM Animaux WHERE CodeAnimal=?";
 	private static final String SELECT_BY_RACE="SELECT * FROM Animaux WHERE Race=?";
 	private static final String UPDATE_QUERY="UPDATE Animaux SET CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
+	private static final String SELECT_BY_CodeClient="SELECT * FROM Animaux WHERE CodeClient=?";
 	
 	private Animal getAnimal(ResultSet res) throws SQLException{
 		
@@ -160,6 +161,29 @@ public class AnimalDAOJdbcImpl implements AnimalDAO{
 	            connection = MSSQLConnectionFactory.get();
 	            statement = connection.prepareStatement(SELECT_BY_RACE);
 	            statement.setString(1, race);
+	            resultSet = statement.executeQuery();
+
+	            while (resultSet.next()) {
+	            	lesAnimaux.add((Animal) resultSet);
+	            }
+	            
+	        } catch(SQLException e) {
+	            throw new DaoException(e.getMessage(), e);
+	        } finally {
+	            ResourceUtil.safeClose(connection, statement);
+	        }
+	        
+	        return lesAnimaux;
+	}
+	public List<Animal> selectByCodeClient(Integer code) throws DaoException {
+		   PreparedStatement statement = null;
+	        ResultSet resultSet = null;
+	        
+	        List<Animal> lesAnimaux = new ArrayList<Animal>();
+	        try {
+	            connection = MSSQLConnectionFactory.get();
+	            statement = connection.prepareStatement(SELECT_BY_CodeClient);
+	            statement.setInt(1, code);
 	            resultSet = statement.executeQuery();
 
 	            while (resultSet.next()) {

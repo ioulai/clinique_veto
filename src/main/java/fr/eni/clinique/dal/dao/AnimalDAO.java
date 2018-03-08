@@ -16,7 +16,9 @@ public interface AnimalDAO {
 	void delete(Animal newAnimal) throws DaoException;
 	
 	List<Animal> selectByRace(String race) throws DaoException;
-
+	
+	List<Animal> selectByCodeClient(Integer code) throws DaoException; 
+	
 	void deleteById(int parseInt) throws DaoException;
 	
 }
