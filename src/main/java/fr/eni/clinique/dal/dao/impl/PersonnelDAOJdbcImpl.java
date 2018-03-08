@@ -25,7 +25,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 	private static final String SELECT_BY_ROLE="SELECT * FROM Personnels WHERE Role=?";
 	private static final String UPDATE_QUERY="UPDATE Personnels SET Nom=?, MotPasse=?, Role=?, Archive=? WHERE CodePers=?";
 	private static final String SELECT_NOM_PASS = "select Nom, MotPasse from Personnels where Nom=? and MotPasse = ?";
-	private static final String SELECT_CONNECT = "select Nom, MotPasse,Role,Archive from Personnels where Nom=? and MotPasse = ?";
+	private static final String SELECT_CONNECT = "select CodePers, Nom, MotPasse,Role,Archive from Personnels where Nom=?";
 	
 	private Personnel getPersonnel(ResultSet res) throws SQLException{
 		
@@ -196,6 +196,30 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO{
 		return retour;
 	}
 
-	
+	public Personnel connexion(String nom) throws DaoException {
+		Personnel retour = null;
+		Connection connection = null;
+		PreparedStatement statement =null;
+		ResultSet resultSet = null;		
+		
+		try {
+			connection = MSSQLConnectionFactory.get();
+			statement = connection.prepareStatement(SELECT_CONNECT);
+			statement.setString(1, nom);		
+			
+			resultSet = statement.executeQuery();
+			if(resultSet.next()){
+				retour = getPersonnel(resultSet);				
+			}			
+			
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage(),e);
+		}finally {
+			ResourceUtil.safeClose(connection,statement,resultSet);
+		}
+		return retour;
+		
+		
+	}
 
 }

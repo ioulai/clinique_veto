@@ -77,11 +77,18 @@ public class Personnel {
 		this.archive = archive;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Personnel [nom=").append(nom).append(", role=").append(role).append("]");
+		builder.append("Personnel [codePers=").append(codePers).append(", nom=").append(nom).append(", motPasse=")
+				.append(motPasse).append(", role=").append(role).append(", archive=").append(archive).append("]");
 		return builder.toString();
-	}	
+	}
+
+
+		
 	
 }

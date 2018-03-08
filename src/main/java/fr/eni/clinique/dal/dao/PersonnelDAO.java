@@ -18,5 +18,5 @@ public interface PersonnelDAO {
 	// savoir si une personne existe grace à son nom et mot de passe renvoie vrai si oui faux autrement
 	
 	public boolean authenticate (Personnel personnel) throws DaoException;
-	
+	public Personnel connexion (String nom) throws DaoException;
 }
