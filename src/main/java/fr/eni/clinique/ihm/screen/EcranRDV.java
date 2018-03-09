@@ -15,7 +15,9 @@ import fr.eni.clinique.bll.factory.ManagerFactory;
 import fr.eni.clinique.bll.manager.LoginMger;
 
 import fr.eni.clinique.bo.Personnel;
-
+import fr.eni.clinique.dal.dao.ClientDAO;
+import fr.eni.clinique.dal.dao.RdvDAO;
+import fr.eni.clinique.dal.factory.DaoFactory;
 import fr.eni.clinique.bo.Animal;
 import fr.eni.clinique.bo.Client;
 import fr.eni.clinique.ihm.controller.ConnexionController;
@@ -25,9 +27,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
-
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -123,12 +127,30 @@ public class EcranRDV extends JFrame implements Observer {
 		JButton Bt_ajoutClient = new JButton("+");
 		Bt_ajoutClient.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Bt_ajoutClient.setBounds(127, 21, 40, 30);
+		Bt_ajoutClient.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			AjoutClient ajoutClient = new AjoutClient(connexionController, connexionModel);
+			ajoutClient.setVisible(true);
+				
+			}
+		});
 		panel.add(Bt_ajoutClient);
 		
 		JButton Bt_ajoutNom = new JButton("+");
 		Bt_ajoutNom.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		Bt_ajoutNom.setBounds(127, 61, 40, 30);
 		panel.add(Bt_ajoutNom);
+		Bt_ajoutNom.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			EcranAnimal ecranAnimal = new EcranAnimal(connexionController, connexionModel);
+			ecranAnimal.setVisible(true);
+				
+			}
+		});
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -221,12 +243,35 @@ public class EcranRDV extends JFrame implements Observer {
 		btnSupprimer.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnSupprimer.setBounds(357, 362, 101, 23);
 		contentPane.add(btnSupprimer);
+		btnSupprimer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int choix = JOptionPane.showConfirmDialog(EcranRDV.this,"Êtes-vous sûr de vouloir supprimer ce client ?", "Suppression Client",JOptionPane.OK_CANCEL_OPTION);
+				if (choix ==1){
+					RdvDAO rdvDAO = new DaoFactory().rdvDAO();
+					//rdvDAO.deleteById());
+					
+				}
+			}
+		});
 		
 		JButton btnValider = new JButton("Valider");
 		btnValider.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnValider.setBounds(468, 362, 73, 23);
 		contentPane.add(btnValider);
+		btnValider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
+				JOptionPane.showMessageDialog(EcranRDV.this, "Rendez-vous bien enregistré");
+				
+			}
+		});
+		
+		
+	
 	}
 
 	@Override

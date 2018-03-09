@@ -98,7 +98,8 @@ public class EcranPrincipalClient extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new AjoutClient(connexionController, connexionModel).setVisible(true);
+			AjoutClient ajoutClient = new AjoutClient(connexionController, connexionModel);
+			ajoutClient.setVisible(true);
 				
 			}
 		});
@@ -131,11 +132,29 @@ public class EcranPrincipalClient extends JFrame {
 		btnValider.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Save24.gif")));
 		btnValider.setBounds(563, 12, 46, 35);
 		panel.add(btnValider);
+		btnValider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JOptionPane.showMessageDialog(EcranPrincipalClient.this, "Modification bien enregistrée");
+				
+			}
+		});
 		
 		JButton btnAnnuler = new JButton("");
 		btnAnnuler.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/aim.png")));
 		btnAnnuler.setBounds(642, 11, 46, 35);
 		panel.add(btnAnnuler);
+		btnAnnuler.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				dispose();
+				
+			}
+		});
 		
 		JButton btnRechercher = new JButton("");
 		btnRechercher.setIcon(new ImageIcon(EcranPrincipalClient.class.getResource("/images/Rechercher.png")));

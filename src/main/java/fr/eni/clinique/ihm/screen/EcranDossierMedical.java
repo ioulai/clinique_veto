@@ -10,7 +10,12 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
@@ -68,6 +73,15 @@ public class EcranDossierMedical extends JFrame {
 		button.setIcon(new ImageIcon(EcranDossierMedical.class.getResource("/images/Save24.gif")));
 		button.setBounds(278, 11, 34, 33);
 		panel.add(button);
+		button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				JOptionPane.showMessageDialog(EcranDossierMedical.this, "Modification bien enregistrée");
+				
+			}
+		});
 		
 		JLabel label = new JLabel("Valider");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -78,6 +92,16 @@ public class EcranDossierMedical extends JFrame {
 		button_1.setIcon(new ImageIcon(EcranDossierMedical.class.getResource("/images/aim.png")));
 		button_1.setBounds(347, 11, 34, 33);
 		panel.add(button_1);
+		button_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				dispose();
+				
+			}
+		});
+		
 		
 		JLabel label_1 = new JLabel("Annuler");
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
